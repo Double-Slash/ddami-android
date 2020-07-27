@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#EEEEEE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/set"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="설정"
+            android:textColor="#232323"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="18dp"
+            />
+
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/layout_manage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <ImageView
+                    android:id="@+id/image_manage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000000"
+                    />
+                <TextView
+                    android:id="@+id/manage_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image_manage"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:text="계정관리"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/image_manage"
+                    android:background="@drawable/setting_layout"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/linked_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="연결된 계정"
+
+                        />
+                    <TextView
+                        android:id="@+id/update_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="비밀번호 변경"
+
+                        />
+                    <TextView
+                        android:id="@+id/dropout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="탈퇴"
+
+                        />
+                    <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="로그아웃"
+
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_manage"
+                >
+                <ImageView
+                    android:id="@+id/image_alarm"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000000"
+                    />
+                <TextView
+                    android:id="@+id/alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image_alarm"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:text="알림"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/image_alarm"
+                    android:background="@drawable/setting_layout"
+                    android:orientation="vertical"
+                    >
+                <TextView
+                    android:id="@+id/set_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#A0A0A0"
+                    android:text="알림 설정"
+
+                    />
+                <TextView
+                    android:id="@+id/sound_chat_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#A0A0A0"
+                    android:text="채팅 알림 소리"
+
+                    />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout_inform_ddami"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_alarm"
+                >
+                <ImageView
+                    android:id="@+id/image_inform"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#000000"
+                    />
+                <TextView
+                    android:id="@+id/ddami_inform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image_inform"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:text="따미 정보"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/image_inform"
+                    android:background="@drawable/setting_layout"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/version_inform"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:textSize="14dp"
+                            android:textColor="#A0A0A0"
+                            android:text="버전"
+
+                            />
+                        <TextView
+                            android:id="@+id/current_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_marginStart="250dp"
+                            android:textSize="14dp"
+                            android:textColor="#A0A0A0"
+                            android:text="version" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/add_review"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="리뷰 및 별점 추가"
+
+                        />
+                    <TextView
+                        android:id="@+id/contact_us"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="CONTACT US"
+
+                        />
+                    <TextView
+                        android:id="@+id/provision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="이용 약관"
+
+                        />
+                    <TextView
+                        android:id="@+id/privacy_policy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="개인정보 취급방침"
+
+                        />
+                    <TextView
+                        android:id="@+id/inform_openSource"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textSize="14dp"
+                        android:textColor="#A0A0A0"
+                        android:text="오픈 소스 라이센스 정보"
+
+                        />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
