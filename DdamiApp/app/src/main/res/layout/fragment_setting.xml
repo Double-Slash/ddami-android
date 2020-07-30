@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:background="#FFFFFF">
         <Button
-            android:id="@+id/back"
+            android:id="@+id/set_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

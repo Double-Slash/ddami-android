@@ -7,10 +7,130 @@
     android:orientation="vertical"
     android:background="#80DADADA">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <RelativeLayout
+            android:id="@+id/detail_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageButton
+                android:id="@+id/detail_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                />
+            <ImageButton
+                android:id="@+id/heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/etc"
+                android:layout_margin="16dp"
+                />
+            <ImageButton
+                android:id="@+id/etc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/detail_catagoly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#3C3C3C"
+                android:text="그래픽 디자인"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="26dp"
+                android:textColor="#101010"
+                android:text="작가가 지정한 제목 최대폭 지정으로 여러줄 표기"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                >
+                <ImageView
+                    android:id="@+id/detail_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/ic_brightness_1_white_24dp"
+                    />
+                <TextView
+                    android:id="@+id/detail_nic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/detail_profile"
+                    android:textSize="14dp"
+                    android:textColor="#3C3C3C"
+                    android:text="닉네임"
+                    />
+                <ImageView
+                    android:id="@+id/detail_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/detail_viewCnt"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/ic_brightness_1_white_24dp"
+                    />
+                <TextView
+                    android:id="@+id/detail_viewCnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/detail_heart"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="14dp"
+                    android:textColor="#3C3C3C"
+                    android:text="900"
+                    />
+                <ImageView
+                    android:id="@+id/detail_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/detail_heartCnt"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/ic_brightness_1_white_24dp"
+                    />
+                <TextView
+                    android:id="@+id/detail_heartCnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="14dp"
+                    android:textColor="#3C3C3C"
+                    android:text="561"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="250dp"
+        android:layout_weight="1"
         android:layout_marginStart="20dp"
         android:background="@drawable/setting_layout"
         >
@@ -81,19 +201,19 @@
                     android:backgroundTint="#B3B3B3"
                     android:layout_margin="20dp"
                     />
+
                 <EditText
                     android:id="@+id/comment_write"
                     android:layout_width="270dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:autofillHints="댓글을 입력해주세요"
                     android:background="@drawable/shape_filter_btn"
                     android:backgroundTint="#F2F2F2"
-                    android:textSize="14dp"
-                    android:textColor="#808080"
                     android:hint="댓글을 입력해주세요"
-                    android:autofillHints="댓글을 입력해주세요"
                     android:padding="15dp"
-                    />
+                    android:textColor="#808080"
+                    android:textSize="14dp" />
                 <LinearLayout
                     android:id="@+id/add_comment"
                     android:layout_width="wrap_content"
