@@ -30,9 +30,8 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        View view = inflater.inflate(R.layout.fragment_like_list, null);
+        View view = inflater.inflate(R.layout.fragment_like_list, container, false);
 
-        /*
         likeBack = (Button) view.findViewById(R.id.like_back);
 
         like_recyclerview = (RecyclerView) view.findViewById(R.id.like_recyclerview);
@@ -40,9 +39,9 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
         like_recyclerview.setLayoutManager(mLayoutManager);
         mLikeAdapter = new LikeAdapter(getActivity(), list); //getLikeList()
         mLikeAdapter.setOnItemClickListener(this);
-        like_recyclerview.setAdapter(mLikeAdapter);
 
-         */
+       
+        like_recyclerview.setAdapter(mLikeAdapter);
 
         return view;
     }

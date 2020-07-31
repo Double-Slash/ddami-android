@@ -17,10 +17,10 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
 
 public class LikeAdapter
-    //    extends RecyclerView.Adapter<LikeAdapter.ViewHolder>
+        extends RecyclerView.Adapter<LikeAdapter.ViewHolder>
 {
 
-    /*
+
     private Context mContext;
     private ArrayList<LikeVO> list_like;
 
@@ -51,10 +51,19 @@ public class LikeAdapter
 
         holder.likeNic.setText(likeVO.getNicname());
         holder.titlePiece.setText(likeVO.getTitle());
+     //   holder.likeListImage.setImageResource(Integer.parseInt(likeVO.getImage()));
+     //   holder.likeProfile.setImageResource(Integer.parseInt(likeVO.getProfile()));
+        holder.heartPiece.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //하트 누리면 빈하트 -> 좋아요 목록에서 없어짐
+            }
+        });
         holder.layoutLikeList.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                //작업물 상세로 이동
                 mOnItemClickListener.onItemClick(v, likeVO);
             }
         });
@@ -87,5 +96,4 @@ public class LikeAdapter
         }
     }
 
-     */
 }

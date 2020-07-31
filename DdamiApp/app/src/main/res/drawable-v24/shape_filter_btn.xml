@@ -1,17 +1,18 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- default -->
-    <item android:state_focused="false" android:state_pressed="false">
+    <!-- click -->
+
+    <item android:state_selected="true" >
         <shape>
-            <solid android:color="#E9E9E9" />
+            <solid android:color="#A2A2A2" />
             <corners android:bottomRightRadius="10dp" android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"
                 android:topRightRadius="10dp"/>
         </shape>
     </item>
 
-    <!-- click -->
-    <item android:state_focused="false" android:state_pressed="true">
+    <!-- default -->
+    <item android:state_selected="false">
         <shape>
-            <solid android:color="#A2A2A2" />
+            <solid android:color="#E9E9E9" />
             <corners android:bottomRightRadius="10dp" android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"
                 android:topRightRadius="10dp"/>
         </shape>

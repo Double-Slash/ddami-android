@@ -85,7 +85,7 @@
 
         </LinearLayout>
         <TextView
-            android:id="@+id/comment_comtexts"
+            android:id="@+id/comment_contexts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/comment_nic"
