@@ -39,8 +39,7 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
         like_recyclerview.setLayoutManager(mLayoutManager);
         mLikeAdapter = new LikeAdapter(getActivity(), list); //getLikeList()
         mLikeAdapter.setOnItemClickListener(this);
-
-       
+        
         like_recyclerview.setAdapter(mLikeAdapter);
 
         return view;
