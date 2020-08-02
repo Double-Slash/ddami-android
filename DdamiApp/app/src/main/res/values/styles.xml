@@ -28,6 +28,7 @@
         <item name="cornerSizeTopLeft">1dp</item>
         <item name="cornerSizeBottomRight">10dp</item>
         <item name="cornerSizeBottomLeft">10dp</item>
+    </style>
 
     <style name="Chip" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipIconTint">?attr/colorControlNormal</item>
