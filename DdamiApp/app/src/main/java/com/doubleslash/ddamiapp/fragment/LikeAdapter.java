@@ -12,6 +12,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c1ccd1... shopddami
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
