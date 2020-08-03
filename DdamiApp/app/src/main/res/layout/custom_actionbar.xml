@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:background="@drawable/shop_round_close_black_18dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@id/btnBack"
+        android:layout_weight="1"
+
+        android:gravity="center_horizontal|center_vertical"
+        android:text="작품샵 피드 선택"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:background="@drawable/shop_custom_radius_gray"
+        android:text="다음"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

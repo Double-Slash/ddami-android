@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.doubleslash.ddamiapp" >
     <!-- camera, gallery -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+=======
+    package="com.doubleslash.ddamiapp">
+
+>>>>>>> 8c1ccd1... shopddami
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme" >
         <provider
             android:name = "androidx.core.content.FileProvider"
@@ -24,6 +30,18 @@
         </provider>
         <activity android:name=".activity.WritingActivity"/>
         <activity android:name=".activity.MainActivity" >
+=======
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.Shop.ShopWritingActivity2_1"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".activity.Shop.ShopWritingActivity1_2"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".activity.Shop.ShopWritingActivity1_1"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".activity.MainActivity">
+>>>>>>> 8c1ccd1... shopddami
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

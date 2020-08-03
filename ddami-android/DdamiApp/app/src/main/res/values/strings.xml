@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">DdamiApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+
+    <!-- Ted Permission -->
+    <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
+    <string name="permission_2">사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.</string>
+
+
+
+    <!-- Shop -->
+    <string name="shop_tab1">작품</string>
+    <string name="shop_tab2">재료</string>
+
+    <string name="shop_order1">인기순</string>
+    <string name="shop_order2">최신순</string>
+    <string name="shop_order3">거리순</string>
+    <string name="shop_order_div">|</string>
+    <string name="shop_first_filter">필터</string>
+    <string name="shop_first_tag1">공예</string>
+    <string name="shop_first_tag2">그래픽디자인</string>
+    <string name="shop_first_tag3">디지털아트</string>
+
+    <string name="shop_second_tag1">판매</string>
+    <string name="shop_second_tag2">나눔</string>
+
+    <string name="shop_writing1_1_title">작품샵 피드 선택</string>
+    <string name="shop_writing1_1_btn">다음</string>
+    <string name="shop_writing1_1_tab_all">전체분야</string>
+    <string name="shop_writing1_1_tab0">커스텀목록0</string>
+    <string name="shop_writing1_1_tab1">커스텀목록1</string>
+    <string name="shop_writing1_1_tab2">커스텀목록2</string>
+    <string name="shop_writing1_1_tab3">커스텀목록3</string>
+    <string name="shop_writing1_1_tab4">커스텀목록4</string>
+    <string name="shop_writing1_1_tab5">커스텀목록5</string>
+    <string name="shop_writing1_1_tab6">커스텀목록6</string>
+
+
+    <string name="shop_writing1_2_title">작품샵 글 작성</string>
+    <string name="shop_writing2_1_title">재료샵 글 작성</string>
+    <string name="shop_writing_btn">등록</string>
+    <string name="shop_writing_et_title">제목</string>
+    <string name="shop_writing_tv_price">가격</string>
+    <string name="shop_writing_tv_won">원</string>
+    <string name="shop_writing_tv_place">거래장소</string>
+    <string name="shop_writing_tv_place2">(미대생 인증 시 등록된 학교로 고정되며 수정이 불가능합니다.)</string>
+    <string name="shop_writing1_2_tv_explain">작품 설명</string>
+    <string name="shop_writing2_1_tv_explain">재료 설명</string>
+    <string name="shop_writing1_2_tv_area">분야</string>
+
+
+</resources>
