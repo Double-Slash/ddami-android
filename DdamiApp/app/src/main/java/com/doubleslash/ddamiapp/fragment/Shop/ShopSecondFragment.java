@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.Shop.ShopWritingActivity1_2;
+
+import com.doubleslash.ddamiapp.activity.Shop.ShopWritingActivity2_1;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -72,7 +73,7 @@ public class ShopSecondFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_2.class));
+                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
             }
         });
 
