@@ -63,6 +63,9 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //circle image
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
 repositories {
     mavenCentral()
