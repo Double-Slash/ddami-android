@@ -5,8 +5,7 @@
     android:id="@+id/fragmentShop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".fragment.ShopFragment">
+    tools:context=".fragment.Shop.ShopFragment">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,8 +17,6 @@
         android:layout_gravity="center"
         android:text="따미샵"
         android:textSize="30sp" />
-=======
-    tools:context=".fragment.Shop.ShopFragment">
 
 
     <LinearLayout
@@ -52,6 +49,5 @@
 
 
     </LinearLayout>
->>>>>>> 8c1ccd1... shopddami
 
 </FrameLayout>

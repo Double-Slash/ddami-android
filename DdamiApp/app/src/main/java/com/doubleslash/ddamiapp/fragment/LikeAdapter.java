@@ -12,17 +12,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-<<<<<<< HEAD
-=======
-
->>>>>>> 8c1ccd1... shopddami
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
 public class LikeAdapter
-        extends RecyclerView.Adapter<LikeAdapter.ViewHolder>
-{
+        extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
 
     private Context mContext;
@@ -55,8 +50,8 @@ public class LikeAdapter
 
         holder.likeNic.setText(likeVO.getNicname());
         holder.titlePiece.setText(likeVO.getTitle());
-     //   holder.likeListImage.setImageResource(Integer.parseInt(likeVO.getImage()));
-     //   holder.likeProfile.setImageResource(Integer.parseInt(likeVO.getProfile()));
+        //   holder.likeListImage.setImageResource(Integer.parseInt(likeVO.getImage()));
+        //   holder.likeProfile.setImageResource(Integer.parseInt(likeVO.getProfile()));
         holder.heartPiece.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +72,6 @@ public class LikeAdapter
     public int getItemCount() {
         return list_like.size();
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
