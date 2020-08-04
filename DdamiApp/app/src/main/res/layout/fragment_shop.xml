@@ -5,7 +5,7 @@
     android:id="@+id/fragmentShop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ShopFragment">
+    tools:context=".fragment.Shop.ShopFragment">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,5 +17,37 @@
         android:layout_gravity="center"
         android:text="따미샵"
         android:textSize="30sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layout_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="#707070">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_tab1" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_tab2" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
 
 </FrameLayout>
