@@ -1,5 +1,6 @@
 package com.doubleslash.ddamiapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -35,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-
         //getSupportActionBar().setTitle("123123");
-
     }
 
     private void initViews() {
@@ -85,5 +84,10 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(title);
         }
+    }
+
+    public void onButtonClick(View view) {
+        Intent intent = new Intent(this, VerificationActivity.class);
+        startActivity(intent);
     }
 }

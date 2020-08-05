@@ -6,4 +6,6 @@
     <color name="drawerColor">#DCDCDC</color>
     <color name="colorGray">#707070</color>
     <color name="colorLightGray">#E4E4E4</color>
+    <color name="colorBeforeClicked">#E9E9E9</color>
+    <color name="colorAfterClicked">#B7B7B7</color>
 </resources>
