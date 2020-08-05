@@ -37,6 +37,7 @@
         tools:text="김따미" />
 
     <Button
+        android:id="@+id/btn_verification"
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:layout_marginTop="10dp"
@@ -46,7 +47,9 @@
         android:textColor="@android:color/darker_gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_name" />
+        app:layout_constraintTop_toBottomOf="@id/textView_name"
+        android:onClick="onButtonClick"/>
+
 
     <View
         android:id="@+id/divider"

@@ -2,6 +2,7 @@ package com.doubleslash.ddamiapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -46,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"id = "+id +"token = "+token,Toast.LENGTH_LONG).show();
 
 
-
         //getSupportActionBar().setTitle("123123");
-
     }
 
     private void initViews() {
@@ -109,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(title);
         }
+    }
+
+    public void onButtonClick(View view) {
+        Intent intent = new Intent(this, VerificationActivity.class);
+        startActivity(intent);
     }
 }
