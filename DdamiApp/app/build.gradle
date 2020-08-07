@@ -12,7 +12,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary=true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -72,6 +72,7 @@ dependencies {
 
     //circle image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
 }
 repositories {
     mavenCentral()

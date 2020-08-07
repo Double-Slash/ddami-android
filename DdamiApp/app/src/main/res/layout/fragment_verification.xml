@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -56,7 +57,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="학과"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#C8C8C8"/>
 
             <EditText
                 android:id="@+id/studentid"
@@ -66,7 +68,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="학번"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#C8C8C8"/>
 
         </LinearLayout>
 
@@ -74,7 +77,6 @@
             android:id="@+id/tv_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textSize="18dp"
             android:text="인증 파일 첨부"
             android:layout_marginBottom="10dp"
@@ -84,10 +86,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textStyle="bold"
             android:text="※ 학생증 사진이나 개인정보(주민등록번호 필수)가 포함된 학교 포털사이트 화면 사진을 첨부해주세요."
-            android:layout_marginBottom="10dp"
             android:textColor="#9d9d9d"/>
 
         <LinearLayout
@@ -95,32 +95,36 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <EditText
+            <TextView
                 android:id="@+id/file_attached"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="파일이름.jpg"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:textColorHint="#C8C8C8"/>
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="카메라"
+                android:id="@+id/btn_camera"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#A2A2A2"
+                android:drawableTop="@drawable/ic_camera" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="파일"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"/>
+                android:id="@+id/btn_file"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#A2A2A2"
+                android:drawableTop="@drawable/ic_file"/>
 
         </LinearLayout>
 
@@ -222,16 +226,17 @@
                 android:text="의상 디자인"/>
         </RelativeLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_verify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_auto_btn"
+            android:backgroundTint="#797979"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
-            android:text="인증하기">
-        </Button>
+            android:text="인증하기"
+            app:cornerRadius="20dp">
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 
