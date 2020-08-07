@@ -6,10 +6,12 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -63,10 +65,22 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_space.setOnClickListener(this);
         btn_costume.setOnClickListener(this);
 
-        btn_verify.setOnClickListener(new View.OnClickListener() {
+//        btn_verify.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openNewAcitivity();
+//            }
+//        });
+
+        btn_verify.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                openNewAcitivity();
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_verify.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#322FA0")));
+                } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
+                    openNewAcitivity();
+                }
+                return true;
             }
         });
 
@@ -127,12 +141,13 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         Button b = (Button) view;
         if (b.isSelected()) {
-            b.setTextColor(Color.parseColor("#A0A0A0"));
-            b.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E9E9E9")));
+            b.setTextColor(Color.parseColor("#808080"));
+            b.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
             b.setSelected(false);
         } else if (!b.isSelected()) {
-            b.setTextColor(Color.parseColor("#ffffff"));
-            b.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B7B7B7")));
+            b.setTextColor(Color.parseColor("#322FA0"));
+            b.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E6E6FA")));
+            b.setTypeface(null, Typeface.BOLD);
             b.setSelected(true);
         }
     }

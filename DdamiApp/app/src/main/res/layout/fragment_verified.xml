@@ -8,36 +8,43 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_img_certify_graphic1"
+        android:layout_marginTop="160dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="270dp">
+        android:layout_marginTop="25dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="인증이 완료되었습니다!"
-            android:textSize="25dp"
+            android:textSize="24dp"
+            android:textColor="#322FA0"
+            android:textStyle="bold"
             android:textAlignment="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="당신의 작업물을 공유하세요 :)"
-            android:textSize="15dp"
+            android:textSize="16dp"
+            android:textColor="#4D4D4D"
             android:textAlignment="center"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="50dp"/>
 
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_goto_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#797979"
-        android:layout_marginTop="260dp"
-        android:textStyle="bold"
+        android:layout_height="50dp"
+        android:backgroundTint="#322FA0"
+        android:layout_marginTop="222dp"
         android:text="따미마을 둘러보기"
         app:cornerRadius="20dp">
     </com.google.android.material.button.MaterialButton>
