@@ -1,7 +1,6 @@
 package com.doubleslash.ddamiapp.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         //NavController 생성
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
 
 
         //AppBarConfig 생성
