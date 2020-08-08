@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFF"
     android:gravity="bottom"
-    android:id="@+id/nav_header_main2"
     android:orientation="vertical"
     android:paddingTop="36dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:id="@+id/imageView_Face"
-        android:background="@drawable/ic_brightness_1_puple_24dp"
         android:layout_width="84dp"
         android:layout_height="84dp"
+        android:background="@drawable/ic_brightness_1_gray_24dp"
         android:backgroundTint="@color/colorAccent"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,30 +28,16 @@
         android:layout_marginTop="18dp"
         android:text="김따미"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="#232323"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView_Face"
         tools:text="김따미" />
-    <Button
-        android:id="@+id/btn_verification"
-        android:padding="0dp"
-        android:layout_width="82dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#322FA0"
-        android:text="미대생 인증"
-        android:textSize="12dp"
-        android:background="@drawable/verify_btn"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_name" />
 
     <TextView
-        android:id="@+id/nav_header_program"
+        android:id="@+id/tv_program"
         android:padding="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +48,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_name"
-        android:visibility="gone"/>
-
+        android:onClick="onButtonClick"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

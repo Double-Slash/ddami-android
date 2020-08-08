@@ -91,14 +91,43 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view_drawer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:background="@color/drawerColor"-->
+<!--            android:fitsSystemWindows="true"-->
+<!--            app:headerLayout="@layout/nav_header_main2"-->
+<!--            app:menu="@menu/menu_drawer_navigation" />-->
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:background="@color/drawerColor"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        app:headerLayout="@layout/nav_header_main2"-->
+<!--        app:menu="@menu/menu_drawer_navigation" />-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="246dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFF"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/drawerColor"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_main2"
-            app:menu="@menu/menu_drawer_navigation" />
+            android:orientation="vertical">
+            <include
+                android:id="@+id/nav_top"
+                layout="@layout/nav_header_main2"/>
+            <include
+                android:id="@+id/nav_bottom"
+                layout="@layout/nav_drawer_menu"/>
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

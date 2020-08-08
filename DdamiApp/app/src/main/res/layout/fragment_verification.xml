@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="20"
+            android:textSize="16dp"
             android:inputType="textPersonName"
             android:layout_marginBottom="18dp"/>
 
@@ -53,7 +54,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="학과"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 android:layout_marginBottom="18dp"
                 android:textColorHint="#BBBBBB"/>
 
@@ -65,7 +66,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="학번"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 android:layout_marginBottom="18dp"
                 android:textColorHint="#BBBBBB"/>
 
@@ -102,11 +103,12 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:cornerRadius="7dp"
                 app:strokeColor="#707070"
-                android:text="사진을 첨부하세요"
+                android:hint="사진을 첨부하세요"
                 android:backgroundTint="#ffffff"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:textColor="#C5C5C5"
+                android:textColorHint="#C5C5C5"
+                android:textColor="#808080"
                 android:textAlignment="textStart"/>
 
             <com.google.android.material.button.MaterialButton
@@ -166,6 +168,7 @@
                 android:textColor="#232323"/>
             </LinearLayout>
 
+<!--            <androidx.appcompat.widget.AppCompatButton-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_modern_art"
                 android:layout_width="116dp"
@@ -213,7 +216,6 @@
                 android:layout_height="50dp"
                 android:backgroundTint="#ffffff"
                 android:layout_below="@+id/btn_modern_art"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="13dp"
                 android:textColor="#808080"
@@ -228,7 +230,6 @@
                 android:backgroundTint="#ffffff"
                 android:layout_below="@+id/btn_graphic_design"
                 android:layout_toRightOf="@+id/btn_video_design"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="13dp"
                 android:textColor="#808080"
@@ -243,7 +244,6 @@
                 android:backgroundTint="#ffffff"
                 android:layout_below="@+id/btn_modern_art"
                 android:layout_toRightOf="@+id/btn_industrial_design"
-                android:layout_marginTop="10dp"
                 android:textSize="13dp"
                 android:textColor="#808080"
                 app:cornerRadius="7dp"
@@ -256,7 +256,6 @@
                 android:layout_height="50dp"
                 android:backgroundTint="#ffffff"
                 android:layout_below="@+id/btn_video_design"
-                android:layout_marginTop="10dp"
                 android:textSize="13dp"
                 android:textColor="#808080"
                 app:cornerRadius="7dp"
@@ -270,7 +269,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#BBBBBB"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:text="인증하기"
             android:textSize="15dp"
             app:cornerRadius="20dp">

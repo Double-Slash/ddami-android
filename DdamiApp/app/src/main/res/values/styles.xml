@@ -57,4 +57,9 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="NavigationViewStyle">
+        <item name="android:textSize">18dp</item>
+        <item name="listPreferredItemHeightSmall">40dp</item>
+    </style>
+
 </resources>
