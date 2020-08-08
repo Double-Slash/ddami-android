@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public class VerificationActivity extends AppCompatActivity implements View.OnClickListener {
+public class VerificationActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int FILE_REQUEST_CODE = 2;
     Button btn_modern, btn_graphic, btn_craft, btn_video, btn_industrial, btn_space, btn_costume;
@@ -37,6 +38,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     TextView tv_file_attached;
     File tempFile = null;
     String pictureFilePath;
+    EditText school, program, studentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_camera = (Button) findViewById(R.id.btn_camera);
         btn_file = (Button) findViewById(R.id.btn_file);
         tv_file_attached = (TextView) findViewById(R.id.file_attached);
+        school = (EditText) findViewById(R.id.school);
+        program = (EditText) findViewById(R.id.program);
+        studentId = (EditText) findViewById(R.id.studentid);
 
         btn_modern.setOnClickListener(this);
         btn_graphic.setOnClickListener(this);
@@ -65,20 +70,24 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_space.setOnClickListener(this);
         btn_costume.setOnClickListener(this);
 
-//        btn_verify.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openNewAcitivity();
-//            }
-//        });
-
         btn_verify.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN) {
                     btn_verify.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#322FA0")));
                 } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-                    openNewAcitivity();
+//                    if(isEmpty(school)) {
+//                        showMsg(0);
+//                    } else if (isEmpty(program)) {
+//                        showMsg(1);
+//                    } else if (isEmpty(studentId)) {
+//                        showMsg(2);
+//                    } else if (isEmpty(tv_file_attached)) {
+//                        showMsg(3);
+//                    } else {
+//
+                    openNewActivity();
+//                    }
                 }
                 return true;
             }
@@ -87,7 +96,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePhoto();
+                //takePhoto();
             }
         });
 
@@ -95,7 +104,6 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), FILE_REQUEST_CODE);
-
             }
         });
 
@@ -196,8 +204,37 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     }
 
     //open verifiedActivity
-    private void openNewAcitivity() {
+    private void openNewActivity() {
         Intent intent = new Intent(this, VerifiedActivity.class);
         startActivity(intent);
+    }
+
+    private boolean isEmpty(EditText text) {
+        if (text.getText().toString().trim().length() > 0)
+            return false;
+        return true;
+    }
+
+    private boolean isEmpty(TextView text) {
+        if (text.getText().toString().trim().length() > 0)
+            return false;
+        return true;
+    }
+
+    private void showMsg(int i) {
+        switch (i) {
+            case 0:
+                Toast.makeText(this, "학교를 입력해주세요", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(this, "학과를 입력해주세요", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "학번을 입력해주세요", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(this, "인증 파일을 첨부해주세요", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

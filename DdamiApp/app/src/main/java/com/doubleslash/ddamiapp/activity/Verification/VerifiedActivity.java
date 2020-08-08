@@ -20,7 +20,6 @@ public class VerifiedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btn_goto_main = (Button) findViewById(R.id.btn_goto_main);
-
         btn_goto_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,7 +27,6 @@ public class VerifiedActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
