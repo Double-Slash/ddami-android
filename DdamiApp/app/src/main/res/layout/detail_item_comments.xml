@@ -33,7 +33,7 @@
             android:layout_marginTop="5dp"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:textColor="#4D4D4D"
+            android:textColor="#3C3C3C"
             android:text="닉네임"/>
 
         <LinearLayout
@@ -49,14 +49,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0000"
-                android:textColor="#808080"
+                android:textColor="#BBBBBB"
                 android:textSize="12dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="."
-                android:textColor="#808080"
+                android:textColor="#BBBBBB"
                 android:textSize="12dp"
                 />
             <TextView
@@ -64,14 +64,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00"
-                android:textColor="#808080"
+                android:textColor="#BBBBBB"
                 android:textSize="12dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="."
-                android:textColor="#808080"
+                android:textColor="#BBBBBB"
                 android:textSize="12dp"
                 />
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00"
-                android:textColor="#808080"
+                android:textColor="#BBBBBB"
                 android:textSize="12dp"
                 />
 

@@ -1,8 +1,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- default -->
-    <item>
+    <item android:state_enabled="true">
         <shape>
             <solid android:color="#322FA0" />
+            <corners android:bottomRightRadius="0dp" android:bottomLeftRadius="0dp" android:topLeftRadius="0dp"
+                android:topRightRadius="20dp"/>
+        </shape>
+    </item>
+    <!--disabled-->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#BBBBBB" />
             <corners android:bottomRightRadius="0dp" android:bottomLeftRadius="0dp" android:topLeftRadius="0dp"
                 android:topRightRadius="20dp"/>
         </shape>
