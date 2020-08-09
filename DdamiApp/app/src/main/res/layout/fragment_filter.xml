@@ -62,7 +62,7 @@
                     android:textStyle="bold"
                     android:textColor="#A0A0A0"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_allSpace"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"

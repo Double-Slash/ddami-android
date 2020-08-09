@@ -1,6 +1,8 @@
 package com.doubleslash.ddamiapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -19,6 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
+    private Long backTime = 0L;
 
     NavController navController;
     DrawerLayout drawerLayout;
@@ -29,17 +33,26 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
 
+        String id = getIntent().getStringExtra("id");
+        String token = getIntent().getStringExtra("token");
+
+        Toast.makeText(this,"id = "+id +"token = "+token,Toast.LENGTH_LONG).show();
+
+
+
         //getSupportActionBar().setTitle("123123");
 
     }
 
     private void initViews() {
+
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
@@ -69,6 +82,19 @@ public class MainActivity extends AppCompatActivity {
 
         //navigationView
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            if (System.currentTimeMillis() - backTime < 2000) {
+                finish();
+            }
+            Toast.makeText(this, "종료하시려면 다시한번 눌러주세요.", Toast.LENGTH_SHORT).show();
+            backTime = System.currentTimeMillis();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     @Override
