@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.nav_host_fragment, fragment).commit();
     }
 
-    private void initViews() {
-
+    private void initViews(){
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         //NavController 생성
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
 
 
         //AppBarConfig 생성
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public boolean onSupportNavigateUp () {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();

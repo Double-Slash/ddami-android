@@ -60,7 +60,6 @@
                 android:id="@+id/detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
                 android:textStyle="bold"
                 android:textSize="26dp"
                 android:textColor="#101010"
@@ -133,6 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
+        android:layout_marginStart="20dp"
         android:fillViewport="true"
         android:background="@drawable/shape_detail_layout"
         >
@@ -198,7 +198,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
 
