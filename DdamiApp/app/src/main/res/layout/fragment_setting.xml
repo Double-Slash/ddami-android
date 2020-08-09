@@ -4,17 +4,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#EEEEEE">
+    android:background="#F0F0F6">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="56dp"
         android:orientation="horizontal"
         android:background="#FFFFFF">
         <ImageButton
             android:id="@+id/set_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
+            android:background="#00ffffff"
+            android:src="@drawable/btn_back"/>
 
         <TextView
             android:id="@+id/set"
@@ -48,9 +52,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
-                    android:backgroundTint="#000000"
+                    android:background="#00ffffff"
+                    android:src="@drawable/ic_lock"
                     />
                 <TextView
                     android:id="@+id/manage_address"
@@ -59,7 +64,7 @@
                     android:layout_toEndOf="@+id/image_manage"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:textColor="#000000"
+                    android:textColor="#232323"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:text="계정관리"/>
@@ -75,9 +80,11 @@
                         android:id="@+id/linked_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="연결된 계정"
 
                         />
@@ -86,9 +93,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="비밀번호 변경"
 
                         />
@@ -97,9 +104,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="탈퇴"
 
                         />
@@ -108,9 +115,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="로그아웃"
 
                         />
@@ -128,9 +135,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
-                    android:backgroundTint="#000000"
+                    android:background="#00ffffff"
+                    android:src="@drawable/ic_notifications"
                     />
                 <TextView
                     android:id="@+id/alarm"
@@ -139,7 +147,7 @@
                     android:layout_toEndOf="@+id/image_alarm"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:textColor="#000000"
+                    android:textColor="#232323"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:text="알림"/>
@@ -151,27 +159,33 @@
                     android:background="@drawable/setting_layout"
                     android:orientation="vertical"
                     >
-                <TextView
-                    android:id="@+id/set_alarm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#A0A0A0"
-                    android:text="알림 설정"
 
-                    />
-                <TextView
-                    android:id="@+id/sound_chat_alarm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginStart="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#A0A0A0"
-                    android:text="채팅 알림 소리"
+                    <Switch
+                        android:id="@+id/set_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="50dp"
+                        android:switchPadding="270dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="16dp"
+                        android:text="알림 설정"
+                        android:textSize="14dp"
+                        android:textColor="#4D4D4D"/>
 
-                    />
+                    <Switch
+                        android:id="@+id/sound_chat_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="50dp"
+                        android:switchPadding="240dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="16dp"
+                        android:text="채팅 알림 소리"
+                        android:textSize="14dp"
+                        android:textColor="#4D4D4D"/>
+
+
                 </LinearLayout>
 
 
@@ -187,9 +201,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="#00ffffff"
+                    android:src="@drawable/ic_phone_android"
                     />
                 <TextView
                     android:id="@+id/ddami_inform"
@@ -198,7 +213,7 @@
                     android:layout_toEndOf="@+id/image_inform"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:textColor="#000000"
+                    android:textColor="#232323"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:text="따미 정보"/>
@@ -219,9 +234,11 @@
                             android:id="@+id/version_inform"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="16dp"
                             android:textSize="14dp"
-                            android:textColor="#A0A0A0"
+                            android:textColor="#4D4D4D"
                             android:text="버전"
 
                             />
@@ -230,9 +247,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
-                            android:layout_marginStart="250dp"
+                            android:layout_marginStart="285dp"
                             android:textSize="14dp"
-                            android:textColor="#A0A0A0"
+                            android:textColor="#BBBBBB"
                             android:text="version" />
 
                     </LinearLayout>
@@ -242,9 +259,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="리뷰 및 별점 추가"
 
                         />
@@ -253,9 +270,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="CONTACT US"
 
                         />
@@ -264,9 +281,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="이용 약관"
 
                         />
@@ -275,9 +292,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="개인정보 취급방침"
 
                         />
@@ -286,9 +303,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="16dp"
                         android:textSize="14dp"
-                        android:textColor="#A0A0A0"
+                        android:textColor="#4D4D4D"
                         android:text="오픈 소스 라이센스 정보"
 
                         />

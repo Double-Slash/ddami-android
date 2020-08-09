@@ -1,7 +1,6 @@
-package com.doubleslash.ddamiapp.fragment;
+package com.doubleslash.ddamiapp.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +66,9 @@ public class CommentAdapter extends BaseExpandableListAdapter {
         }
 
         if(isExpanded){
-           // viewHolder.commentProfile.setBackgroundColor(Color.GREEN);
+            // viewHolder.commentProfile.setBackgroundColor(Color.GREEN);
         }else{
-           // viewHolder.commentProfile.setBackgroundColor(Color.WHITE);
+            // viewHolder.commentProfile.setBackgroundColor(Color.WHITE);
         }
 
         viewHolder.commentNic.setText(getGroup(groupPosition));
@@ -121,6 +120,6 @@ public class CommentAdapter extends BaseExpandableListAdapter {
     class ViewHolder{
         public ImageView commentProfile;
         public TextView commentNic, cYear, cMonth, cDay,
-                        commentContext, recomments;
+                commentContext, recomments;
     }
 }

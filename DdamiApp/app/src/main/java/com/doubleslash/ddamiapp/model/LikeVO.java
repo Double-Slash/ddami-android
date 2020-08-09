@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.fragment;
+package com.doubleslash.ddamiapp.model;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,13 @@ public class LikeVO {
     private String nicname;
     private String heart;
     private ArrayList<String> likelist;
+
+    public LikeVO(String image, String title, String profile, String nicname) {
+        this.image = image;
+        this.title = title;
+        this.profile = profile;
+        this.nicname = nicname;
+    }
 
     public int getNum() {
         return num;
@@ -51,7 +58,7 @@ public class LikeVO {
     public void setNicname(String nicname) {
         this.nicname = nicname;
     }
-
+/*
     public String getHeart() {
         return heart;
     }
@@ -59,7 +66,7 @@ public class LikeVO {
     public void setHeart(String heart) {
         this.heart = heart;
     }
-
+*/
     public ArrayList<String> getLikelist() {
         return likelist;
     }
@@ -67,6 +74,8 @@ public class LikeVO {
     public void setLikelist(ArrayList<String> likelist) {
         this.likelist = likelist;
     }
+
+
 
     @Override
     public String toString() {

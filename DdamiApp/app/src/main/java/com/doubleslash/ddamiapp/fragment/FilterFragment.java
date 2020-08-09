@@ -59,12 +59,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                if(allSpace.isSelected()) {
                     allSpace.setSelected(false);
-                    allSpace.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!allSpace.isSelected()){
 
                     allSpace.setSelected(true);
-                    allSpace.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -74,12 +74,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(livingSpace.isSelected()) {
                     livingSpace.setSelected(false);
-                    livingSpace.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!livingSpace.isSelected()){
 
                     livingSpace.setSelected(true);
-                    livingSpace.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -89,12 +89,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(build.isSelected()) {
                     build.setSelected(false);
-                    build.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!build.isSelected()){
 
                     build.setSelected(true);
-                    build.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -104,12 +104,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(interior.isSelected()) {
                     interior.setSelected(false);
-                    interior.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!interior.isSelected()){
 
                     interior.setSelected(true);
-                    interior.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -119,12 +119,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(inner.isSelected()) {
                     inner.setSelected(false);
-                    inner.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!inner.isSelected()){
 
                     inner.setSelected(true);
-                    inner.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -134,12 +134,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(envir.isSelected()) {
                     envir.setSelected(false);
-                    envir.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!envir.isSelected()){
 
                     envir.setSelected(true);
-                    envir.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -149,12 +149,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(allModern.isSelected()) {
                     allModern.setSelected(false);
-                    allModern.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!allModern.isSelected()){
 
                     allModern.setSelected(true);
-                    allModern.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -164,12 +164,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(painting.isSelected()) {
                     painting.setSelected(false);
-                    painting.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!painting.isSelected()){
 
                     painting.setSelected(true);
-                    painting.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -179,12 +179,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(sculp.isSelected()) {
                     sculp.setSelected(false);
-                    sculp.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!sculp.isSelected()){
 
                     sculp.setSelected(true);
-                    sculp.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -194,12 +194,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(allCraft.isSelected()) {
                     allCraft.setSelected(false);
-                    allCraft.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!allCraft.isSelected()){
 
                     allCraft.setSelected(true);
-                    allCraft.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -209,12 +209,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(pottery.isSelected()) {
                     pottery.setSelected(false);
-                    pottery.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!pottery.isSelected()){
 
                     pottery.setSelected(true);
-                    pottery.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -224,12 +224,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(metals.isSelected()) {
                     metals.setSelected(false);
-                    metals.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!metals.isSelected()){
 
                     metals.setSelected(true);
-                    metals.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -239,12 +239,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(fiber.isSelected()) {
                     fiber.setSelected(false);
-                    fiber.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!fiber.isSelected()){
 
                     fiber.setSelected(true);
-                    fiber.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -254,12 +254,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(woodworking.isSelected()) {
                     woodworking.setSelected(false);
-                    woodworking.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!woodworking.isSelected()){
 
                     woodworking.setSelected(true);
-                    woodworking.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -269,12 +269,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(picture.isSelected()) {
                     picture.setSelected(false);
-                    picture.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!picture.isSelected()){
 
                     picture.setSelected(true);
-                    picture.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -284,12 +284,12 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(video.isSelected()) {
                     video.setSelected(false);
-                    video.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!video.isSelected()){
 
                     video.setSelected(true);
-                    video.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -299,12 +299,11 @@ public class FilterFragment extends Fragment {
             public void onClick(View view) {
                 if(indus.isSelected()) {
                     indus.setSelected(false);
-                    indus.setTextColor(rgb(160,160,160));
+                    allSpace.setTextColor(rgb(128, 128, 128));
 
                 } else if(!indus.isSelected()){
-
                     indus.setSelected(true);
-                    indus.setTextColor(Color.WHITE);
+                    allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
         });
@@ -313,7 +312,10 @@ public class FilterFragment extends Fragment {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //클릭된 버튼 서버로 전달
+                //아무것도 클릭 안 한 경우 버튼 비활성화, (버튼 배경색 #BBBBBB)
+
+                //클릭된 버튼 서버likeField에 추가
+
 
             }
         });
@@ -322,6 +324,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //클릭된 버튼 모두 unclick
+
+                //서버 likeField 배열 모두 삭제, 전체 추가
             }
         });
 

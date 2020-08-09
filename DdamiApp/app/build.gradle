@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -26,9 +27,6 @@ android {
 }
 
 dependencies {
-
-
-
     //implementation 'com.android.support:design:28.0.0'
 
     def nav_version = "2.3.0-rc01"
@@ -72,6 +70,19 @@ dependencies {
 
     //circle image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    //Server Connect
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.3.1'
+
+    //push alarm
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
 }
 repositories {
     mavenCentral()

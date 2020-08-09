@@ -1,6 +1,5 @@
 package com.doubleslash.ddamiapp.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.adapter.CommentAdapter;
 
 import java.util.ArrayList;
 
@@ -71,8 +69,10 @@ public class DetailFragment extends Fragment {
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //누르면 fullHeart로 -> 좋아요 목록에 추가
-                //heartCnt++
+                //누르면 fullHeart로
+                //작품 상세보기 like배열에 사용자 기본키 저장
+                //작품 상세보기 likeCount++, 사용자 상세보기 like++ == heartCnt
+                //작품 상세보기 likeByMe = true
             }
         });
 
@@ -80,7 +80,7 @@ public class DetailFragment extends Fragment {
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //commentWrite.getText() 서버에 추가, 서버에서 불러와서 view에 추가
+                //commentWrite.getText() 서버comments에 추가, 서버에서 불러와서 view에 추가
             }
         });
 

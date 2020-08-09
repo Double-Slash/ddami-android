@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_whole_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9B9B9B">
@@ -56,11 +57,12 @@
                     android:id="@+id/text_space_design"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="공간 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#A0A0A0"/>
+                    android:textColor="#232323"/>
 
                 <Button
                     android:id="@+id/btn_allSpace"
@@ -72,7 +74,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="전체"/>
                 <Button
                     android:id="@+id/btn_livingSpace"
@@ -83,7 +85,7 @@
                     android:layout_below="@+id/text_space_design"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="생활공간"/>
                 <Button
                     android:id="@+id/btn_build"
@@ -94,7 +96,7 @@
                     android:layout_below="@+id/text_space_design"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="건축"/>
                 <Button
                     android:id="@+id/btn_interior"
@@ -105,7 +107,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="인테리어"/>
                 <Button
                     android:id="@+id/btn_inner"
@@ -117,7 +119,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="실내"/>
                 <Button
                     android:id="@+id/btn_envir"
@@ -129,7 +131,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="환경"/>
             </RelativeLayout>
 
@@ -144,11 +146,11 @@
                     android:id="@+id/text_modern_art"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="20dp"
                     android:text="현대미술"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#232323"
                     tools:ignore="NotSibling" />
 
                 <Button
@@ -161,7 +163,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="전체"/>
                 <Button
                     android:id="@+id/btn_painting"
@@ -172,7 +174,7 @@
                     android:layout_below="@+id/text_modern_art"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="회화"/>
                 <Button
                     android:id="@+id/btn_sculp"
@@ -183,7 +185,7 @@
                     android:layout_below="@+id/text_modern_art"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="조형"/>
 
 
@@ -199,11 +201,11 @@
                     android:id="@+id/text_craft_design"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="20dp"
                     android:text="공예 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#A0A0A0"/>
+                    android:textColor="#232323"/>
 
                 <Button
                     android:id="@+id/btn_allCraft"
@@ -215,7 +217,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="전체"/>
                 <Button
                     android:id="@+id/btn_pottery"
@@ -226,7 +228,7 @@
                     android:layout_below="@+id/text_craft_design"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="도자"/>
                 <Button
                     android:id="@+id/btn_metals"
@@ -237,7 +239,7 @@
                     android:layout_below="@+id/text_craft_design"
                     android:layout_margin="10dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="금속"/>
                 <Button
                     android:id="@+id/btn_fiber"
@@ -248,7 +250,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="섬유"/>
                 <Button
                     android:id="@+id/btn_woodworking"
@@ -260,7 +262,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="목공"/>
             </RelativeLayout>
 
@@ -275,11 +277,11 @@
                 android:id="@+id/text_graphic_design"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
                 android:text="그래픽 디자인"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:textColor="#A0A0A0"/>
+                android:textColor="#232323"/>
 
             <Button
                 android:id="@+id/btn_pic"
@@ -291,8 +293,22 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="20dp"
                 android:textSize="16dp"
-                android:textColor="#A0A0A0"
+                android:textColor="#808080"
                 android:text="사진"/>
+
+            <Button
+                android:id="@+id/btn_illust"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_filter_btn"
+                android:layout_below="@+id/text_graphic_design"
+                android:layout_toRightOf="@+id/btn_pic"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"
+                android:textColor="#808080"
+                android:text="일러스트"/>
+
         </RelativeLayout>
 
             <RelativeLayout
@@ -306,11 +322,11 @@
                     android:id="@+id/text_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="20dp"
                     android:text="영상"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#A0A0A0"/>
+                    android:textColor="#232323"/>
 
                 <Button
                     android:id="@+id/btn_allVideo"
@@ -322,8 +338,54 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="전체"/>
+
+                <Button
+                    android:id="@+id/btn_anymation"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_filter_btn"
+                    android:layout_toRightOf="@+id/btn_allVideo"
+                    android:layout_below="@+id/text_video"
+                    android:layout_margin="10dp"
+                    android:textSize="16dp"
+                    android:textColor="#808080"
+                    android:text="애니메이션"/>
+                <Button
+                    android:id="@+id/btn_movie"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_filter_btn"
+                    android:layout_toRightOf="@+id/btn_anymation"
+                    android:layout_below="@+id/text_video"
+                    android:layout_margin="10dp"
+                    android:textSize="16dp"
+                    android:textColor="#808080"
+                    android:text="영화"/>
+                <Button
+                    android:id="@+id/btn_motion"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_filter_btn"
+                    android:layout_below="@+id/btn_allVideo"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16dp"
+                    android:textColor="#808080"
+                    android:text="모션그래픽"/>
+                <Button
+                    android:id="@+id/btn_docu"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_filter_btn"
+                    android:layout_below="@+id/btn_allVideo"
+                    android:layout_toRightOf="@+id/btn_motion"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="16dp"
+                    android:textColor="#808080"
+                    android:text="다큐멘터리"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -337,11 +399,10 @@
                     android:id="@+id/text_industrial_design"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="산업 디자인"
+                    android:layout_marginStart="20dp"                    android:text="산업 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#A0A0A0"/>
+                    android:textColor="#232323"/>
 
                 <Button
                     android:id="@+id/btn_allIndus"
@@ -354,7 +415,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="80dp"
                     android:textSize="16dp"
-                    android:textColor="#A0A0A0"
+                    android:textColor="#808080"
                     android:text="전체"/>
             </RelativeLayout>
 
@@ -365,11 +426,11 @@
         android:layout_width="210dp"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_filter_layout"
+        android:background="@drawable/btn_shape_filter_left"
         android:backgroundTint="#E9E9E9"
         android:text="모두 초기화"
         android:textSize="20dp"
-        android:textColor="#A2A2A2"
+        android:textColor="#322FA0"
         android:textStyle="bold"
 
         />
@@ -379,7 +440,7 @@
         android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_filter_layout"
+        android:background="@drawable/btn_shape_filter_right"
         android:backgroundTint="#9B9B9B"
         android:text="적용하기"
         android:textSize="20dp"
