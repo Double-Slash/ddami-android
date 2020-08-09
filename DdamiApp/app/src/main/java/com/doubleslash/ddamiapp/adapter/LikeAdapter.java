@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.fragment;
+package com.doubleslash.ddamiapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.model.LikeVO;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -47,7 +48,12 @@ public class LikeAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final LikeVO likeVO = list_like.get(position);
-
+/*
+        Glide.with(mContext)
+                .load(likeVO.getThumb())
+                .thumbnail(0.5f)
+                .into(holder.img_thumb);
+*/
         holder.likeNic.setText(likeVO.getNicname());
         holder.titlePiece.setText(likeVO.getTitle());
         //   holder.likeListImage.setImageResource(Integer.parseInt(likeVO.getImage()));

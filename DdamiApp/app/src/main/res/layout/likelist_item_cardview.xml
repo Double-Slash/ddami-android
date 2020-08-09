@@ -13,23 +13,22 @@
     -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/likelist_cardView"
-        android:background="@drawable/shape_like_item"
-        android:backgroundTint="#ffffff"
         app:cardElevation="0dp"
-        android:layout_width="180dp"
-        android:layout_height="220dp"
+        android:layout_width="170dp"
+        android:layout_height="190dp"
         card_view:cardUseCompatPadding="true"
         android:layout_margin="10dp">
 
         <RelativeLayout
             android:id="@+id/ll_cardView_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_likeitem_layout">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/likelist_listImage"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="130dp"
                 android:background="@drawable/shape_like_item"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"/>
@@ -37,8 +36,7 @@
             <RelativeLayout
                 android:id="@+id/text_lay"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="10dp"
+                android:layout_height="50dp"
                 android:gravity="center"
                 android:layout_alignParentBottom="true">
                 <TextView
@@ -46,17 +44,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="3dp"
                     android:textColor="#232323"
-                    android:textSize="13dp"
-                    android:layout_marginLeft="10dp"
+                    android:textSize="14dp"
                     android:text="작품 이름"/>
                 <ImageView
                     android:id="@+id/likelist_profile"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_below="@+id/title_piece"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/ic_brightness_1_puple_24dp"
                     android:backgroundTint="#999999"/>
@@ -68,15 +67,16 @@
                     android:layout_below="@+id/title_piece"
                     android:textColor="#4D4D4D"
                     android:textSize="10dp"
-                    android:layout_marginTop="13dp"
                     android:text="닉네임"/>
                 <ImageButton
                     android:id="@+id/heart_piece"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_margin="10dp"/>
+                    android:background="#00ffffff"
+                    android:src="@drawable/btn_likelist_filled_heart"/>
 
             </RelativeLayout>
 

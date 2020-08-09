@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.Shop.ShopWritingActivity1_1;
 
+import com.doubleslash.ddamiapp.fragment.FilterFragment;
+import com.doubleslash.ddamiapp.fragment.SettingFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -76,11 +80,19 @@ public class ShopFirstFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_shop_first, container, false);
         FloatingActionButton btn=v.findViewById(R.id.floatingBtn_1);
+        TextView filter = (TextView)v.findViewById(R.id.textView7);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
+            }
+        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).replaceFragment(FilterFragment.newInstance());
             }
         });
 
