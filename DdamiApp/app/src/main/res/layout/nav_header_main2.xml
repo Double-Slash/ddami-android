@@ -14,7 +14,7 @@
         android:id="@+id/imageView_Face"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/ic_brightness_1_white_24dp"
+        android:background="@drawable/ic_brightness_1_puple_24dp"
         android:backgroundTint="@color/colorAccent"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintLeft_toLeftOf="parent"
