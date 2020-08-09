@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
@@ -28,6 +29,9 @@ public class DetailFragment extends Fragment {
     LinearLayout pieceDetail //작가가 설명하는 글 들어갈 자리
             , addComment; //댓글 작성 버튼
     EditText commentWrite;
+
+    TextView detailText;
+    RecyclerView detail_img_recyclerview;
 
     private ArrayList<String> mGroupList = null;
     private ArrayList<ArrayList<String>> mChildList = null;
@@ -59,12 +63,19 @@ public class DetailFragment extends Fragment {
         addComment=(LinearLayout)view.findViewById(R.id.add_comment);
         commentWrite=(EditText)view.findViewById(R.id.comment_write);
 
+        detailText = (TextView) view.findViewById(R.id.detail_text);
+        detail_img_recyclerview = (RecyclerView) view.findViewById(R.id.detail_img_recyclerview);
+
         detailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //뒤록 가기
             }
         });
+
+        //\n이 있을 경우 줄바꿈
+        String text = detailText.getText().toString();
+        text = text.replace("\\\n", System.getProperty("line.separator"));
 
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
