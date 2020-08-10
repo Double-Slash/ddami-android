@@ -1,6 +1,9 @@
 package com.doubleslash.ddamiapp.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +19,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
+import com.doubleslash.ddamiapp.model.DetailPieceDAO;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
+import com.doubleslash.ddamiapp.network.kotlin.DetailPieceApi;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class DetailFragment extends Fragment {
 
 
-    ImageButton detailBack, heart, etc;
+    ImageButton detailBack, heart, etc, addComment;
     TextView detailCatagoly,detailTitle, detailNicname, viewCnt,heartCnt;
     ImageView detailProfile, commentProfile;//저작권 등 4이미지 추가
-    LinearLayout pieceDetail //작가가 설명하는 글 들어갈 자리
-            , addComment; //댓글 작성 버튼
+    LinearLayout pieceDetail; //작가가 설명하는 글 들어갈 자리
     EditText commentWrite;
 
     TextView detailText;
@@ -44,6 +58,7 @@ public class DetailFragment extends Fragment {
         return new DetailFragment();
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
@@ -60,11 +75,87 @@ public class DetailFragment extends Fragment {
         detailProfile=(ImageView)view.findViewById(R.id.detail_profile);
         commentProfile=(ImageView)view.findViewById(R.id.comment_profile);
         pieceDetail=(LinearLayout)view.findViewById(R.id.piece_deatil);
-        addComment=(LinearLayout)view.findViewById(R.id.add_comment);
+        addComment=(ImageButton)view.findViewById(R.id.add_comment);
         commentWrite=(EditText)view.findViewById(R.id.comment_write);
+
+
 
         detailText = (TextView) view.findViewById(R.id.detail_text);
         detail_img_recyclerview = (RecyclerView) view.findViewById(R.id.detail_img_recyclerview);
+
+
+//작품 등록 또는 메인의 아이템 누르면
+        JsonObject inputJson = new JsonObject();
+            /*
+            inputJson.put("result", id);     //0,1
+            inputJson.put("obj", pw);       //작품
+                inputJson.put("fileUrl",);          //imagelist
+                inputJson.put("comments",);         //댓글 배열
+                inputJson.put("hasField",);         //분야(카테고리) 배열
+                inputJson.put("views",);         //조회수
+                inputJson.put("like",);         //좋아요 누른 사람 기본키 배열//heart 누르면 여기에 추가
+                inputJson.put("likeCount",);         //좋아요 수
+                inputJson.put("_id",);         //??
+                inputJson.put("title",);         //제목
+                inputJson.put("description",);         //내용
+                inputJson.put("author",);         //작가
+                    inputJson.put("_id",);         //작가 아이디
+                    inputJson.put("userNickname",);         //작가 닉네임
+                inputJson.put("created",);         //등록 시간
+                inputJson.put("likeByUser",);         //내가 좋아요 눌렀는지 아닌지
+             */
+            /*
+        inputJson.get("result");
+
+        inputJson.get("obj");
+        inputJson.get("fileUrl");       //imgList //recyclerview에 추가
+        inputJson.get("comments");      //댓글 배열
+        inputJson.get("hasField");      //분야(카테고리) 배열 // detailCatagoly
+        inputJson.get("views");         //조회수   //viewCnt
+        inputJson.get("like");          //좋아요 누른 사람 기본키 배열
+        inputJson.get("likeCount");     //좋아요 수     //heartCnt
+        inputJson.get("_id");           //사용자 기본키
+        inputJson.get("title");                     //detailTitle
+        inputJson.get("description");   //내용        //detailText
+
+        inputJson.get("author");
+        inputJson.get("_id");           //작가 기본키
+        inputJson.get("userNickname");  //작가 닉네임    //detailNicname
+
+        inputJson.get("created");       //등록 시간
+        inputJson.get("likeByUser");    //좋아요 true false
+
+             */
+
+        //    Single<DetailPieceDAO> deatil = DetailPieceApi.getDeatil(inputJson);
+
+
+
+        ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                           // detailCatagoly.setText(it.getPiece().getHasField());  //list로
+                            detailTitle.setText(it.getPiece().getTitle());
+
+                            detailNicname.setText(it.getPiece().getAuthor().getUserNickname());
+                            viewCnt.setText(it.getPiece().getViews());
+                            heartCnt.setText(it.getPiece().getLikeCount());
+
+                            //recyclerview 이미지 추가
+
+                            detailText.setText(it.getPiece().getDescription());
+
+                            //comments
+                            Log.e("tttest",it.toString());
+                        },it -> {
+                                Log.e("failed",it.toString());
+                        });
+
+
+
+
 
         detailBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +194,7 @@ public class DetailFragment extends Fragment {
         mChildList = new ArrayList<ArrayList<String>>();
         mChildListContent = new ArrayList<String>();
 
-        /*sample data / 서버에서 불러오기  */
+        /*댓글 sample data / 서버에서 불러오기  */
         mGroupList.add("a");
         mGroupList.add("b");
         mGroupList.add("c");
