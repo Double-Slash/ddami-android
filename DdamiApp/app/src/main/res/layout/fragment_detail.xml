@@ -23,6 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:background="#00ffffff"
+                android:src="@drawable/btn_back"
                 />
             <ImageButton
                 android:id="@+id/heart"
@@ -30,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/etc"
                 android:layout_margin="16dp"
+                android:background="#00ffffff"
+                android:src="@drawable/btn_detailview_heart"
                 />
             <ImageButton
                 android:id="@+id/etc"
@@ -37,6 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="16dp"
+                android:background="#00ffffff"
+                android:src="@drawable/btn_detailview_menu"
                 />
 
         </RelativeLayout>
@@ -76,7 +82,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:background="@drawable/ic_brightness_1_puple_24dp" />
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_brightness_1_puple_24dp"
+                />
                 <TextView
                     android:id="@+id/detail_nic"
                     android:layout_width="wrap_content"
@@ -92,7 +100,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/detail_viewCnt"
                     android:layout_marginEnd="5dp"
-                    android:background="@drawable/ic_brightness_1_puple_24dp"
+                    android:layout_centerVertical="true"
+                    android:background="#00ffffff"
+                    android:src="@drawable/ic_eye"
                     />
                 <TextView
                     android:id="@+id/detail_viewCnt"
@@ -110,7 +120,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/detail_heartCnt"
                     android:layout_marginEnd="5dp"
-                    android:background="@drawable/ic_brightness_1_puple_24dp"
+                    android:layout_centerVertical="true"
+                    android:background="#00ffffff"
+                    android:src="@drawable/ic_like"
                     />
                 <TextView
                     android:id="@+id/detail_heartCnt"
@@ -224,33 +236,18 @@
                     android:padding="15dp"
                     android:textColor="#4D4D4D"
                     android:textSize="14dp" />
-                <LinearLayout
+                <ImageButton
                     android:id="@+id/add_comment"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center"
                     android:layout_margin="20dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="댓글"
-                        android:textColor="#4D4D4D"
-                        android:textSize="12dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="작성"
-                        android:textColor="#4D4D4D"
-                        android:textSize="12dp"
-                        />
-                </LinearLayout>
+                    android:background="#00ffffff"
+                    android:src="@drawable/btn_enter"
+                    />
 
-            </LinearLayout>
-
+        </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

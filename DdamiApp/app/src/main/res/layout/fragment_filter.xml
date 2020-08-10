@@ -22,6 +22,7 @@
             android:background="#00ff0000"
             android:layout_alignParentTop="true"
             android:padding="20dp"
+            android:src="@drawable/img_filter_bar"
             />
         <View
             android:id="@+id/divider"
