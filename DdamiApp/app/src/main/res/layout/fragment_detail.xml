@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#ffffff">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="0">
+    tools:context=".fragment.DetailFragment">
 
         <RelativeLayout
             android:id="@+id/detail_top"
@@ -46,105 +42,108 @@
                 />
 
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/detail_catagoly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:textColor="#3C3C3C"
-                android:text="그래픽 디자인"
-                />
-            <TextView
-                android:id="@+id/detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="#101010"
-                android:text="작가가 지정한 제목 최대폭 지정으로 여러줄 표기"
-                />
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                >
-                <ImageView
-                    android:id="@+id/detail_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_brightness_1_puple_24dp"
-                />
-                <TextView
-                    android:id="@+id/detail_nic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/detail_profile"
-                    android:textSize="15dp"
-                    android:textColor="#3C3C3C"
-                    android:text="닉네임"
-                    />
-                <ImageView
-                    android:id="@+id/detail_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/detail_viewCnt"
-                    android:layout_marginEnd="5dp"
-                    android:layout_centerVertical="true"
-                    android:background="#00ffffff"
-                    android:src="@drawable/ic_eye"
-                    />
-                <TextView
-                    android:id="@+id/detail_viewCnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/detail_heart"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="14dp"
-                    android:textColor="#4D4D4D"
-                    android:text="900"
-                    />
-                <ImageView
-                    android:id="@+id/detail_heart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/detail_heartCnt"
-                    android:layout_marginEnd="5dp"
-                    android:layout_centerVertical="true"
-                    android:background="#00ffffff"
-                    android:src="@drawable/ic_like"
-                    />
-                <TextView
-                    android:id="@+id/detail_heartCnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textSize="14dp"
-                    android:textColor="#4D4D4D"
-                    android:text="561"
-                    />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-    <androidx.core.widget.NestedScrollView
+    <TextView
+        android:id="@+id/detail_catagoly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/nanum_square_regular"
+        android:text="그래픽 디자인"
+        android:textColor="#3C3C3C"
+        android:textSize="14dp" />
+    <TextView
+        android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_marginStart="20dp"
+        android:lineSpacingMultiplier="1.3"
+        android:fontFamily="@font/nanum_square_bold"
+        android:textSize="26dp"
+        android:textColor="#101010"
+        android:text="작가가 지정한 제목 최대폭 지정으로 여러줄 표기"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        >
+        <ImageView
+            android:id="@+id/detail_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_brightness_1_puple_24dp"
+            />
+        <TextView
+            android:id="@+id/detail_nic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/detail_profile"
+            android:fontFamily="@font/nanum_square_regular"
+            android:textSize="15dp"
+            android:textColor="#3C3C3C"
+            android:text="닉네임"
+            />
+        <ImageView
+            android:id="@+id/detail_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/detail_viewCnt"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:background="#00ffffff"
+            android:src="@drawable/ic_eye"
+            />
+        <TextView
+            android:id="@+id/detail_viewCnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/detail_heart"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/nanum_square_regular"
+            android:textSize="14dp"
+            android:textColor="#4D4D4D"
+            android:text="900"
+            />
+        <ImageView
+            android:id="@+id/detail_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/detail_heartCnt"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:background="#00ffffff"
+            android:src="@drawable/ic_like"
+            />
+        <TextView
+            android:id="@+id/detail_heartCnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/nanum_square_regular"
+            android:textSize="14dp"
+            android:textColor="#4D4D4D"
+            android:text="561"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true"
         android:background="@drawable/shape_detail_layout"
         >
@@ -173,6 +172,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:text="중간에 글이 들어갈 수도 있고,\n 네이버 블로그 글쓰기 참고하면 이해하기 조금 더 쉬울 듯"
                     />
 
@@ -188,6 +189,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="#00ffffff"
+                    android:src="@drawable/img_ccl"
                     />
             </RelativeLayout>
             <View
@@ -203,7 +207,6 @@
                 android:layout_height="wrap_content"
                 android:groupIndicator="@null"
                 android:scrollbars="vertical"
-                android:layout_marginStart="20dp"
                 />
 
 
@@ -232,6 +235,7 @@
                     android:background="@drawable/shape_filter_btn"
                     android:backgroundTint="#F0F0F6"
                     android:hint="댓글을 입력해주세요"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textColorHint="#B6B6DB"
                     android:padding="15dp"
                     android:textColor="#4D4D4D"

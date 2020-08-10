@@ -14,7 +14,7 @@
         android:layout_marginTop="120dp"
         android:background="@drawable/shape_filter_layout"
         >
-        <!--아이콘 추가-->
+
         <ImageButton
             android:id="@+id/filter_imageBtn"
             android:layout_width="match_parent"
@@ -59,7 +59,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:text="공간 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -74,6 +76,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="전체"/>
@@ -85,6 +88,7 @@
                     android:layout_toRightOf="@+id/btn_allSpace"
                     android:layout_below="@+id/text_space_design"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="생활공간"/>
@@ -96,6 +100,7 @@
                     android:layout_toRightOf="@+id/btn_livingSpace"
                     android:layout_below="@+id/text_space_design"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="건축"/>
@@ -107,6 +112,7 @@
                     android:layout_below="@+id/btn_allSpace"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="인테리어"/>
@@ -119,6 +125,7 @@
                     android:layout_toRightOf="@+id/btn_interior"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="실내"/>
@@ -131,6 +138,7 @@
                     android:layout_toRightOf="@+id/btn_inner"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="환경"/>
@@ -148,6 +156,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:text="현대미술"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -163,6 +174,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="전체"/>
@@ -174,6 +186,7 @@
                     android:layout_toRightOf="@+id/btn_allMA"
                     android:layout_below="@+id/text_modern_art"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="회화"/>
@@ -185,6 +198,7 @@
                     android:layout_toRightOf="@+id/btn_painting"
                     android:layout_below="@+id/text_modern_art"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="조형"/>
@@ -203,6 +217,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:text="공예 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -217,6 +234,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="전체"/>
@@ -228,6 +246,7 @@
                     android:layout_toRightOf="@+id/btn_allCraft"
                     android:layout_below="@+id/text_craft_design"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="도자"/>
@@ -239,6 +258,7 @@
                     android:layout_toRightOf="@+id/btn_pottery"
                     android:layout_below="@+id/text_craft_design"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="금속"/>
@@ -250,6 +270,7 @@
                     android:layout_below="@+id/btn_allCraft"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="섬유"/>
@@ -262,6 +283,7 @@
                     android:layout_toRightOf="@+id/btn_fiber"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="목공"/>
@@ -279,6 +301,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/nanum_square_bold"
                 android:text="그래픽 디자인"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -293,6 +318,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/nanum_square_regular"
                 android:textSize="16dp"
                 android:textColor="#808080"
                 android:text="사진"/>
@@ -306,6 +332,7 @@
                 android:layout_toRightOf="@+id/btn_pic"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/nanum_square_regular"
                 android:textSize="16dp"
                 android:textColor="#808080"
                 android:text="일러스트"/>
@@ -324,6 +351,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:text="영상"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -338,6 +368,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="전체"/>
@@ -350,6 +381,7 @@
                     android:layout_toRightOf="@+id/btn_allVideo"
                     android:layout_below="@+id/text_video"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="애니메이션"/>
@@ -361,6 +393,7 @@
                     android:layout_toRightOf="@+id/btn_animation"
                     android:layout_below="@+id/text_video"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="영화"/>
@@ -372,6 +405,7 @@
                     android:layout_below="@+id/btn_allVideo"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="모션그래픽"/>
@@ -384,6 +418,7 @@
                     android:layout_toRightOf="@+id/btn_motion"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="다큐멘터리"/>
@@ -401,6 +436,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:text="산업 디자인"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -415,6 +453,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="전체"/>
@@ -426,6 +465,7 @@
                     android:layout_below="@+id/text_industrial_design"
                     android:layout_toRightOf="@+id/btn_allIndus"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="제품"/>
@@ -437,6 +477,7 @@
                     android:layout_below="@+id/text_industrial_design"
                     android:layout_toRightOf="@+id/btn_goods"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="공간"/>
@@ -449,6 +490,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="UX/UI"/>
@@ -461,6 +503,7 @@
                     android:layout_toRightOf="@+id/btn_UXUI"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/nanum_square_regular"
                     android:textSize="16dp"
                     android:textColor="#808080"
                     android:text="자동차"/>
@@ -477,6 +520,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/nanum_square_bold"
                 android:text="의상 디자인"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -492,6 +538,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="100dp"
+                android:fontFamily="@font/nanum_square_regular"
                 android:textSize="16dp"
                 android:textColor="#808080"
                 android:text="전체"/>
@@ -505,6 +552,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_shape_filter_left"
+        android:fontFamily="@font/nanum_square_bold"
         android:text="모두 초기화"
         android:textSize="20dp"
         android:textColor="#322FA0"
@@ -518,6 +566,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_shape_filter_right"
+        android:fontFamily="@font/nanum_square_bold"
         android:text="적용하기"
         android:textSize="20dp"
         android:textColor="#FFFFFF"

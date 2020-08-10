@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -82,6 +83,7 @@ public class FilterFragment extends Fragment {
                 } else if(!allSpace.isSelected()){
 
                     allSpace.setSelected(true);
+                    allSpace.setTypeface(null, Typeface.BOLD);
                     allSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -98,6 +100,7 @@ public class FilterFragment extends Fragment {
                 } else if(!livingSpace.isSelected()){
 
                     livingSpace.setSelected(true);
+                    livingSpace.setTypeface(null, Typeface.BOLD);
                     livingSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -114,6 +117,7 @@ public class FilterFragment extends Fragment {
                 } else if(!build.isSelected()){
 
                     build.setSelected(true);
+                    build.setTypeface(null, Typeface.BOLD);
                     build.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -130,6 +134,7 @@ public class FilterFragment extends Fragment {
                 } else if(!interior.isSelected()){
 
                     interior.setSelected(true);
+                    interior.setTypeface(null, Typeface.BOLD);
                     interior.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -146,6 +151,7 @@ public class FilterFragment extends Fragment {
                 } else if(!inner.isSelected()){
 
                     inner.setSelected(true);
+                    inner.setTypeface(null, Typeface.BOLD);
                     inner.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -162,6 +168,7 @@ public class FilterFragment extends Fragment {
                 } else if(!envir.isSelected()){
 
                     envir.setSelected(true);
+                    envir.setTypeface(null, Typeface.BOLD);
                     envir.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -178,6 +185,7 @@ public class FilterFragment extends Fragment {
                 } else if(!allModern.isSelected()){
 
                     allModern.setSelected(true);
+                    allModern.setTypeface(null, Typeface.BOLD);
                     allModern.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -194,6 +202,7 @@ public class FilterFragment extends Fragment {
                 } else if(!painting.isSelected()){
 
                     painting.setSelected(true);
+                    painting.setTypeface(null, Typeface.BOLD);
                     painting.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -210,6 +219,7 @@ public class FilterFragment extends Fragment {
                 } else if(!sculp.isSelected()){
 
                     sculp.setSelected(true);
+                    sculp.setTypeface(null, Typeface.BOLD);
                     sculp.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -226,6 +236,7 @@ public class FilterFragment extends Fragment {
                 } else if(!allCraft.isSelected()){
 
                     allCraft.setSelected(true);
+                    allCraft.setTypeface(null, Typeface.BOLD);
                     allCraft.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -242,6 +253,7 @@ public class FilterFragment extends Fragment {
                 } else if(!pottery.isSelected()){
 
                     pottery.setSelected(true);
+                    pottery.setTypeface(null, Typeface.BOLD);
                     pottery.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -258,6 +270,7 @@ public class FilterFragment extends Fragment {
                 } else if(!metals.isSelected()){
 
                     metals.setSelected(true);
+                    metals.setTypeface(null, Typeface.BOLD);
                     metals.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -274,6 +287,7 @@ public class FilterFragment extends Fragment {
                 } else if(!fiber.isSelected()){
 
                     fiber.setSelected(true);
+                    fiber.setTypeface(null, Typeface.BOLD);
                     fiber.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -290,6 +304,7 @@ public class FilterFragment extends Fragment {
                 } else if(!woodworking.isSelected()){
 
                     woodworking.setSelected(true);
+                    woodworking.setTypeface(null, Typeface.BOLD);
                     woodworking.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -306,6 +321,7 @@ public class FilterFragment extends Fragment {
                 } else if(!picture.isSelected()){
 
                     picture.setSelected(true);
+                    picture.setTypeface(null, Typeface.BOLD);
                     picture.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -322,6 +338,7 @@ public class FilterFragment extends Fragment {
                 } else if(!allVideo.isSelected()){
 
                     allVideo.setSelected(true);
+                    allVideo.setTypeface(null, Typeface.BOLD);
                     allVideo.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -337,6 +354,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!allIndus.isSelected()){
                     allIndus.setSelected(true);
+                    allIndus.setTypeface(null, Typeface.BOLD);
                     allIndus.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -352,6 +370,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!illust.isSelected()){
                     illust.setSelected(true);
+                    illust.setTypeface(null, Typeface.BOLD);
                     illust.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -366,6 +385,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!animation.isSelected()){
                     animation.setSelected(true);
+                    animation.setTypeface(null, Typeface.BOLD);
                     animation.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -380,6 +400,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!movie.isSelected()){
                     movie.setSelected(true);
+                    movie.setTypeface(null, Typeface.BOLD);
                     movie.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -394,6 +415,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!motion.isSelected()){
                     motion.setSelected(true);
+                    motion.setTypeface(null, Typeface.BOLD);
                     motion.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -408,6 +430,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!docu.isSelected()){
                     docu.setSelected(true);
+                    docu.setTypeface(null, Typeface.BOLD);
                     docu.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -421,6 +444,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!goods.isSelected()){
                     goods.setSelected(true);
+                    goods.setTypeface(null, Typeface.BOLD);
                     goods.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -434,6 +458,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!industSpace.isSelected()){
                     industSpace.setSelected(true);
+                    industSpace.setTypeface(null, Typeface.BOLD);
                     industSpace.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -447,6 +472,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!UXUI.isSelected()){
                     UXUI.setSelected(true);
+                    UXUI.setTypeface(null, Typeface.BOLD);
                     UXUI.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -460,6 +486,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!car.isSelected()){
                     car.setSelected(true);
+                    car.setTypeface(null, Typeface.BOLD);
                     car.setTextColor(rgb(50, 47, 160));
                 }
             }
@@ -474,6 +501,7 @@ public class FilterFragment extends Fragment {
 
                 } else if(!allClothes.isSelected()){
                     allClothes.setSelected(true);
+                    allClothes.setTypeface(null, Typeface.BOLD);
                     allClothes.setTextColor(rgb(50, 47, 160));
                 }
             }
