@@ -1,20 +1,23 @@
 package com.doubleslash.ddamiapp.fragment;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.MainActivity;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.graphics.Color.rgb;
 
@@ -27,6 +30,7 @@ public class FilterFragment extends Fragment {
             , allIndus, goods, industSpace, UXUI, car
             , allClothes
             , reset, apply;
+    private ArrayList<String> likeFieldList;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
     public static FilterFragment newInstance() {
@@ -69,6 +73,52 @@ public class FilterFragment extends Fragment {
         allClothes = (AppCompatButton)view.findViewById(R.id.btn_allClothes);
 
 
+
+        likeFieldList= new ArrayList<>();
+
+        //사용자 살세보기의 likeField 사용
+        JsonObject inputJson = new JsonObject();
+        ApiService.INSTANCE.getUserDetailService().getUser(inputJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+//                            try {
+                            //배열에 서버 likeField값 넣기
+//                                JSONArray jsonArray = new JSONArray(it.getUser().getLikeField());
+//                                for(int i = 0 ; i<jsonArray.length(); i++) {
+//                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                                    String likeField = jsonObject.getString("likeField");
+//                                    likeFieldList.add(likeField);
+//
+//                                    Log.i("JSON Parser", likeField);
+//                                    Log.e("tttestlllike",likeFieldList.toString());
+//                                }
+//                            } catch (JSONException e) {
+//
+//                                Log.e("JSON Parser", "Error parsing data " + e.toString());
+//                            }
+
+                            reset.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //서버에 있는 likeField배열 모두 삭제 //list.removeAll();
+
+                                }
+                            });
+
+                            apply.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //클릭된 버튼 서버 likeField배열에 추가, 이전 화면으로 돌아가기
+                                }
+                            });
+                            Log.e("tttest",it.toString());
+                        },it -> {
+                            Log.e("fffailed",it.toString());
+                        });
+
+
         /*각 버튼 클릭 이벤트*/
         apply_Enabled();
 
@@ -76,7 +126,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 apply_Enabled();
-               if(allSpace.isSelected()) {
+                if(allSpace.isSelected()) {
                     allSpace.setSelected(false);
                     allSpace.setTextColor(rgb(128, 128, 128));
 
@@ -553,6 +603,7 @@ public class FilterFragment extends Fragment {
                 apply.setEnabled(false);
 
                 //서버 likeField 배열 모두 삭제
+
 
 
             }

@@ -1,7 +1,6 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,19 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
-import com.doubleslash.ddamiapp.model.DetailPieceDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
-import com.doubleslash.ddamiapp.network.kotlin.DetailPieceApi;
 import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -129,19 +121,18 @@ public class DetailFragment extends Fragment {
 
         //    Single<DetailPieceDAO> deatil = DetailPieceApi.getDeatil(inputJson);
 
-
-
         ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
-                           // detailCatagoly.setText(it.getPiece().getHasField());  //list로
+                            // detailCatagoly.setText(it.getPiece().getHasField());  //list로
                             detailTitle.setText(it.getPiece().getTitle());
 
-                            detailNicname.setText(it.getPiece().getAuthor().getUserNickname());
-                            viewCnt.setText(it.getPiece().getViews());
-                            heartCnt.setText(it.getPiece().getLikeCount());
+                            detailNicname.setText(it.getPiece().getAuthor().getUserName());
+
+                            viewCnt.setText(String.valueOf(it.getPiece().getViews()));
+                            heartCnt.setText(String.valueOf(it.getPiece().getLikeCount()));
 
                             //recyclerview 이미지 추가
 
@@ -150,8 +141,9 @@ public class DetailFragment extends Fragment {
                             //comments
                             Log.e("tttest",it.toString());
                         },it -> {
-                                Log.e("failed",it.toString());
+                            Log.e("ffffailed",it.toString());
                         });
+
 
 
 

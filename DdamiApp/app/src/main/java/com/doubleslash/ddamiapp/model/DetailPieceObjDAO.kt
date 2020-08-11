@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.model
 
 data class DetailPieceObjDAO(
+        val __v: Int,
         val _id: String,
         val author: DetailPieceAuthorDAO,
         val comments: List<Any>,
@@ -11,6 +12,8 @@ data class DetailPieceObjDAO(
         val like: List<String>,
         val likeByUser: Boolean,
         val likeCount: Int,
+        val state: Int,
         val title: String,
         val views: Int
+
 )

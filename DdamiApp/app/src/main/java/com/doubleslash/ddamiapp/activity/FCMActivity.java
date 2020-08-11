@@ -37,13 +37,13 @@ public class FCMActivity extends FirebaseMessagingService {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            String channel = "채널";
-            String channel_nm = "채널명";
+            String channel = "channel";
+            String channel_nm = "channelName";
 
             NotificationManager notichannel = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationChannel channelMessage = new NotificationChannel(channel, channel_nm,
                     android.app.NotificationManager.IMPORTANCE_DEFAULT);
-            channelMessage.setDescription("채널에 대한 설명.");
+            channelMessage.setDescription("explain channel");
             channelMessage.enableLights(true);
             channelMessage.enableVibration(true);
             channelMessage.setShowBadge(false);
@@ -68,7 +68,7 @@ public class FCMActivity extends FirebaseMessagingService {
 
         } else {
             NotificationCompat.Builder notificationBuilder =
-                    new NotificationCompat.Builder(this, "")
+                    new NotificationCompat.Builder(this, "test") //""
                             .setSmallIcon(R.drawable.ic_launcher_background)
                             .setContentTitle(title)
                             .setContentText(message)

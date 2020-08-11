@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.LikeAdapter;
 import com.doubleslash.ddamiapp.model.LikeVO;
-import com.google.gson.Gson;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
+import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickListener {
 
@@ -39,7 +39,24 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_like_list, container, false);
 
-      //  likeBack = (Button) view.findViewById(R.id.like_back);
+        //  likeBack = (Button) view.findViewById(R.id.like_back);
+
+
+        JsonObject inputJson = new JsonObject();
+        //likeByUser :Boolean 사용
+        ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+
+
+                            //comments
+                            Log.e("tttest",it.toString());
+                        },it -> {
+                            Log.e("failed",it.toString());
+                        });
+
 
         like_recyclerview = (RecyclerView) view.findViewById(R.id.like_recyclerview);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);

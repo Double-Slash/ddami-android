@@ -21,6 +21,7 @@ import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         String token = getIntent().getStringExtra("token");
 
         Toast.makeText(this,"id = "+id +"token = "+token,Toast.LENGTH_LONG).show();
-
 
 
         //getSupportActionBar().setTitle("123123");
