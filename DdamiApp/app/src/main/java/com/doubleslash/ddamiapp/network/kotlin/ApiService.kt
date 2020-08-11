@@ -18,4 +18,13 @@ object ApiService {
     val loginService : LoginApi by lazy {
         retrofit.create(LoginApi::class.java)
     }
+
+    val detailPieceService : DetailPieceApi by lazy {
+        retrofit.create(DetailPieceApi::class.java)
+    }
+
+    val userDetailService : UserApi by lazy {
+        retrofit.create(UserApi::class.java)
+    }
+
 }
