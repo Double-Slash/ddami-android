@@ -5,7 +5,7 @@
     android:id="@+id/fragmentShop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Shop.ShopFragment">
+    tools:context=".fragment.shop.ShopFragment">
 
     <TextView
         app:layout_constraintBottom_toBottomOf="parent"
