@@ -7,8 +7,14 @@
     <color name="colorGray">#707070</color>
     <color name="colorLightGray">#E4E4E4</color>
 
-
-    <color name="colorChip">#CCBEE6</color>
     <color name="colorBeforeClicked">#E9E9E9</color>
     <color name="colorAfterClicked">#B7B7B7</color>
+    <color name="colorChip">#E6E6FA</color>
+
+    <color name="colorSplash">#322FA0</color>
+    <color name="colorButton">#3E309D</color>
+    <color name="colorDisable">#BBBBBB</color>
+    <color name="colorCheckOk">#4D4D4D</color>
+    <color name="colorBlueFont">#322FA0</color>
+    <color name="colorGrayFont">#4D4D4D</color>
 </resources>

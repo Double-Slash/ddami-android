@@ -48,22 +48,22 @@ public class MyRoomFragment extends Fragment {
 
         //getting values from Bundle
         String input_id = getArguments().getString("Id");
-        int input_field_size = getArguments().getInt("FieldCount");
-        int input_follow = getArguments().getInt("Follow");
-        int input_follower = getArguments().getInt("Follower");
-        String input_file = getArguments().getString("File0");
-        String input_username = getArguments().getString("Username");
-        String input_profile_img = getArguments().getString("ProfileImg");
-        String input_fileId = getArguments().getString("FileId");
-        Boolean input_state = getArguments().getBoolean("State");
-        String fields = "";
-        for (int i = 0; i < input_field_size; i++) {
-            String input_like_field = getArguments().getString("LikeField" + String.valueOf(i));
-            if (i != 0) {
-                fields = fields.concat(" · " + input_like_field);
-            } else fields = fields.concat(input_like_field);
-        }
-
+//        int input_field_size = getArguments().getInt("FieldCount");
+//        int input_follow = getArguments().getInt("Follow");
+//        int input_follower = getArguments().getInt("Follower");
+//        String input_file = getArguments().getString("File0");
+//        String input_username = getArguments().getString("Username");
+//        String input_profile_img = getArguments().getString("ProfileImg");
+//        String input_fileId = getArguments().getString("FileId");
+//        Boolean input_state = getArguments().getBoolean("State");
+//        String fields = "";
+//        for (int i = 0; i < input_field_size; i++) {
+//            String input_like_field = getArguments().getString("LikeField" + String.valueOf(i));
+//            if (i != 0) {
+//                fields = fields.concat(" · " + input_like_field);
+//            } else fields = fields.concat(input_like_field);
+//        }
+//
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
@@ -80,13 +80,13 @@ public class MyRoomFragment extends Fragment {
         btn_follow = (Button) view.findViewById(R.id.btn_follow);
 
         //add values to the profile layout
-        name.setText(input_username);
+//       name.setText(input_username);
         //id.setText(input_id);
         //program.setText(input_file);
-        field.setText(fields);
-        followerNum.setText(String.valueOf(input_follower));
-        followingNum.setText(String.valueOf(input_follow));
-        Picasso.get().load(input_profile_img).into(profileImg);
+//        field.setText(fields);
+//        followerNum.setText(String.valueOf(input_follower));
+//        followingNum.setText(String.valueOf(input_follow));
+//        Picasso.get().load(input_profile_img).into(profileImg);
 
 
         //Create tabs on TabLayout
@@ -101,24 +101,24 @@ public class MyRoomFragment extends Fragment {
         tabLayout.addTab(tab);
 
 
-        //add fileUrls to the recyclerview
-        ArrayList<MyroomItem> itemL = new ArrayList<>();
-        MyroomItem item = new MyroomItem(input_file);
-        itemL.add(item);
-
-        RecyclerView.Adapter adapter = new MyroomAdapter(itemL);
-        recyclerView.setAdapter(adapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-
-//        bundle.putString("FileId", input_fileId);
-//        DetailFragment detail = new DetailFragment();
-//        detail.setArguments(bundle);
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-//                .add(R.id.nav_host_fragment, detail)
-//                .commit();
+//        //add fileUrls to the recyclerview
+//        ArrayList<MyroomItem> itemL = new ArrayList<>();
+//        MyroomItem item = new MyroomItem(input_file);
+//        itemL.add(item);
+//
+//        RecyclerView.Adapter adapter = new MyroomAdapter(itemL);
+//        recyclerView.setAdapter(adapter);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
+//        recyclerView.setLayoutManager(gridLayoutManager);
+//
+//
+////        bundle.putString("FileId", input_fileId);
+////        DetailFragment detail = new DetailFragment();
+////        detail.setArguments(bundle);
+////        getActivity().getSupportFragmentManager().beginTransaction()
+////                .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+////                .add(R.id.nav_host_fragment, detail)
+////                .commit();
 
 
         //FloatingActionButton onClick event

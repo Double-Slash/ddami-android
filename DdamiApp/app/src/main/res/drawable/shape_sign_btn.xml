@@ -1,0 +1,17 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- default -->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/colorDisable" />
+            <corners android:bottomLeftRadius="100dp" android:bottomRightRadius="100dp" android:topLeftRadius="100dp" android:topRightRadius="100dp" />
+        </shape>
+    </item>
+
+    <!-- click -->
+    <item>
+        <shape>
+            <solid android:color="@color/colorButton" />
+            <corners android:bottomLeftRadius="100dp" android:bottomRightRadius="100dp" android:topLeftRadius="100dp" android:topRightRadius="100dp" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "834131043087",
+    "firebase_url": "https://ddamiapp.firebaseio.com",
+    "project_id": "ddamiapp",
+    "storage_bucket": "ddamiapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834131043087:android:db570c017d89206cae547a",
+        "android_client_info": {
+          "package_name": "com.doubleslash.ddamiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834131043087-tbfl43qdgma7hqm9crkkb9da694jcodm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doubleslash.ddamiapp",
+            "certificate_hash": "9403ccff149734470aafe2804e6691650d73182c"
+          }
+        },
+        {
+          "client_id": "834131043087-i1a5uat1cen3qgqtaaqn7v6rhoahdspl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr9Jx-sS0GfIZKaFMrbL-U943ZhYkOUpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834131043087-i1a5uat1cen3qgqtaaqn7v6rhoahdspl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

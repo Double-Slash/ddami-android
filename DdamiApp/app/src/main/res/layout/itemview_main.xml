@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/main_item_background"
-    android:layout_margin="20dp"
-    android:layout_height="400dp">
+    android:layout_marginTop="10dp"
+    android:layout_height="340dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginBottom="10dp">
 
     <ImageView
         android:id="@+id/main_image"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="262dp"
         android:background="@drawable/main_item_img_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,22 +24,81 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:textSize="22sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_image"
         tools:text="작품이름" />
 
-    <TextView
-        android:id="@+id/main_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/li_profile"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="6dp"
-        android:drawableLeft="@drawable/ic_brightness_1_gray_24dp"
-        android:textSize="16sp"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_title"
-        tools:text="닉네임" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/author_thumbnail"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@color/colorBlueFont" />
+
+        <TextView
+            android:id="@+id/main_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/author_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/main_title"
+            tools:text="닉네임" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/img_eye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_eye" />
+
+        <TextView
+            android:id="@+id/tv_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/author_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/main_title"
+            tools:text="900" />
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/img_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_like" />
+
+        <TextView
+            android:id="@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/author_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/main_title"
+            tools:text="닉네임" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

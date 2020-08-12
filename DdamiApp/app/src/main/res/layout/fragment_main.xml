@@ -7,87 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MainFragment">
 
-
-    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:id="@+id/fragmentMain"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    tools:context=".fragment.MainFragment">-->
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/myInfo"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:background="@android:color/white"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/picture"-->
-    <!--            android:layout_width="80dp"-->
-    <!--            android:layout_height="80dp"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:background="@drawable/ic_brightness_1_puple_24dp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:text="김따미님"-->
-    <!--            android:textColor="@android:color/black"-->
-    <!--            android:textSize="22sp"-->
-    <!--            android:textStyle="bold"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintLeft_toRightOf="@id/picture"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:background="@android:color/white"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapseActionView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 app:contentInsetStart="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/myInfo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white">
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_ddami_home_bg_graphic"
+                        app:layout_constraintLeft_toRightOf="@id/guideline"
+                        app:layout_constraintRight_toRightOf="parent" />
 
                     <ImageView
                         android:id="@+id/picture"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@drawable/ic_brightness_1_puple_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tv_home_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -106,11 +72,10 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@android:color/white"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/filter"
@@ -125,14 +90,14 @@
 
 
             <TextView
-                android:id="@+id/filter2"
+                android:id="@+id/tv_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="12dp"
                 android:text="필터"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/divider" />
+                app:layout_constraintBottom_toTopOf="@id/divider"
+                app:layout_constraintRight_toRightOf="parent" />
 
 
             <View
@@ -160,48 +125,37 @@
                 app:layout_constraintTop_toBottomOf="@id/filter"
                 tools:ignore="RtlSymmetry">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group"
+                <LinearLayout
+                    android:showDividers="middle"
+                    android:divider="@drawable/divider"
+                    android:layout_margin="10dp"
+                    android:id="@+id/chip_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:padding="2dp">
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="전체분야" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="공예" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="그래픽디자인" />
-
-                </com.google.android.material.chip.ChipGroup>
-
+                    android:orientation="horizontal" />
             </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_recyclerview"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_recycler_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chip_layout" />
+        android:descendantFocusability="blocksDescendants"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:background="@android:color/white"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,13 +23,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.doubleslash.ddamiapp.R;
+
 import com.doubleslash.ddamiapp.activity.verification.VerificationActivity;
 import com.doubleslash.ddamiapp.fragment.ActivitisFragment;
 import com.doubleslash.ddamiapp.fragment.LikeFragment;
@@ -37,12 +42,15 @@ import com.doubleslash.ddamiapp.fragment.MyRoomFragment;
 import com.doubleslash.ddamiapp.fragment.SettingFragment;
 
 import com.doubleslash.ddamiapp.fragment.shop.ShopFragment;
+import com.doubleslash.ddamiapp.fragment.MainFragment;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,12 +67,15 @@ public class MainActivity extends AppCompatActivity {
     AppBarConfiguration appBarConfigurationBottom;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
+
     Button btn_verification;
     TextView nav_main, nav_myroom, nav_like, nav_shop, nav_purchase, nav_shop_like, nav_activities, nav_interested_activities, nav_settings;
     TextView nav_header_program;
     ImageView nav_profile_img;
 
     @SuppressLint("CheckResult")
+    Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -252,6 +263,16 @@ public class MainActivity extends AppCompatActivity {
         nav_settings = (TextView) findViewById(R.id.nav_settings);
         nav_header_program = (TextView) findViewById(R.id.nav_header_program);
 
+        //activity to mainFragment
+//        String id = getIntent().getStringExtra("id");
+//        String token = getIntent().getStringExtra("token");
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString("id", id);
+//
+//        fragment = new MainFragment();
+//        fragment.setArguments(bundle);
+
         //if user is verified
         //if() {
               //set btn_verification invisible, show program instead
@@ -260,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
               nav_header_program.setVisibility(View.VISIBLE);
               nav_myroom.setVisibility(View.VISIBLE);
         //}
+
 
         //verification button onClick event
         btn_verification.setOnClickListener(new View.OnClickListener() {
@@ -347,17 +369,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        Intent tokenIntent = new Intent(this, MainFragment.class);
+//        tokenIntent.putExtra("token",token);
+//        startActivity(tokenIntent);
+
+
+        //푸시 알림
+        Intent intent = getIntent();
+        if (intent != null) {//푸시알림을 선택해서 실행한것이 아닌경우 예외처리
+            String notificationData = intent.getStringExtra("test");
+            if (notificationData != null)
+                Log.d("FCM_TEST", notificationData);
+        }
+    }
+
+    //화면 전환
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, fragment).commit();
     }
 
     private void initViews() {
-
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
+        Objects.requireNonNull(getSupportActionBar()).setElevation(0);
+
         //NavController 생성
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
 
         //AppBarConfig 생성
         Set<Integer> pageSet = new HashSet<>();

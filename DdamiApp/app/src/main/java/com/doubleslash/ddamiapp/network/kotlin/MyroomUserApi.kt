@@ -11,5 +11,4 @@ import retrofit2.http.Query
 interface MyroomUserApi {
     @POST("/user/detail/5f3139a8cb0e0f42d0a02b9a"  )
     fun myroom(@Body Body:JsonObject): Single<MyroomUserDAO>
-
 }
