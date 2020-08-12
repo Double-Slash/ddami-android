@@ -2,6 +2,7 @@ package com.doubleslash.ddamiapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,11 +44,14 @@ public class MyRoomFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_room, container, false);
-        Bundle bundle = new Bundle();
-
-
-        //getting values from Bundle
         String input_id = getArguments().getString("Id");
+//        String input_id = "";
+//        //getting values from Bundle
+//        if(getArguments() != null) {
+//            input_id = getArguments().getString("Id");
+//        } else input_id = "err";
+
+
 //        int input_field_size = getArguments().getInt("FieldCount");
 //        int input_follow = getArguments().getInt("Follow");
 //        int input_follower = getArguments().getInt("Follower");
@@ -65,23 +69,23 @@ public class MyRoomFragment extends Fragment {
 //        }
 //
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
-
-        name = (TextView) view.findViewById(R.id.name);
+//        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+//        FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
+//
+//        name = (TextView) view.findViewById(R.id.name);
         id = (TextView) view.findViewById(R.id.id);
-        program = (TextView) view.findViewById(R.id.program);
-        field = (TextView) view.findViewById(R.id.field);
-        followerNum = (TextView) view.findViewById(R.id.followerNum);
-        followingNum = (TextView) view.findViewById(R.id.followingNum);
-        profileImg = (CircleImageView) view.findViewById(R.id.profileImage);
-        recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
-        btn_modify = (Button) view.findViewById(R.id.btn_modify);
-        btn_follow = (Button) view.findViewById(R.id.btn_follow);
+//        program = (TextView) view.findViewById(R.id.program);
+//        field = (TextView) view.findViewById(R.id.field);
+//        followerNum = (TextView) view.findViewById(R.id.followerNum);
+//        followingNum = (TextView) view.findViewById(R.id.followingNum);
+//        profileImg = (CircleImageView) view.findViewById(R.id.profileImage);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
+//        btn_modify = (Button) view.findViewById(R.id.btn_modify);
+//        btn_follow = (Button) view.findViewById(R.id.btn_follow);
 
         //add values to the profile layout
 //       name.setText(input_username);
-        //id.setText(input_id);
+         id.setText(input_id);
         //program.setText(input_file);
 //        field.setText(fields);
 //        followerNum.setText(String.valueOf(input_follower));
@@ -89,16 +93,16 @@ public class MyRoomFragment extends Fragment {
 //        Picasso.get().load(input_profile_img).into(profileImg);
 
 
-        //Create tabs on TabLayout
-        TabLayout.Tab tab = null;
-        tab = tabLayout.newTab().setText("전체분야");
-        tabLayout.addTab(tab);
-        tab = tabLayout.newTab().setText("커스텀목록1");
-        tabLayout.addTab(tab);
-        tab = tabLayout.newTab().setText("커스텀목록2");
-        tabLayout.addTab(tab);
-        tab = tabLayout.newTab().setText("커스텀목록3");
-        tabLayout.addTab(tab);
+//        //Create tabs on TabLayout
+//        TabLayout.Tab tab = null;
+//        tab = tabLayout.newTab().setText("전체분야");
+//        tabLayout.addTab(tab);
+//        tab = tabLayout.newTab().setText("커스텀목록1");
+//        tabLayout.addTab(tab);
+//        tab = tabLayout.newTab().setText("커스텀목록2");
+//        tabLayout.addTab(tab);
+//        tab = tabLayout.newTab().setText("커스텀목록3");
+//        tabLayout.addTab(tab);
 
 
 //        //add fileUrls to the recyclerview
@@ -121,14 +125,14 @@ public class MyRoomFragment extends Fragment {
 ////                .commit();
 
 
-        //FloatingActionButton onClick event
-        btn_fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), WritingActivity.class));
-
-            }
-        });
+//        //FloatingActionButton onClick event
+//        btn_fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().startActivity(new Intent(getActivity(), WritingActivity.class));
+//
+//            }
+//        });
 
         //button display depends on the state
 
