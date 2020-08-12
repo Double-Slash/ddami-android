@@ -3,24 +3,24 @@
     <item
         android:id="@+id/page_main"
         android:enabled="true"
-        android:icon="@drawable/ic_brightness_1_puple_24dp"
+        android:icon="@drawable/selector_nav_btn_home"
         android:title="따미마을" />
 
     <item
         android:id="@+id/page_shop"
         android:enabled="true"
-        android:icon="@drawable/ic_brightness_1_puple_24dp"
+        android:icon="@drawable/selector_nav_btn_shop"
         android:title="따미샵" />
 
     <item
         android:id="@+id/page_activities"
         android:enabled="true"
-        android:icon="@drawable/ic_brightness_1_puple_24dp"
+        android:icon="@drawable/btn_navi_activity"
         android:title="대외활동" />
 
     <item
         android:id="@+id/page_chat"
         android:enabled="true"
-        android:icon="@drawable/ic_brightness_1_puple_24dp"
+        android:icon="@drawable/btn_navi_chat_num_x"
         android:title="채팅" />
 </menu>
