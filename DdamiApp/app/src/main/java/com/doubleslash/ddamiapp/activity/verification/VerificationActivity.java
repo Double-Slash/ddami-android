@@ -1,5 +1,6 @@
-package com.doubleslash.ddamiapp.activity.Verification;
+package com.doubleslash.ddamiapp.activity.verification;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -27,9 +28,10 @@ import com.doubleslash.ddamiapp.R;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 
-public class VerificationActivity extends AppCompatActivity implements View.OnClickListener{
+public class VerificationActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int FILE_REQUEST_CODE = 2;
     Button btn_modern, btn_graphic, btn_craft, btn_video, btn_industrial, btn_space, btn_costume;
@@ -40,11 +42,12 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     String pictureFilePath;
     EditText school, program, studentId;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_verification);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         btn_modern = (Button) findViewById(R.id.btn_modern_art);
         btn_graphic = (Button) findViewById(R.id.btn_graphic_design);

@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.fragment.Shop;
+package com.doubleslash.ddamiapp.fragment.shop;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.activity.Verification;
+package com.doubleslash.ddamiapp.activity.verification;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 
+import java.util.Objects;
+
 public class VerifiedActivity extends AppCompatActivity {
     Button btn_goto_main;
 
@@ -17,7 +19,7 @@ public class VerifiedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_verified);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         btn_goto_main = (Button) findViewById(R.id.btn_goto_main);
         btn_goto_main.setOnClickListener(new View.OnClickListener() {

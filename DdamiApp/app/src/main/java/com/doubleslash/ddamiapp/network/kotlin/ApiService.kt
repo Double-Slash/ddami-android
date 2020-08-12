@@ -22,4 +22,8 @@ object ApiService {
     val myroomUser : MyroomUserApi by lazy {
         retrofit.create(MyroomUserApi::class.java)
     }
+
+    val verifyUser : VerifyApi by lazy {
+        retrofit.create(VerifyApi::class.java)
+    }
 }

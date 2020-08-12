@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,14 +49,18 @@ public class MyRoomFragment extends Fragment {
     CircleImageView profileImg;
     GridView gridView;
     RecyclerView recyclerView;
+    Button btn_modify, btn_follow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_room, container, false);
         Bundle bundle = new Bundle();
+
 
         //getting values from Bundle
         String input_id = getArguments().getString("Id");
@@ -66,6 +71,7 @@ public class MyRoomFragment extends Fragment {
         String input_username = getArguments().getString("Username");
         String input_profile_img = getArguments().getString("ProfileImg");
         String input_fileId = getArguments().getString("FileId");
+        Boolean input_state = getArguments().getBoolean("State");
         String fields = "";
         for(int i=0; i<input_field_size; i++) {
             String input_like_field = getArguments().getString("LikeField" + String.valueOf(i));
@@ -73,6 +79,7 @@ public class MyRoomFragment extends Fragment {
                 fields = fields.concat(" · " + input_like_field);
             } else fields=fields.concat(input_like_field);
         }
+
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         FloatingActionButton btn_fab = (FloatingActionButton)view.findViewById(R.id.fab_myroom);
@@ -83,16 +90,19 @@ public class MyRoomFragment extends Fragment {
         followerNum = (TextView)view.findViewById(R.id.followerNum);
         followingNum = (TextView)view.findViewById(R.id.followingNum);
         profileImg = (CircleImageView)view.findViewById(R.id.profileImage);
-        gridView = (GridView)view.findViewById(R.id.gridView);
         recyclerView = (RecyclerView)view.findViewById(R.id.myroom_recyclerview);
+        btn_modify=(Button)view.findViewById(R.id.btn_modify);
+        btn_follow=(Button)view.findViewById(R.id.btn_follow);
 
+        //add values to the profile layout
         name.setText(input_username);
         //id.setText(input_id);
         //program.setText(input_file);
         field.setText(fields);
         followerNum.setText(String.valueOf(input_follower));
         followingNum.setText(String.valueOf(input_follow));
-        Picasso.get().load(input_file).into(profileImg);
+        Picasso.get().load(input_profile_img).into(profileImg);
+
 
         //Create tabs on TabLayout
         TabLayout.Tab tab = null;
@@ -105,38 +115,38 @@ public class MyRoomFragment extends Fragment {
         tab = tabLayout.newTab().setText("커스텀목록3");
         tabLayout.addTab(tab);
 
+
+        //add fileUrls to the recyclerview
         ArrayList<MyroomItem> itemL = new ArrayList<>();
-
-        MyroomItem item = new MyroomItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800");
-        MyroomItem item2 = new MyroomItem("https://lh3.googleusercontent.com/proxy/BXVOUTQo6OCR28ccw3o3t9ktZRmfGUubrZTb4YVt8Rw13keFUVAwZtRw5dSx7-NNmIfOUBrl27_uZS7Ryfw1Y8xZRt_BqyQxRBFxU_C7g7IlIOvbxrEUXQ");
-        MyroomItem item3 = new MyroomItem("https://t1.daumcdn.net/cfile/tistory/2744FB4058719BE733");
-        MyroomItem item4 = new MyroomItem("https://www.enewstoday.co.kr/news/photo/201805/1188725_303007_1317.jpg");
-
+        MyroomItem item = new MyroomItem(input_file);
         itemL.add(item);
-        itemL.add(item2);
-        itemL.add(item3);
-        itemL.add(item4);
 
         RecyclerView.Adapter adapter = new MyroomAdapter(itemL);
         recyclerView.setAdapter(adapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+
+//        bundle.putString("FileId", input_fileId);
+//        DetailFragment detail = new DetailFragment();
+//        detail.setArguments(bundle);
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+//                .add(R.id.nav_host_fragment, detail)
+//                .commit();
+
+
         //FloatingActionButton onClick event
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getActivity().startActivity(new Intent(getActivity(), WritingActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), WritingActivity.class));
 
-                bundle.putString("FileId", input_fileId);
-                DetailFragment detail = new DetailFragment();
-                detail.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, detail)
-                        .commit();
             }
         });
+
+        //button display depends on the state
+
 
         return view;
     }

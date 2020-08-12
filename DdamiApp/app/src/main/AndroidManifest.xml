@@ -27,13 +27,13 @@
         <activity android:name=".activity.WritingActivity" />
 
         <activity
-            android:name=".activity.Shop.ShopWritingActivity2_1"
+            android:name=".activity.shop.ShopWritingActivity2_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".activity.Shop.ShopWritingActivity1_2"
+            android:name=".activity.shop.ShopWritingActivity1_2"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".activity.Shop.ShopWritingActivity1_1"
+            android:name=".activity.shop.ShopWritingActivity1_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Verification.VerificationActivity">
+        <activity android:name=".activity.verification.VerificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -51,7 +51,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity"/>
         </activity>
-        <activity android:name=".activity.Verification.VerifiedActivity">
+        <activity android:name=".activity.verification.VerifiedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
