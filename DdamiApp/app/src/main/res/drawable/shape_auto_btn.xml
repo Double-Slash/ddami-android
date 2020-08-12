@@ -2,7 +2,7 @@
     <!-- default -->
     <item android:state_focused="false" android:state_pressed="false">
         <shape>
-            <solid android:color="@android:color/white" />
+            <solid android:color="@color/colorButton" />
             <corners android:bottomRightRadius="100dp" android:bottomLeftRadius="100dp" android:topLeftRadius="100dp"
                 android:topRightRadius="100dp"/>
         </shape>
@@ -11,7 +11,7 @@
     <!-- click -->
     <item android:state_focused="false" android:state_pressed="true">
         <shape>
-            <solid android:color="@android:color/darker_gray" />
+            <solid android:color="#4E3CC1" />
             <corners android:bottomRightRadius="100dp" android:bottomLeftRadius="100dp" android:topLeftRadius="100dp"
                 android:topRightRadius="100dp"/>
         </shape>

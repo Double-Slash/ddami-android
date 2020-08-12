@@ -42,7 +42,6 @@ public class ShopFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mTabLayout = (TabLayout) v.findViewById(R.id.layout_tab);
-
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
         mShopViewpagerAdapter = new ShopViewpagerAdapter(getChildFragmentManager(), 2);
         mViewPager.setAdapter(mShopViewpagerAdapter);
@@ -58,7 +57,6 @@ public class ShopFragment extends Fragment {
         FragmentActivity activity = getActivity();
         if (activity != null) {
             ((MainActivity) activity).setActionBarTitle("따미샵");
-
         }
     }
 }

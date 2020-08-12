@@ -27,4 +27,11 @@ object ApiService {
         retrofit.create(UserApi::class.java)
     }
 
+    val signUpService : SignUpApi by lazy {
+        retrofit.create(SignUpApi::class.java)
+    }
+
+    val homeService : HomeApi by lazy {
+        retrofit.create(HomeApi::class.java)
+    }
 }

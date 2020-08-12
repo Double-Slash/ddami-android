@@ -18,12 +18,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.network.kotlin.ApiService;
+import com.doubleslash.ddamiapp.fragment.MainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     BottomNavigationView bottomNavigationView;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-        String id = getIntent().getStringExtra("id");
-        String token = getIntent().getStringExtra("token");
+        //activity to mainFragment
+//        String id = getIntent().getStringExtra("id");
+//        String token = getIntent().getStringExtra("token");
 
-        Toast.makeText(this,"id = "+id +"token = "+token,Toast.LENGTH_LONG).show();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("id", id);
+//
+//        fragment = new MainFragment();
+//        fragment.setArguments(bundle);
 
 
-        //getSupportActionBar().setTitle("123123");
+//        Intent tokenIntent = new Intent(this, MainFragment.class);
+//        tokenIntent.putExtra("token",token);
+//        startActivity(tokenIntent);
+
 
         //푸시 알림
         Intent intent = getIntent();
@@ -58,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
             String notificationData = intent.getStringExtra("test");
             if (notificationData != null)
                 Log.d("FCM_TEST", notificationData);
-
         }
     }
+
     //화면 전환
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -68,15 +77,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.nav_host_fragment, fragment).commit();
     }
 
-    private void initViews(){
+    private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
+        Objects.requireNonNull(getSupportActionBar()).setElevation(0);
+
         //NavController 생성
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-
 
         //AppBarConfig 생성
         Set<Integer> pageSet = new HashSet<>();
@@ -115,13 +124,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp () {
+    public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
-    public void setActionBarTitle (String title){
+    public void setActionBarTitle(String title) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
