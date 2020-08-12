@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 
 public class LikeAdapter
         extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
-
 
     private Context mContext;
     private ArrayList<LikeVO> list_like;
@@ -56,12 +56,14 @@ public class LikeAdapter
 */
         holder.likeNic.setText(likeVO.getNicname());
         holder.titlePiece.setText(likeVO.getTitle());
-        //   holder.likeListImage.setImageResource(Integer.parseInt(likeVO.getImage()));
-        //   holder.likeProfile.setImageResource(Integer.parseInt(likeVO.getProfile()));
+        holder.likeListImage.setImageURI(Uri.parse(likeVO.getImage()));
+        holder.likeProfile.setImageURI(Uri.parse(likeVO.getProfile()));
         holder.heartPiece.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //하트 누리면 빈하트 -> 좋아요 목록에서 없어짐
+                //하트 누리면 빈하트 -> 좋아요 목록에서 없어짐    likeByUser = false
+
+                holder.heartPiece.setImageResource(R.drawable.btn_detailview_heart);
             }
         });
         holder.layoutLikeList.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +85,7 @@ public class LikeAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private LinearLayout layoutLikeList;
-        private RoundedImageView likeListImage;
+        private ImageView likeListImage;
         private ImageView likeProfile;
         private ImageButton heartPiece;
         private TextView likeNic, titlePiece;
@@ -92,7 +94,7 @@ public class LikeAdapter
             super(convertView);
 
             layoutLikeList = (LinearLayout) convertView.findViewById(R.id.layout_like_list);
-            likeListImage = (RoundedImageView) convertView.findViewById(R.id.likelist_listImage);
+            likeListImage = (ImageView) convertView.findViewById(R.id.likelist_listImage);
             likeProfile = (ImageView) convertView.findViewById(R.id.likelist_profile);
             heartPiece = (ImageButton) convertView.findViewById(R.id.heart_piece);
             likeNic = (TextView) convertView.findViewById(R.id.likelist_nic);

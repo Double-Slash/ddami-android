@@ -1,6 +1,9 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends ActivitisFragment {
 
 
     ImageButton detailBack, heart, etc, addComment;
@@ -78,55 +81,22 @@ public class DetailFragment extends Fragment {
 
 //작품 등록 또는 메인의 아이템 누르면
         JsonObject inputJson = new JsonObject();
-            /*
-            inputJson.put("result", id);     //0,1
-            inputJson.put("obj", pw);       //작품
-                inputJson.put("fileUrl",);          //imagelist
-                inputJson.put("comments",);         //댓글 배열
-                inputJson.put("hasField",);         //분야(카테고리) 배열
-                inputJson.put("views",);         //조회수
-                inputJson.put("like",);         //좋아요 누른 사람 기본키 배열//heart 누르면 여기에 추가
-                inputJson.put("likeCount",);         //좋아요 수
-                inputJson.put("_id",);         //??
-                inputJson.put("title",);         //제목
-                inputJson.put("description",);         //내용
-                inputJson.put("author",);         //작가
-                    inputJson.put("_id",);         //작가 아이디
-                    inputJson.put("userNickname",);         //작가 닉네임
-                inputJson.put("created",);         //등록 시간
-                inputJson.put("likeByUser",);         //내가 좋아요 눌렀는지 아닌지
-             */
-            /*
-        inputJson.get("result");
-
-        inputJson.get("obj");
-        inputJson.get("fileUrl");       //imgList //recyclerview에 추가
-        inputJson.get("comments");      //댓글 배열
-        inputJson.get("hasField");      //분야(카테고리) 배열 // detailCatagoly
-        inputJson.get("views");         //조회수   //viewCnt
-        inputJson.get("like");          //좋아요 누른 사람 기본키 배열
-        inputJson.get("likeCount");     //좋아요 수     //heartCnt
-        inputJson.get("_id");           //사용자 기본키
-        inputJson.get("title");                     //detailTitle
-        inputJson.get("description");   //내용        //detailText
-
-        inputJson.get("author");
-        inputJson.get("_id");           //작가 기본키
-        inputJson.get("userNickname");  //작가 닉네임    //detailNicname
-
-        inputJson.get("created");       //등록 시간
-        inputJson.get("likeByUser");    //좋아요 true false
-
-             */
-
-        //    Single<DetailPieceDAO> deatil = DetailPieceApi.getDeatil(inputJson);
 
         ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
-                            // detailCatagoly.setText(it.getPiece().getHasField());  //list로
+
+                            detailCatagoly.setText(it.getPiece().getHasField().toString());  //list로
+//                            String replace = detailCatagoly.getText().toString();
+//                            replace = replace.replace("[","");
+//                            replace = replace.replace("]","");
+//                            replace = replace.replace(","," / ");
+
+                            String imgUrl = it.getPiece().getFileUrl().get(0);
+                            detailProfile.setImageURI(Uri.parse(imgUrl));
+
                             detailTitle.setText(it.getPiece().getTitle());
 
                             detailNicname.setText(it.getPiece().getAuthor().getUserName());
@@ -137,6 +107,35 @@ public class DetailFragment extends Fragment {
                             //recyclerview 이미지 추가
 
                             detailText.setText(it.getPiece().getDescription());
+
+                            heart.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    String count=null;
+                                    Intent intent = new Intent(getActivity(), DetailFragment.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                    if (it.getPiece().getLikeByUser() == true||heart.isSelected()) {
+                                        intent.putExtra("likeField",false);
+                                       // getActivity().startActivity(intent);
+                                        heart.setSelected(false);
+
+                                    }else if(it.getPiece().getLikeByUser() == false||(!heart.isSelected())){
+                                        intent.putExtra("likeField",true);
+                                        //getActivity().startActivity(intent);
+                                        heart.setSelected(true);
+                                    }
+//                                    누르면 fullHeart로
+//                                    작품 상세보기 like배열에 사용자 기본키 저장
+//                                    작품 상세보기 likeCount++, 사용자 상세보기 like++ == heartCnt
+//                                    작품 상세보기 likeByMe = true
+                                }
+                            });
+
+
+
+
+
 
                             //comments
                             Log.e("tttest",it.toString());
@@ -160,15 +159,7 @@ public class DetailFragment extends Fragment {
         String text = detailText.getText().toString();
         text = text.replace("\\\n", System.getProperty("line.separator"));
 
-        heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //누르면 fullHeart로
-                //작품 상세보기 like배열에 사용자 기본키 저장
-                //작품 상세보기 likeCount++, 사용자 상세보기 like++ == heartCnt
-                //작품 상세보기 likeByMe = true
-            }
-        });
+
 
         //댓글 작성 버튼
         addComment.setOnClickListener(new View.OnClickListener() {

@@ -11,17 +11,19 @@
         android:name="com.doubleslash.ddamiapp.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
-
+    <!--수정-->
     <fragment
         android:id="@+id/page_activities"
-        android:name="com.doubleslash.ddamiapp.fragment.ActivitisFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.LikeFragment"
         android:label="fragment_activitis"
-        tools:layout="@layout/fragment_activitis" />
+        tools:layout="@layout/fragment_like_list" />
+
     <fragment
         android:id="@+id/page_chat"
-        android:name="com.doubleslash.ddamiapp.fragment.ChattingFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.DetailFragment"
         android:label="fragment_chatting"
-        tools:layout="@layout/fragment_chatting" />
+        tools:layout="@layout/fragment_detail" />
+    <!--************************-->
     <fragment
         android:id="@+id/page_shop"
         android:name="com.doubleslash.ddamiapp.fragment.Shop.ShopFragment"

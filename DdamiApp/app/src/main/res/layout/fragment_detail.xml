@@ -29,7 +29,7 @@
                 android:layout_toLeftOf="@+id/etc"
                 android:layout_margin="16dp"
                 android:background="#00ffffff"
-                android:src="@drawable/btn_detailview_heart"
+                android:src="@drawable/btn_heart_event"
                 />
             <ImageButton
                 android:id="@+id/etc"
