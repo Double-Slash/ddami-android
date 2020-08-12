@@ -9,7 +9,6 @@
 
 
     <color name="colorChip">#CCBEE6</color>
-
     <color name="colorBeforeClicked">#E9E9E9</color>
     <color name="colorAfterClicked">#B7B7B7</color>
 </resources>

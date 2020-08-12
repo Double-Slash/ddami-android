@@ -168,7 +168,6 @@
                 android:textColor="#232323"/>
             </LinearLayout>
 
-<!--            <androidx.appcompat.widget.AppCompatButton-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_modern_art"
                 android:layout_width="116dp"

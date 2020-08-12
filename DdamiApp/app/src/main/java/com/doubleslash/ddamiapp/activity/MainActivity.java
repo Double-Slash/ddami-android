@@ -2,18 +2,27 @@ package com.doubleslash.ddamiapp.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,8 +35,8 @@ import com.doubleslash.ddamiapp.fragment.LikeFragment;
 import com.doubleslash.ddamiapp.fragment.MainFragment;
 import com.doubleslash.ddamiapp.fragment.MyRoomFragment;
 import com.doubleslash.ddamiapp.fragment.SettingFragment;
+
 import com.doubleslash.ddamiapp.fragment.shop.ShopFragment;
-import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonObject;
@@ -38,6 +47,7 @@ import java.util.Set;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import static android.content.res.ColorStateList.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     private Long backTime = 0L;
@@ -229,6 +239,114 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         });
+
+        btn_verification = (Button)findViewById(R.id.btn_verification);
+        nav_main = (TextView) findViewById(R.id.nav_main);
+        nav_myroom = (TextView) findViewById(R.id.nav_myroom);
+        nav_like = (TextView) findViewById(R.id.nav_like);
+        nav_shop = (TextView) findViewById(R.id.nav_shop);
+        nav_purchase = (TextView) findViewById(R.id.nav_purchase);
+        nav_shop_like = (TextView) findViewById(R.id.nav_shop_like);
+        nav_activities = (TextView) findViewById(R.id.nav_activities);
+        nav_interested_activities = (TextView) findViewById(R.id.nav_interested_activities);
+        nav_settings = (TextView) findViewById(R.id.nav_settings);
+        nav_header_program = (TextView) findViewById(R.id.nav_header_program);
+
+        //if user is verified
+        //if() {
+              //set btn_verification invisible, show program instead
+              //set nav_myroom visible in the navigation menu
+              btn_verification.setVisibility(View.GONE);
+              nav_header_program.setVisibility(View.VISIBLE);
+              nav_myroom.setVisibility(View.VISIBLE);
+        //}
+
+        //verification button onClick event
+        btn_verification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewActivity();
+            }
+        });
+
+        //navigation menu clicked event
+        nav_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainFragment main = new MainFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, main).commit();
+            }
+        });
+
+        nav_myroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyRoomFragment myroom = new MyRoomFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, myroom).commit();
+            }
+        });
+
+        nav_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 LikeFragment like = new LikeFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, like).commit();
+            }
+        });
+
+        nav_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShopFragment shop = new ShopFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, shop).commit();
+            }
+        });
+
+        nav_purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        nav_shop_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        nav_activities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitisFragment activities = new ActivitisFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, activities).commit();
+            }
+        });
+
+        nav_interested_activities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitisFragment activities = new ActivitisFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, activities).commit();
+            }
+        });
+
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingFragment settings= new SettingFragment();
+                drawerLayout.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, settings).commit();
+            }
+        });
+
     }
 
     private void initViews() {

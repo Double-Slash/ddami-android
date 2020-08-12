@@ -1,47 +1,31 @@
 package com.doubleslash.ddamiapp.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.WritingActivity;
-import com.doubleslash.ddamiapp.adapter.MainAdapter;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
-import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.model.MyroomItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+
 
 public class MyRoomFragment extends Fragment {
     TabLayout tabLayout;
@@ -73,26 +57,27 @@ public class MyRoomFragment extends Fragment {
         String input_fileId = getArguments().getString("FileId");
         Boolean input_state = getArguments().getBoolean("State");
         String fields = "";
-        for(int i=0; i<input_field_size; i++) {
+        for (int i = 0; i < input_field_size; i++) {
             String input_like_field = getArguments().getString("LikeField" + String.valueOf(i));
-            if(i != 0) {
+            if (i != 0) {
                 fields = fields.concat(" · " + input_like_field);
-            } else fields=fields.concat(input_like_field);
+            } else fields = fields.concat(input_like_field);
         }
 
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        FloatingActionButton btn_fab = (FloatingActionButton)view.findViewById(R.id.fab_myroom);
-        name = (TextView)view.findViewById(R.id.name);
-        id = (TextView)view.findViewById(R.id.id);
-        program = (TextView)view.findViewById(R.id.program);
-        field = (TextView)view.findViewById(R.id.field);
-        followerNum = (TextView)view.findViewById(R.id.followerNum);
-        followingNum = (TextView)view.findViewById(R.id.followingNum);
-        profileImg = (CircleImageView)view.findViewById(R.id.profileImage);
-        recyclerView = (RecyclerView)view.findViewById(R.id.myroom_recyclerview);
-        btn_modify=(Button)view.findViewById(R.id.btn_modify);
-        btn_follow=(Button)view.findViewById(R.id.btn_follow);
+        FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
+
+        name = (TextView) view.findViewById(R.id.name);
+        id = (TextView) view.findViewById(R.id.id);
+        program = (TextView) view.findViewById(R.id.program);
+        field = (TextView) view.findViewById(R.id.field);
+        followerNum = (TextView) view.findViewById(R.id.followerNum);
+        followingNum = (TextView) view.findViewById(R.id.followingNum);
+        profileImg = (CircleImageView) view.findViewById(R.id.profileImage);
+        recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
+        btn_modify = (Button) view.findViewById(R.id.btn_modify);
+        btn_follow = (Button) view.findViewById(R.id.btn_follow);
 
         //add values to the profile layout
         name.setText(input_username);
@@ -146,7 +131,6 @@ public class MyRoomFragment extends Fragment {
         });
 
         //button display depends on the state
-
 
         return view;
     }
