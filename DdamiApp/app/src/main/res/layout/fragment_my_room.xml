@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e4e4e4">
+        android:background="#f0f0f6">
 
         <!--Profile Part-->
         <LinearLayout
@@ -32,7 +32,6 @@
                     android:id="@+id/profileImage"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
-                    android:layout_marginLeft="23dp"
                     android:outlineAmbientShadowColor="#0000001A"
                     android:outlineSpotShadowColor="#0000001A"/>
             </RelativeLayout>
@@ -43,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="65"
                 android:layout_marginTop = "15dp"
-                android:layout_marginLeft="19dp"
+
                 android:layout_marginBottom="20dp">
 
                 <include layout="@layout/myroom_profile"/>

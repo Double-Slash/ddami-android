@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,11 +53,11 @@ public class MyRoomFragment extends Fragment {
         int input_field_size = getArguments().getInt("FieldCount");
         int input_follow = getArguments().getInt("Follow");
         int input_follower = getArguments().getInt("Follower");
-        String input_file = getArguments().getString("File0");
         String input_username = getArguments().getString("Username");
         String input_profile_img = getArguments().getString("ProfileImg");
-        String input_fileId = getArguments().getString("FileId");
         Boolean input_state = getArguments().getBoolean("State");
+        int input_file_count = getArguments().getInt("FileCount");
+
         String fields = "";
         for (int i = 0; i < input_field_size; i++) {
             String input_like_field = getArguments().getString("LikeField" + String.valueOf(i));
@@ -63,10 +66,16 @@ public class MyRoomFragment extends Fragment {
             } else fields = fields.concat(input_like_field);
         }
 
+        ArrayList<MyroomItem> itemL = new ArrayList<>();
+        for(int i=0; i<input_file_count; i++) {
+            String input_file = getArguments().getString("File" + String.valueOf(i));
+            String input_file_id = getArguments().getString("FileId" + String.valueOf(i));
+            MyroomItem item = new MyroomItem(input_file, input_file_id);
+            itemL.add(item);
+        }
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
-
         name = (TextView) view.findViewById(R.id.name);
         id = (TextView) view.findViewById(R.id.id);
         program = (TextView) view.findViewById(R.id.program);
@@ -77,10 +86,16 @@ public class MyRoomFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
         btn_modify = (Button) view.findViewById(R.id.btn_modify);
         btn_follow = (Button) view.findViewById(R.id.btn_follow);
+        ImageView imgView = (ImageView) view.findViewById(R.id.myroom_itemimage);
+
+//        imgView.setClipToOutline(true);
+//        GradientDrawable drawable = (GradientDrawable)getContext().getDrawable(R.drawable.myroom_image);
+//        imgView.setBackground(drawable);
+//        imgView.setClipToOutline(true);
 
         //add values to the profile layout
-       name.setText(input_username);
-         id.setText(input_id);
+        name.setText(input_username);
+        id.setText(input_id);
         //program.setText(input_file);
         field.setText(fields);
         followerNum.setText(String.valueOf(input_follower));
@@ -90,7 +105,7 @@ public class MyRoomFragment extends Fragment {
 
         //Create tabs on TabLayout
         TabLayout.Tab tab = null;
-        tab = tabLayout.newTab().setText("전체분야");
+        tab = tabLayout.newTab().setText("전체분야 " + String.valueOf(input_file_count));
         tabLayout.addTab(tab);
         tab = tabLayout.newTab().setText("커스텀목록1");
         tabLayout.addTab(tab);
@@ -99,11 +114,6 @@ public class MyRoomFragment extends Fragment {
         tab = tabLayout.newTab().setText("커스텀목록3");
         tabLayout.addTab(tab);
 
-
-        //add fileUrls to the recyclerview
-        ArrayList<MyroomItem> itemL = new ArrayList<>();
-        MyroomItem item = new MyroomItem(input_file);
-        itemL.add(item);
 
         RecyclerView.Adapter adapter = new MyroomAdapter(itemL);
         recyclerView.setAdapter(adapter);
@@ -130,6 +140,7 @@ public class MyRoomFragment extends Fragment {
         });
 
         //button display depends on the state
+
 
         return view;
     }

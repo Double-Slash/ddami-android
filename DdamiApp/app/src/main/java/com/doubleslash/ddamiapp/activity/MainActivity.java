@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-
         String id = getIntent().getStringExtra("id");
         String token = getIntent().getStringExtra("token");
 
@@ -100,11 +99,12 @@ public class MainActivity extends AppCompatActivity {
                             bundle.putInt("FieldCount", it.getUser().getLikeField().size());
                             bundle.putInt("Follow", it.getUser().getFollow());
                             bundle.putInt("Follower", it.getUser().getFollower());
-                            for (int i = 0; i < it.getUser().getMyPieces().get(0).getFileUrl().size(); i++) {
-                                bundle.putString("File" + String.valueOf(i), it.getUser().getMyPieces().get(0).getFileUrl().get(i));
+                            for (int i = 0; i < it.getUser().getMyPieces().size(); i++) {
+                                bundle.putString("File" + String.valueOf(i), it.getUser().getMyPieces().get(i).getFileUrl().get(0));
+                                bundle.putString("FileId" + String.valueOf(i), it.getUser().getMyPieces().get(i).getId());
                             }
-                            bundle.putString("FileId", it.getUser().getMyPieces().get(0).getId());
-                            bundle.putInt("FileCount", it.getUser().getMyPieces().get(0).getFileUrl().size());
+                            Log.e("hhhhhere", String.valueOf(it.getUser().getMyPieces().size()));
+                            bundle.putInt("FileCount", it.getUser().getMyPieces().size());
                             bundle.putString("Username", it.getUser().getUserName());
                             bundle.putString("ProfileImg", it.getUser().getImageUrl());
                             bundle.putBoolean("State", it.getUser().getState());
