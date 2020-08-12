@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_chatting" />
     <fragment
         android:id="@+id/page_shop"
-        android:name="com.doubleslash.ddamiapp.fragment.Shop.ShopFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
 

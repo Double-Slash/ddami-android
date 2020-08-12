@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this,"id = "+id +"token = "+token,Toast.LENGTH_LONG).show();
 
-
+        //ApiService.INSTANCE.getLoginService()
 
         //getSupportActionBar().setTitle("123123");
 

@@ -5,7 +5,7 @@
     android:id="@+id/shop1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Shop.ShopFirstFragment">
+    tools:context=".fragment.shop.ShopFirstFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingBtn_1"
@@ -16,19 +16,27 @@
         android:clickable="true"
         app:backgroundTint="#F7606B"
         app:fabSize="normal"
-        app:srcCompat="@drawable/shop_baseline_add_white_18dp" />
+        app:tint="#FFFFFF"
+        app:srcCompat="@drawable/img_plus" />
 
     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EEEEEE"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/setting_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="16dp">
 
             <TextView
                 android:id="@+id/textView6"
@@ -36,7 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_order1"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textColor="#3C3C3C"
+                android:fontFamily="@font/nanum_square_regular"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -44,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_order_div"
+                android:textColor="#3C3C3C"
                 android:textSize="13sp" />
 
             <TextView
@@ -52,7 +63,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_order2"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textColor="#3C3C3C"
+                android:fontFamily="@font/nanum_square_regular"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -60,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_order_div"
+                android:textColor="#3C3C3C"
                 android:textSize="13sp" />
 
             <TextView
@@ -68,7 +82,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_order3"
-                android:textSize="13sp" />
+                android:textColor="#3C3C3C"
+                android:textSize="13sp"
+                android:fontFamily="@font/nanum_square_regular"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -83,33 +99,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="@string/shop_first_filter"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textColor="#3C3C3C"
+                android:fontFamily="@font/nanum_square_regular"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginHorizontal="16dp"
             android:background="#DBDBDB" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/shop_custom_radius_white"
+                android:background="@drawable/shop_custom_radius_purple"
+                android:fontFamily="@font/nanum_square_bold"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
                 android:text="@string/shop_first_tag1"
+                android:textColor="#101010"
                 android:textSize="13sp" />
 
             <TextView
@@ -117,12 +137,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/shop_custom_radius_white"
+                android:background="@drawable/shop_custom_radius_purple"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
                 android:text="@string/shop_first_tag2"
+                android:textColor="#101010"
+                android:fontFamily="@font/nanum_square_bold"
                 android:textSize="13sp" />
 
             <TextView
@@ -130,21 +152,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/shop_custom_radius_white"
+                android:background="@drawable/shop_custom_radius_purple"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
                 android:text="@string/shop_first_tag3"
+                android:textColor="#101010"
+                android:fontFamily="@font/nanum_square_bold"
                 android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shop_first_recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
+</LinearLayout>
 </FrameLayout>

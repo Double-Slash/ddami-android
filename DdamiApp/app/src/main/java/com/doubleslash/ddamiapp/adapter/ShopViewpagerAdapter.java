@@ -1,6 +1,5 @@
 package com.doubleslash.ddamiapp.adapter;
 
-
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.doubleslash.ddamiapp.fragment.Shop.ShopFirstFragment;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopSecondFragment;
+import com.doubleslash.ddamiapp.fragment.shop.ShopFirstFragment;
+import com.doubleslash.ddamiapp.fragment.shop.ShopSecondFragment;
 
 
 // 따미샵-작품, 재료 뷰페이저 어댑터
