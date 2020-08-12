@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                             for(int i=0; i<it.getUser().getMyPieces().get(0).getFileUrl().size(); i++) {
                                 bundle.putString("File" + String.valueOf(i), it.getUser().getMyPieces().get(0).getFileUrl().get(i));
                             }
+                            bundle.putString("FileId", it.getUser().getMyPieces().get(0).get_id());
                             bundle.putInt("FileCount", it.getUser().getMyPieces().get(0).getFileUrl().size());
                             bundle.putString("Username", it.getUser().getUserName());
                             bundle.putString("ProfileImg", it.getUser().getImageUrl());
@@ -146,7 +147,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MainFragment main = new MainFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, main).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, main)
+                        .commit();
             }
         });
 
@@ -156,7 +160,10 @@ public class MainActivity extends AppCompatActivity {
                 MyRoomFragment myroom = new MyRoomFragment();
                 drawerLayout.closeDrawers();
                 myroom.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, myroom).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, myroom)
+                        .commit();
             }
         });
 
@@ -165,7 +172,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                  LikeFragment like = new LikeFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, like).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, like)
+                        .commit();
             }
         });
 
@@ -174,7 +184,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ShopFragment shop = new ShopFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, shop).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, shop)
+                        .commit();
             }
         });
 
@@ -197,7 +210,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ActivitisFragment activities = new ActivitisFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, activities).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, activities)
+                        .commit();
             }
         });
 
@@ -206,7 +222,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ActivitisFragment activities = new ActivitisFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, activities).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, activities)
+                        .commit();
             }
         });
 
@@ -215,10 +234,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SettingFragment settings= new SettingFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, settings).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
+                        .add(R.id.nav_host_fragment, settings)
+                        .commit();
             }
         });
-        //getSupportActionBar().setTitle("123123");
     }
 
     private void initViews() {

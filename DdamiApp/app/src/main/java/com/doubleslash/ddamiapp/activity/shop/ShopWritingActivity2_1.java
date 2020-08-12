@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.activity.Shop;
+package com.doubleslash.ddamiapp.activity.shop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;

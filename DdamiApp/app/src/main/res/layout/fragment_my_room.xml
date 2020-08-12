@@ -72,22 +72,18 @@
             <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/pager">
+                android:id="@+id/pager"
+                android:layout_below="@+id/tabLayout">
 
             </androidx.viewpager.widget.ViewPager>
 
-
-            <GridView
-                android:id="@+id/gridView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myroom_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_below="@+id/tabLayout"
-                android:horizontalSpacing="10dp"
-                android:verticalSpacing="10dp"
-                android:numColumns="2"
-                android:stretchMode="columnWidth">
-            </GridView>
+                android:layout_height="match_parent"
+                android:padding="9dp"
+                android:background="#fff"
+                android:layout_below="@+id/tabLayout"/>
 
         </RelativeLayout>
 
