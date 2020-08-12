@@ -1,8 +1,7 @@
-package com.doubleslash.ddamiapp.fragment;
+package com.doubleslash.ddamiapp.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,11 +16,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
+import com.doubleslash.ddamiapp.adapter.DetailImgAdapter;
+import com.doubleslash.ddamiapp.adapter.MainAdapter;
+import com.doubleslash.ddamiapp.fragment.ActivitisFragment;
+import com.doubleslash.ddamiapp.model.DetailImgItem;
+import com.doubleslash.ddamiapp.model.DetailPieceDAO;
+import com.doubleslash.ddamiapp.model.DetailPieceObjDAO;
+import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
 
@@ -30,7 +37,7 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailFragment extends ActivitisFragment {
+public class DetailActivity extends AppCompatActivity {
 
 
     ImageButton detailBack, heart, etc, addComment;
@@ -46,37 +53,33 @@ public class DetailFragment extends ActivitisFragment {
     private ArrayList<ArrayList<String>> mChildList = null;
     private ArrayList<String> mChildListContent = null;
     ExpandableListView commentView;
+    RecyclerView recyclerView;
 
-
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
-    public static DetailFragment newInstance() {
-        return new DetailFragment();
-    }
 
     @SuppressLint("CheckResult")
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
 
-        detailBack=(ImageButton)view.findViewById(R.id.detail_back);
-        heart=(ImageButton)view.findViewById(R.id.heart);
-        etc=(ImageButton)view.findViewById(R.id.etc);
-        detailCatagoly=(TextView)view.findViewById(R.id.detail_catagoly);
-        detailTitle=(TextView)view.findViewById(R.id.detail_title);
-        detailNicname=(TextView)view.findViewById(R.id.detail_nic);
-        viewCnt=(TextView)view.findViewById(R.id.detail_viewCnt);
-        heartCnt=(TextView)view.findViewById(R.id.detail_heartCnt);
-        detailProfile=(ImageView)view.findViewById(R.id.detail_profile);
-        commentProfile=(ImageView)view.findViewById(R.id.comment_profile);
-        pieceDetail=(LinearLayout)view.findViewById(R.id.piece_deatil);
-        addComment=(ImageButton)view.findViewById(R.id.add_comment);
-        commentWrite=(EditText)view.findViewById(R.id.comment_write);
+        detailBack=(ImageButton)findViewById(R.id.detail_back);
+        heart=(ImageButton)findViewById(R.id.heart);
+        etc=(ImageButton)findViewById(R.id.etc);
+        detailCatagoly=(TextView)findViewById(R.id.detail_catagoly);
+        detailTitle=(TextView)findViewById(R.id.detail_title);
+        detailNicname=(TextView)findViewById(R.id.detail_nic);
+        viewCnt=(TextView)findViewById(R.id.detail_viewCnt);
+        heartCnt=(TextView)findViewById(R.id.detail_heartCnt);
+        detailProfile=(ImageView)findViewById(R.id.detail_profile);
+        commentProfile=(ImageView)findViewById(R.id.comment_profile);
+        pieceDetail=(LinearLayout)findViewById(R.id.piece_deatil);
+        addComment=(ImageButton)findViewById(R.id.add_comment);
+        commentWrite=(EditText)findViewById(R.id.comment_write);
 
 
 
-        detailText = (TextView) view.findViewById(R.id.detail_text);
-        detail_img_recyclerview = (RecyclerView) view.findViewById(R.id.detail_img_recyclerview);
+        detailText = (TextView) findViewById(R.id.detail_text);
+        detail_img_recyclerview = (RecyclerView)findViewById(R.id.detail_img_recyclerview);
 
 
 //작품 등록 또는 메인의 아이템 누르면
@@ -94,9 +97,6 @@ public class DetailFragment extends ActivitisFragment {
 //                            replace = replace.replace("]","");
 //                            replace = replace.replace(","," / ");
 
-                            String imgUrl = it.getPiece().getFileUrl().get(0);
-                            detailProfile.setImageURI(Uri.parse(imgUrl));
-
                             detailTitle.setText(it.getPiece().getTitle());
 
                             detailNicname.setText(it.getPiece().getAuthor().getUserName());
@@ -105,25 +105,56 @@ public class DetailFragment extends ActivitisFragment {
                             heartCnt.setText(String.valueOf(it.getPiece().getLikeCount()));
 
                             //recyclerview 이미지 추가
+                            recyclerView = (RecyclerView) findViewById(R.id.detail_img_recyclerview);
+
+                            ArrayList<DetailImgItem> imgs = new ArrayList<>();
+
+                            for(int i = 0; i<it.getPiece().getFileUrl().size(); i++){
+                                String pieceUrl = it.getPiece().getFileUrl().get(i);
+                                imgs.add(new DetailImgItem(pieceUrl));
+                            }
+
+                            RecyclerView.Adapter adapter = new DetailImgAdapter(imgs);
+                            recyclerView.setAdapter(adapter);
+
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+
+
 
                             detailText.setText(it.getPiece().getDescription());
+
+
 
                             heart.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    String count=null;
-                                    Intent intent = new Intent(getActivity(), DetailFragment.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
 
-                                    if (it.getPiece().getLikeByUser() == true||heart.isSelected()) {
-                                        intent.putExtra("likeField",false);
-                                       // getActivity().startActivity(intent);
+                                    Log.e("tttestlllbbb",it.toString());
+                                    if(it.getPiece().getLikeByUser() == false){
+                                        heart.setSelected(true);
+
+                                        inputJson.addProperty("likeField",true);
+//
+//
+//                                        intent.putExtra("likeField",true);
+//                                        startActivity(intent);
+//                                        finish();
+
+                                        Log.e("tttestlllttt",it.toString());
+
+                                    }else if (it.getPiece().getLikeByUser() == true) {
                                         heart.setSelected(false);
 
-                                    }else if(it.getPiece().getLikeByUser() == false||(!heart.isSelected())){
-                                        intent.putExtra("likeField",true);
-                                        //getActivity().startActivity(intent);
-                                        heart.setSelected(true);
+                                        inputJson.addProperty("likeField",false);
+
+//
+//                                        intent.putExtra("likeField",false);
+//                                        startActivity(intent);
+//                                        finish();
+
+                                        Log.e("tttestlllfff",it.toString());
                                     }
 //                                    누르면 fullHeart로
 //                                    작품 상세보기 like배열에 사용자 기본키 저장
@@ -131,6 +162,7 @@ public class DetailFragment extends ActivitisFragment {
 //                                    작품 상세보기 likeByMe = true
                                 }
                             });
+                            Log.e("tttestlll",it.toString());
 
 
 
@@ -152,6 +184,7 @@ public class DetailFragment extends ActivitisFragment {
             @Override
             public void onClick(View view) {
                 //뒤록 가기
+                onBackPressed();
             }
         });
 
@@ -171,7 +204,7 @@ public class DetailFragment extends ActivitisFragment {
 
 
 
-        commentView = (ExpandableListView)view.findViewById(R.id.comments_view);
+        commentView = (ExpandableListView)findViewById(R.id.comments_view);
 
         mGroupList = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
@@ -192,14 +225,14 @@ public class DetailFragment extends ActivitisFragment {
 
         /********************************************************/
 
-        commentView.setAdapter(new CommentAdapter(getActivity(), mGroupList, mChildList));
+        commentView.setAdapter(new CommentAdapter(getApplicationContext(), mGroupList, mChildList));
 
         setExpandableListViewHeight(commentView, -1);
 
         commentView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Toast.makeText(getActivity(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
 
                 setExpandableListViewHeight(parent, groupPosition);
 
@@ -212,7 +245,7 @@ public class DetailFragment extends ActivitisFragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(getActivity(), "c click = " + childPosition,
+                Toast.makeText(getApplicationContext(), "c click = " + childPosition,
                         Toast.LENGTH_SHORT).show();
 
                 return false;
@@ -222,7 +255,7 @@ public class DetailFragment extends ActivitisFragment {
         commentView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getActivity(), "g Collapse = " + groupPosition,
+                Toast.makeText(getApplicationContext(), "g Collapse = " + groupPosition,
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -230,13 +263,11 @@ public class DetailFragment extends ActivitisFragment {
         commentView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity(), "g Expand = " + groupPosition,
+                Toast.makeText(getApplicationContext(), "g Expand = " + groupPosition,
                         Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        return view;
     }
 
     private void setExpandableListViewHeight(ExpandableListView listView,
