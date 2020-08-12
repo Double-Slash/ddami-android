@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.activity.Verification;
+package com.doubleslash.ddamiapp.activity.verification;
 
 import android.app.Activity;
 import android.content.Intent;
