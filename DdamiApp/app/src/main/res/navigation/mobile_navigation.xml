@@ -24,26 +24,9 @@
         tools:layout="@layout/fragment_chatting" />
     <fragment
         android:id="@+id/page_shop"
-        android:name="com.doubleslash.ddamiapp.fragment.Shop.ShopFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
 
-    <fragment
-        android:id="@+id/page_myroom"
-        android:name="com.doubleslash.ddamiapp.fragment.MyRoomFragment"
-        android:label="fragment_my_room"
-        tools:layout="@layout/fragment_my_room" />
-
-    <fragment
-        android:id="@+id/page_like"
-        android:name="com.doubleslash.ddamiapp.fragment.LikeFragment"
-        android:label="fragment_like_list"
-        tools:layout="@layout/fragment_like_list"/>
-
-    <fragment
-        android:id="@+id/page_verfication"
-        android:name="com.doubleslash.ddamiapp.fragment.VerificationFragment"
-        android:label="fragment_verification"
-        tools:layout="@layout/fragment_verification"/>
 
 </navigation>

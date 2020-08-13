@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class MyInfo(
     @SerializedName("_id")
-    var id: String,
+    val id: String,
     @SerializedName("imageUrl")
-    var imageUrl: String,
+    val imageUrl: String,
     @SerializedName("userName")
-    var userName: String
+    val userName: String
 )

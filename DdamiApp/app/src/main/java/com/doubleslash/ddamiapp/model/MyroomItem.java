@@ -18,7 +18,7 @@ public class MyroomItem {
     }
 
     public String getId() {
-        return image;
+        return id;
     }
 
     public void setId(String id) {

@@ -1,10 +1,11 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,12 +13,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
 import com.doubleslash.ddamiapp.model.MyroomItem;
@@ -28,7 +30,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 
 
 public class MyRoomFragment extends Fragment {
@@ -67,7 +68,7 @@ public class MyRoomFragment extends Fragment {
         }
 
         ArrayList<MyroomItem> itemL = new ArrayList<>();
-        for(int i=0; i<input_file_count; i++) {
+        for (int i = 0; i < input_file_count; i++) {
             String input_file = getArguments().getString("File" + String.valueOf(i));
             String input_file_id = getArguments().getString("FileId" + String.valueOf(i));
             MyroomItem item = new MyroomItem(input_file, input_file_id);
@@ -120,14 +121,45 @@ public class MyRoomFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+        });
 
-//        bundle.putString("FileId", input_fileId);
-//        DetailFragment detail = new DetailFragment();
-//        detail.setArguments(bundle);
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-//                .add(R.id.nav_host_fragment, detail)
-//                .commit();
+        RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                //get corresponding item
+                View childView = rv.findChildViewUnder(e.getX(), e.getY());
+                if (childView != null && gestureDetector.onTouchEvent(e)) {
+                    //get position of current item
+                    int currentPosition = rv.getChildAdapterPosition(childView);
+
+                    //get data
+                    MyroomItem currentItem = itemL.get(currentPosition);
+                    Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
+
+                    //switch fragment to DetailActivity onItemClicked
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("FileId", currentItem.getId());
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+            }
+        };
+
+        recyclerView.addOnItemTouchListener(onItemTouchListener);
 
 
         //FloatingActionButton onClick event
@@ -138,9 +170,6 @@ public class MyRoomFragment extends Fragment {
 
             }
         });
-
-        //button display depends on the state
-
 
         return view;
     }

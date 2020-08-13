@@ -11,10 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +25,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.MainActivity;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
+import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class VerificationActivity extends AppCompatActivity implements View.OnClickListener{
@@ -34,11 +45,12 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     private static final int FILE_REQUEST_CODE = 2;
     Button btn_modern, btn_graphic, btn_craft, btn_video, btn_industrial, btn_space, btn_costume;
     Button btn_verify, btn_goto_main;
-    Button btn_camera, btn_file;
+    ImageButton btn_camera, btn_file;
     TextView tv_file_attached;
     File tempFile = null;
     String pictureFilePath;
-    EditText school, program, studentId;
+    EditText et_school, et_program, et_studentId;
+    List<String> likeFields = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +67,12 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_costume = (Button) findViewById(R.id.btn_costume_design);
         btn_verify = (Button) findViewById(R.id.btn_verify);
         btn_goto_main = (Button) findViewById(R.id.btn_goto_main);
-        btn_camera = (Button) findViewById(R.id.btn_camera);
-        btn_file = (Button) findViewById(R.id.btn_file);
+        btn_camera = (ImageButton) findViewById(R.id.btn_camera);
+        btn_file = (ImageButton) findViewById(R.id.btn_file);
         tv_file_attached = (TextView) findViewById(R.id.file_attached);
-        school = (EditText) findViewById(R.id.school);
-        program = (EditText) findViewById(R.id.program);
-        studentId = (EditText) findViewById(R.id.studentid);
+        et_school = (EditText) findViewById(R.id.school);
+        et_program = (EditText) findViewById(R.id.program);
+        et_studentId = (EditText) findViewById(R.id.studentid);
 
         btn_modern.setOnClickListener(this);
         btn_graphic.setOnClickListener(this);
@@ -76,18 +88,39 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN) {
                     btn_verify.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#322FA0")));
                 } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-//                    if(isEmpty(school)) {
-//                        showMsg(0);
-//                    } else if (isEmpty(program)) {
-//                        showMsg(1);
-//                    } else if (isEmpty(studentId)) {
-//                        showMsg(2);
-//                    } else if (isEmpty(tv_file_attached)) {
-//                        showMsg(3);
-//                    } else {
-//
-                    openNewActivity();
-//                    }
+                    String school = et_school.getText().toString();
+                    String program = et_program.getText().toString();
+                    String student_id = et_studentId.getText().toString();
+                    JsonObject inputJson = new JsonObject();
+
+                    if(isEmpty(school)) {
+                        showMsg(0);
+                    } else if (isEmpty(program)) {
+                        showMsg(1);
+                    } else if (isEmpty(student_id)) {
+                        showMsg(2);
+                    } else if (isEmpty(tv_file_attached.getText().toString())) {
+                        showMsg(3);
+                    } else {
+
+                        inputJson.addProperty("university", school);
+                        inputJson.addProperty("department", program);
+                        inputJson.addProperty("number", student_id);
+
+                        addIfSelected(btn_modern);
+                        addIfSelected(btn_graphic);
+                        addIfSelected(btn_craft);
+                        addIfSelected(btn_video);
+                        addIfSelected(btn_industrial);
+                        addIfSelected(btn_space);
+                        addIfSelected(btn_costume);
+
+                        inputJson.addProperty("likeField", "");
+                        //inputJson.addProperty("likeField", likeFields);
+                        verify(inputJson);
+
+                        openNewActivity();
+                    }
                 }
                 return true;
             }
@@ -96,7 +129,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //takePhoto();
+                takePhoto();
             }
         });
 
@@ -107,6 +140,12 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
+    }
+
+    public void addIfSelected(Button b) {
+        if(b.isSelected()) {
+            likeFields.add(b.getText().toString());
+        }
     }
 
     @Override
@@ -209,14 +248,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         startActivity(intent);
     }
 
-    private boolean isEmpty(EditText text) {
-        if (text.getText().toString().trim().length() > 0)
-            return false;
-        return true;
-    }
-
-    private boolean isEmpty(TextView text) {
-        if (text.getText().toString().trim().length() > 0)
+    private boolean isEmpty(String s) {
+        if (s.trim().length() > 0)
             return false;
         return true;
     }
@@ -236,5 +269,23 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
                 Toast.makeText(this, "인증 파일을 첨부해주세요", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void verify(JsonObject inputJson) {
+        //verify(inputJson);
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+        inputJson.addProperty("token", token);
+        ApiService.INSTANCE.getVerifyUser().verify(inputJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            Log.e("sss!!!", it.toString());
+                        },
+                        it -> {
+                            Log.e("fff!!!", it.toString());
+                        }
+                );
+
     }
 }
