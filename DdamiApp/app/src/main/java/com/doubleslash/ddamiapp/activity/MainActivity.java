@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView nav_profile_img;
     Fragment fragment;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                         it -> {
                             Log.e("sss!!!", it.toString());
                             if(it.getMyInfo().getState()) {
-                                btn_verification.setVisibility(View.GONE);
-                                nav_header_program.setVisibility(View.VISIBLE);
+                                //btn_verification.setVisibility(View.GONE);
+                                //nav_header_program.setVisibility(View.VISIBLE);
                                 nav_header_program.setText(it.getMyInfo().getStudent().getDepartment());
                                 nav_myroom.setVisibility(View.VISIBLE);
                             }
@@ -253,13 +251,9 @@ public class MainActivity extends AppCompatActivity {
 
     //화면 전환
     public void replaceFragment(Fragment fr) {
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        if (fragments != null) {
-            for (Fragment fragment : fragments) {
-                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-            }
-        }
-        getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, fr).commit();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if(fragment != null)
+            getSupportFragmentManager().beginTransaction().remove(fragment).add(R.id.nav_host_fragment,fr).commit();
     }
 
     private void initViews() {
