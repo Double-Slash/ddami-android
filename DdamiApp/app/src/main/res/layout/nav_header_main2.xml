@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@color/drawerColor"
-    android:gravity="bottom"
+    android:background="#FFF"
+    android:id="@+id/nav_header_main2"
     android:orientation="vertical"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="36dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView_Face"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/ic_brightness_1_puple_24dp"
-        android:backgroundTint="@color/colorAccent"
-        android:contentDescription="@string/nav_header_desc"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_profile_img"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_centerHorizontal="true"
+        android:outlineAmbientShadowColor="#0000001A"
+        android:outlineSpotShadowColor="#0000001A"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/textView_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:text="김따미"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_Face"
-        tools:text="김따미" />
+        app:layout_constraintTop_toBottomOf="@id/nav_profile_img"
+        tools:text="김따미"
+        android:layout_gravity="center"/>
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape_auto_btn"
-        android:text="미대생인증"
-        android:textSize="12sp"
+        android:id="@+id/btn_verification"
+        android:padding="0dp"
+        android:layout_width="82dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#322FA0"
+        android:text="미대생 인증"
+        android:textSize="12dp"
+        android:background="@drawable/verify_btn"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_name" />
+        app:layout_constraintTop_toBottomOf="@id/textView_name"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <TextView
+        android:id="@+id/nav_header_program"
+        android:padding="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="시각디자인학과"
+        android:textSize="13dp"
+        android:textColor="#4D4D4D"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_verification"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

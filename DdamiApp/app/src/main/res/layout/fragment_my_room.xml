@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e4e4e4">
+        android:background="#f0f0f6">
 
         <!--Profile Part-->
         <LinearLayout
@@ -24,28 +24,28 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="25"
-                android:layout_marginStart="10dp">
+                android:layout_weight="35">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:id="@+id/profileImage"
-                    app:civ_border_color="#000000"
-                    app:civ_border_width="2dp"
-                    android:layout_centerVertical="true"/>
-
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:outlineAmbientShadowColor="#0000001A"
+                    android:outlineSpotShadowColor="#0000001A"/>
             </RelativeLayout>
 
             <!--Profile information-->
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="75"
-                android:layout_margin = "10dp">
+                android:layout_weight="65"
+                android:layout_marginTop = "15dp"
+
+                android:layout_marginBottom="20dp">
 
                 <include layout="@layout/myroom_profile"/>
-
             </RelativeLayout>
         </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:id="@+id/folderLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/profileLayout"
             android:background="#ffffff"
             android:orientation="vertical">
@@ -71,25 +71,34 @@
             <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/pager">
+                android:id="@+id/pager"
+                android:layout_below="@+id/tabLayout">
 
             </androidx.viewpager.widget.ViewPager>
 
-
-            <GridView
-                android:id="@+id/gridView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myroom_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_below="@+id/tabLayout"
-                android:horizontalSpacing="10dp"
-                android:verticalSpacing="10dp"
-                android:numColumns="2"
-                android:stretchMode="columnWidth">
+                android:layout_height="match_parent"
+                android:padding="9dp"
+                android:background="#fff"
+                android:layout_below="@+id/tabLayout"/>
 
-            </GridView>
         </RelativeLayout>
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_myroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:fabSize="normal"
+        android:src="@drawable/plus_sign"
+        app:backgroundTint="#F7606B" />
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
