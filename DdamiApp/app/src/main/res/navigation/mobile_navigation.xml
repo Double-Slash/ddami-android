@@ -11,20 +11,22 @@
         android:name="com.doubleslash.ddamiapp.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
-
+    <!--수정-->
     <fragment
         android:id="@+id/page_activities"
         android:name="com.doubleslash.ddamiapp.fragment.ActivitisFragment"
         android:label="fragment_activitis"
         tools:layout="@layout/fragment_activitis" />
+
     <fragment
         android:id="@+id/page_chat"
         android:name="com.doubleslash.ddamiapp.fragment.ChattingFragment"
         android:label="fragment_chatting"
         tools:layout="@layout/fragment_chatting" />
+    <!--************************-->
     <fragment
         android:id="@+id/page_shop"
-        android:name="com.doubleslash.ddamiapp.fragment.Shop.ShopFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
 

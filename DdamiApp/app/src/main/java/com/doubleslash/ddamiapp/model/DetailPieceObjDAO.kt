@@ -1,8 +1,13 @@
 package com.doubleslash.ddamiapp.model
 
+import com.google.gson.annotations.SerializedName
+
 data class DetailPieceObjDAO(
         val __v: Int,
-        val _id: String,
+
+        @SerializedName("_id")
+        val FileId: String,
+
         val author: DetailPieceAuthorDAO,
         val comments: List<Any>,
         val created: String,

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.DetailFragment">
+    tools:context=".activity.DetailActivity">
 
         <RelativeLayout
             android:id="@+id/detail_top"
@@ -29,7 +29,7 @@
                 android:layout_toLeftOf="@+id/etc"
                 android:layout_margin="16dp"
                 android:background="#00ffffff"
-                android:src="@drawable/btn_detailview_heart"
+                android:src="@drawable/btn_heart_event"
                 />
             <ImageButton
                 android:id="@+id/etc"
@@ -157,16 +157,19 @@
             <LinearLayout
                 android:id="@+id/piece_deatil"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="320dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detail_img_recyclerview"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_gravity="center"
                     android:scrollbars="horizontal"
                     />
+            </LinearLayout>
                 <TextView
                     android:id="@+id/detail_text"
                     android:layout_width="match_parent"
@@ -176,9 +179,6 @@
                     android:fontFamily="@font/nanum_square_regular"
                     android:text="중간에 글이 들어갈 수도 있고,\n 네이버 블로그 글쓰기 참고하면 이해하기 조금 더 쉬울 듯"
                     />
-
-
-            </LinearLayout>
 
 
             <RelativeLayout

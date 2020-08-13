@@ -29,11 +29,26 @@ public class SettingFragment extends Fragment{
         return new SettingFragment();
     }
 
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+//                //finish();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                fragmentManager.beginTransaction().remove(SettingFragment.this).commit();
+//                fragmentManager.popBackStack();
+//                return true;
+//            }
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        setBack = (ImageButton) view.findViewById(R.id.set_back);
+        //     setBack = (ImageButton) view.findViewById(R.id.set_back);
         linkedAddress = (TextView) view.findViewById(R.id.linked_address);
         updatePW = (TextView) view.findViewById(R.id.update_pw);
         dropout = (TextView) view.findViewById(R.id.dropout);
@@ -48,6 +63,12 @@ public class SettingFragment extends Fragment{
         setAlarm = (Switch) view.findViewById(R.id.set_alarm);
         soundChatAlarm = (Switch) view.findViewById(R.id.sound_chat_alarm);
 
+//
+//        Toolbar set_toolbar = (Toolbar) view.findViewById(R.id.set_toolbar);
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.setSupportActionBar(set_toolbar);
+//        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
 
         currentVersion.setText(getAppVersionName());
 
