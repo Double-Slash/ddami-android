@@ -41,4 +41,13 @@ object ApiService {
     val homeService : HomeApi by lazy {
         retrofit.create(HomeApi::class.java)
     }
+
+    val ShopWorkService : ShopWorkApi by lazy {
+        retrofit.create(ShopWorkApi::class.java)
+    }
+
+    val ShopMaterialService : ShopMaterialApi by lazy {
+        retrofit.create(ShopMaterialApi::class.java)
+    }
+
 }

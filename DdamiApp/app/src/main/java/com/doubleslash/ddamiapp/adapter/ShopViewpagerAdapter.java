@@ -1,6 +1,5 @@
 package com.doubleslash.ddamiapp.adapter;
 
-
 import android.util.Log;
 
 import androidx.annotation.NonNull;

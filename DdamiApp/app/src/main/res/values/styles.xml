@@ -118,4 +118,32 @@
         <item name="listPreferredItemHeightSmall">40dp</item>
     </style>
 
+
+    // 따미샵-탭레이아웃-폰트
+    <style name="shop_tab_font_selected"
+        parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/nanum_square_extrabold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="shop_tab_font_unselected"
+        parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/nanum_square_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    // 따미샵-chip
+    <style name="shop_chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="chipBackgroundColor">#FFFFFF</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStrokeColor">#322FA0</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:clipChildren">false</item>
+    </style>
+
 </resources>

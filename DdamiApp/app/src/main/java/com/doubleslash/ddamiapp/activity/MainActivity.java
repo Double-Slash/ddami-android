@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     AppBarConfiguration appBarConfigurationBottom;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
+
     Button btn_verification;
     TextView nav_main, nav_myroom, nav_like, nav_shop, nav_purchase, nav_shop_like, nav_activities, nav_interested_activities, nav_settings;
     TextView nav_header_program;
@@ -146,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         });
+
+        //ApiService.INSTANCE.getLoginService()
 
         nav_myroom.setOnClickListener(new View.OnClickListener() {
             @Override

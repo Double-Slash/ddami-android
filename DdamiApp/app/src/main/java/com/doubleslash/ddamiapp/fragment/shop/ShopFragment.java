@@ -1,6 +1,5 @@
 package com.doubleslash.ddamiapp.fragment.shop;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.MainActivity;
+import com.doubleslash.ddamiapp.adapter.ShopViewpagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 // 따미샵-작품, 재료
@@ -35,6 +35,7 @@ public class ShopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_shop, container, false);
+
         return v;
     }
 
@@ -49,6 +50,7 @@ public class ShopFragment extends Fragment {
         // // 따미샵-작품, 재료 탭 선택 이벤트
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+
     }
 
     @Override

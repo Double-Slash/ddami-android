@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment1;
@@ -14,7 +16,12 @@ import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment2;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment3;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment4;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment5;
+
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class ShopWritingActivity1_1 extends AppCompatActivity {
 
@@ -94,5 +101,6 @@ public class ShopWritingActivity1_1 extends AppCompatActivity {
         Intent intent=new Intent(ShopWritingActivity1_1.this,ShopWritingActivity1_2.class);
         startActivity(intent);
     }
+
 
 }
