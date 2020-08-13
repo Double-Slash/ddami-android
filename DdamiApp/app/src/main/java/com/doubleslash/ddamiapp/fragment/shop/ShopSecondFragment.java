@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.doubleslash.ddamiapp.R;
 
+import com.doubleslash.ddamiapp.activity.shop.ShopNormalActivity;
+import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity1_1;
 import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity2_1;
 import com.doubleslash.ddamiapp.adapter.OnShopItemClickListener;
 import com.doubleslash.ddamiapp.adapter.OnShopMaterialItemClickListener;
@@ -103,9 +105,6 @@ public class ShopSecondFragment extends Fragment implements OnShopMaterialItemCl
                         });
     }
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +123,12 @@ public class ShopSecondFragment extends Fragment implements OnShopMaterialItemCl
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+                //getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+
+                String token=getActivity().getIntent().getStringExtra("token");
+
+                // 미대생 인증 확인
+                getUserInfo(token);
             }
         });
 
@@ -132,9 +136,41 @@ public class ShopSecondFragment extends Fragment implements OnShopMaterialItemCl
 
     }
 
+    @SuppressLint("CheckResult")
+    private void getUserInfo(String token) {
+        JsonObject inputJson = new JsonObject();
+
+        inputJson.addProperty("token", token);
+        ApiService.INSTANCE.getHomeService().userAuth(inputJson).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            ApiService.INSTANCE.getShopUser().shopUserAuth(it.getMyInfo().getId())
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            subs -> {
+                                                if(!subs.getUser().getState()){
+                                                    getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
+                                                }
+                                                if(subs.getUser().getState()){
+                                                    getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+                                                }
+                                            },
+                                            subs -> {
+                                                Log.e("미대생 인증 확인 오류", it.toString());
+                                            }
+                                    );
+                        }, it -> {
+                            Log.e("failed", it.toString());
+                        }
+                );
+    }
+
 
     @Override
     public void onShopMaterialClicked(ShopMaterialItem shopMaterialItem) {
         Toast.makeText(getContext(), shopMaterialItem.getmMaterial(), Toast.LENGTH_LONG).show();
+
     }
 }

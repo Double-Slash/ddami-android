@@ -23,6 +23,10 @@ object ApiService {
         retrofit.create(MyroomUserApi::class.java)
     }
 
+    val shopUser : ShopUserApi by lazy {
+        retrofit.create(ShopUserApi::class.java)
+    }
+
     val verifyUser : VerifyApi by lazy {
         retrofit.create(VerifyApi::class.java)
     }
@@ -48,6 +52,10 @@ object ApiService {
 
     val ShopMaterialService : ShopMaterialApi by lazy {
         retrofit.create(ShopMaterialApi::class.java)
+    }
+
+    val ShopFeedService : ShopFeedApi by lazy {
+        retrofit.create(ShopFeedApi::class.java)
     }
 
 }

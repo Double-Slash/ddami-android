@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.shop.ShopNormalActivity;
 import com.doubleslash.ddamiapp.activity.shop.ShopWorkDetailActivity;
 import com.doubleslash.ddamiapp.adapter.OnItemClickListener;
 import com.doubleslash.ddamiapp.adapter.OnShopItemClickListener;
@@ -29,6 +30,7 @@ import com.doubleslash.ddamiapp.adapter.ShopWorkAdapter;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -116,23 +118,63 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
-                //getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
+                String token=getActivity().getIntent().getStringExtra("token");
+
+
+                // 미대생 인증 확인
+                getUserInfo(token);
+
             }
         });
 
         return v;
     }
 
+    @SuppressLint("CheckResult")
+    private void getUserInfo(String token) {
+        JsonObject inputJson = new JsonObject();
+
+        inputJson.addProperty("token", token);
+        Log.e("test",token);
+        ApiService.INSTANCE.getHomeService().userAuth(inputJson).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            ApiService.INSTANCE.getShopUser().shopUserAuth(it.getMyInfo().getId())
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            subs -> {
+                                                //if(!subs.getUser().getState()){
+                                                    //getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
+                                                //}
+                                                //if(subs.getUser().getState()){
+
+                                                    Intent intent=new Intent(getActivity(), ShopWritingActivity1_1.class);
+                                                    intent.putExtra("token", token);
+                                                    startActivity(intent);
+
+                                                    //getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
+                                                //}
+                                            },
+                                            subs -> {
+                                                Log.e("미대생 인증 확인 오류", it.toString());
+                                            }
+                                    );
+                        }, it -> {
+                            Log.e("failed", it.toString());
+                        }
+                );
+    }
+
     @Override
     public void onShopWorkClicked(ShopWorkItem shopWorkItem) {
         Toast.makeText(getContext(), shopWorkItem.getmWork(), Toast.LENGTH_LONG).show();
         this.shopWorkItem=shopWorkItem;
-        getActivity().startActivity(new Intent(getActivity(), ShopWorkDetailActivity.class));
+        //getActivity().startActivity(new Intent(getActivity(), ShopWorkDetailActivity.class));
     }
 
     public static ShopWorkItem getShopWorkItem(){
-
         return shopWorkItem;
     }
 }

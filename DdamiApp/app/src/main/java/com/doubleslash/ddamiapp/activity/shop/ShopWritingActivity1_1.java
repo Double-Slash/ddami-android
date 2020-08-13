@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment3;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment4;
 import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment5;
 
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.JsonObject;
 
@@ -54,7 +56,12 @@ public class ShopWritingActivity1_1 extends AppCompatActivity {
 
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.shop_frameLayout, fragment1).commitAllowingStateLoss();
+        Log.e("피드_프래그먼트 시작", "ㅋㅋ");
 
+        // 작품샵 피드 서버 연결
+        //String token=getActivity().getIntent().getStringExtra("token");
+
+        //getUserInfo(token);
 
         // 따미샵-글작성(작품샵 피드 선택): 탭 선택 이벤트
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
@@ -65,6 +72,7 @@ public class ShopWritingActivity1_1 extends AppCompatActivity {
                 switch (tab.getPosition()) {
                     case 0:
                         transaction.replace(R.id.shop_frameLayout, fragment1).commitAllowingStateLoss();
+
                         break;
                     case 1:
                         transaction.replace(R.id.shop_frameLayout, fragment2).commitAllowingStateLoss();
@@ -95,6 +103,27 @@ public class ShopWritingActivity1_1 extends AppCompatActivity {
         });
 
     }
+
+
+    @SuppressLint("CheckResult")
+    private void getUserInfo(String token) {
+        JsonObject inputJson = new JsonObject();
+
+        inputJson.addProperty("token", token);
+        Log.e("test",token);
+        ApiService.INSTANCE.getHomeService().userAuth(inputJson).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+
+
+                        }, it -> {
+                            Log.e("failed", it.toString());
+                        }
+                );
+    }
+
+
 
     // 따미샵-글작성(작품샵 피드 선택) 다음 버튼 이벤트 처리
     public void onClickNextBtn(View v){

@@ -87,7 +87,7 @@
                         android:layout_height="100dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="40dp"
-                        android:background="@drawable/shop_custom_left_radius_lightgray" />
+                        android:background="@drawable/shop_custom_left_radius_lightpurple" />
 
                     <EditText
                         android:id="@+id/editTextTextPersonName"
@@ -97,7 +97,10 @@
                         android:ems="10"
                         android:hint="@string/shop_writing_et_title"
                         android:inputType="textPersonName"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/nanum_square_bold"
+                        android:textSize="18sp"
+                        android:textColor="#232323"
+                        />
 
                     <TextView
                         android:id="@+id/textView14"

@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ShopWorkApi {
-    @POST("/shop/search/piece")
+    @POST("/shop/search/product")
     fun shopWork(@Body Body: JsonObject
     ): Single<ShopWorkDAO>
 }
