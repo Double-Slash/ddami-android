@@ -48,13 +48,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="3">
             <include
                 android:id="@+id/nav_top"
-                layout="@layout/nav_header_main2"/>
+                layout="@layout/nav_header_main2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
             <include
                 android:id="@+id/nav_bottom"
-                layout="@layout/nav_drawer_menu"/>
+                layout="@layout/nav_drawer_menu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 

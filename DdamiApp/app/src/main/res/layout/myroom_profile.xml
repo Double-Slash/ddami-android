@@ -59,6 +59,7 @@
             </RelativeLayout>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_modify"
+                android:layout_marginLeft="10dp"
                 android:padding="6dp"
                 android:layout_width="72dp"
                 android:layout_height="28dp"
@@ -69,6 +70,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/verify_btn"
                 android:textColor="#FFF"
+                android:textAllCaps="false"
                 android:visibility="visible"/>
         </LinearLayout>
         <View
@@ -130,9 +132,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_follow"
-                android:layout_width="70dp"
-                android:layout_height="25dp"
+                android:layout_width="72dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/verify_btn"
                 android:backgroundTint="#322FA0"
                 android:padding="6dp"
@@ -141,7 +144,8 @@
                 android:text="+ Follow"
                 android:textColor="#FFF"
                 android:textSize="11dp"
-                android:visibility="visible" />
+                android:textAllCaps="false"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 

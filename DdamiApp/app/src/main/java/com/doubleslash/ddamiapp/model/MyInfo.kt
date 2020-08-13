@@ -4,10 +4,22 @@ package com.doubleslash.ddamiapp.model
 import com.google.gson.annotations.SerializedName
 
 data class MyInfo(
+    @SerializedName("follow")
+    val follow: Int,
+    @SerializedName("followerCount")
+    val followerCount: Int,
     @SerializedName("_id")
-    var id: String,
+    val id: String,
     @SerializedName("imageUrl")
-    var imageUrl: String,
+    val imageUrl: String,
+    @SerializedName("likeField")
+    val likeField: List<Any>,
+    @SerializedName("myPieces")
+    val myPieces: List<MyPiece>,
+    @SerializedName("student")
+    val student: Student,
+    @SerializedName("userId")
+    val userId: String,
     @SerializedName("userName")
-    var userName: String
+    val userName: String
 )
