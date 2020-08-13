@@ -125,22 +125,36 @@ public class MainActivity extends AppCompatActivity {
 //                            Log.e("fff", it.toString());
 //                        }
 //                );
+        JsonObject ij = new JsonObject();
+        String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+        ij.addProperty("token", token2);
+        ApiService.INSTANCE.getMyroomUser().myroom(ij)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            Log.e("sss@@@!!!", it.toString());
 
+                        },
+                        it -> {
+                            Log.e("fff@@@!!!", it.toString());
+                        }
+                );
+
+//        JsonObject ij = new JsonObject();
 //        String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
-//        JsonObject inputJson2 = new JsonObject();
-//        inputJson2.addProperty("token", token);
-//        ApiService.INSTANCE.getMyInfo().myinfo(inputJson)
+//        ij.addProperty("token", token2);
+//        ApiService.INSTANCE.getVerifyUser().verify(ij)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(
 //                        it -> {
-//                            Log.e("sss@@@!!!", it.toString());
+//                            Log.e("sss!!!", it.toString());
 //                        },
 //                        it -> {
-//                            Log.e("fff@@@!!!", it.toString());
+//                            Log.e("fff!!!", it.toString());
 //                        }
 //                );
-
 
         //verification button onClick event
         btn_verification.setOnClickListener(new View.OnClickListener() {
