@@ -16,21 +16,23 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     private ArrayList<MainItem> items;
+    private OnItemClickListener onItemClickListener;
 
-    public MainAdapter(ArrayList<MainItem> items) {
+    public MainAdapter(ArrayList<MainItem> items,OnItemClickListener itemClickListener) {
         this.items = items;
+        this.onItemClickListener = itemClickListener;
     }
 
     @NonNull
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_main,parent,false);
+        View mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_main, parent, false);
         return new MainViewHolder(mainView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-        holder.adapt(items.get(position));
+        holder.adapt(items.get(position),onItemClickListener);
     }
 
     @Override
