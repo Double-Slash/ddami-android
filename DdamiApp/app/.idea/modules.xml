@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/666644265/DdamiApp.iml" filepath="$PROJECT_DIR$/.idea/modules/666644265/DdamiApp.iml" group="DdamiApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DdamiApp-app.iml" filepath="$PROJECT_DIR$/.idea/modules/DdamiApp-app.iml" group="DdamiApp/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="DdamiApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1648768254/ddami-android-DdamiApp.iml" filepath="$PROJECT_DIR$/.idea/modules/-1648768254/ddami-android-DdamiApp.iml" group="DdamiApp" />
     </modules>
   </component>
 </project>

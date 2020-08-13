@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity1_1;
+<<<<<<< HEAD:DdamiApp/app/src/main/java/com/doubleslash/ddamiapp/fragment/shop/ShopFirstFragment.java
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,9 @@ import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.fragment.FilterFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+=======
+
+>>>>>>> acdd22c... temp commit:DdamiApp/app/src/main/java/com/doubleslash/ddamiapp/fragment/Shop/ShopFirstFragment.java
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/writing_btnBack"
+        android:layout_width="19.12dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_back" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="68dp"
+        android:layout_height="32dp"
+        android:background="@drawable/btn_temp_save"
+        android:layout_marginLeft="102.88dp"
+        android:text="임시저장"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="#4D4D4D"
+        android:id="@+id/btnTemp_save"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="68dp"
+        android:layout_height="32dp"
+        android:background="@drawable/loading_save"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="불러오기"
+        android:id="@+id/btnLoading"
+        android:textColor="#4D4D4D"
+        />
+
+    <Button
+        android:id="@+id/btnReg"
+        android:layout_width="54dp"
+        android:layout_height="32dp"
+        android:background="@drawable/shop_custom_radius_gray"
+        android:text="등록"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="16dp"
+        android:textSize="16dp" />
+
+
+</LinearLayout>
