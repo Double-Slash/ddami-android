@@ -39,15 +39,35 @@ public class MyRoomFragment extends Fragment {
     GridView gridView;
     RecyclerView recyclerView;
     Button btn_modify, btn_follow;
+    FloatingActionButton btn_fab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_room, container, false);
+
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
+        name = (TextView) view.findViewById(R.id.name);
+        id = (TextView) view.findViewById(R.id.id);
+        program = (TextView) view.findViewById(R.id.program);
+        field = (TextView) view.findViewById(R.id.field);
+        followerNum = (TextView) view.findViewById(R.id.followerNum);
+        followingNum = (TextView) view.findViewById(R.id.followingNum);
+        profileImg = (CircleImageView) view.findViewById(R.id.profileImage);
+        recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
+        btn_modify = (Button) view.findViewById(R.id.btn_modify);
+        btn_follow = (Button) view.findViewById(R.id.btn_follow);
+        ImageView imgView = (ImageView) view.findViewById(R.id.myroom_itemimage);
+
+        if (!getArguments().getBoolean("Myroom")) {
+            btn_fab.setVisibility(View.GONE);
+            btn_modify.setVisibility(View.GONE);
+            btn_follow.setVisibility(View.VISIBLE);
+        }
 
         //get values from bundle
         String input_id = getArguments().getString("Id");
@@ -56,8 +76,8 @@ public class MyRoomFragment extends Fragment {
         int input_follower = getArguments().getInt("Follower");
         String input_username = getArguments().getString("Username");
         String input_profile_img = getArguments().getString("ProfileImg");
-        Boolean input_state = getArguments().getBoolean("State");
         int input_file_count = getArguments().getInt("FileCount");
+        String input_program = getArguments().getString("Program");
 
         String fields = "";
         for (int i = 0; i < input_field_size; i++) {
@@ -75,34 +95,14 @@ public class MyRoomFragment extends Fragment {
             itemL.add(item);
         }
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        FloatingActionButton btn_fab = (FloatingActionButton) view.findViewById(R.id.fab_myroom);
-        name = (TextView) view.findViewById(R.id.name);
-        id = (TextView) view.findViewById(R.id.id);
-        program = (TextView) view.findViewById(R.id.program);
-        field = (TextView) view.findViewById(R.id.field);
-        followerNum = (TextView) view.findViewById(R.id.followerNum);
-        followingNum = (TextView) view.findViewById(R.id.followingNum);
-        profileImg = (CircleImageView) view.findViewById(R.id.profileImage);
-        recyclerView = (RecyclerView) view.findViewById(R.id.myroom_recyclerview);
-        btn_modify = (Button) view.findViewById(R.id.btn_modify);
-        btn_follow = (Button) view.findViewById(R.id.btn_follow);
-        ImageView imgView = (ImageView) view.findViewById(R.id.myroom_itemimage);
-
-//        imgView.setClipToOutline(true);
-//        GradientDrawable drawable = (GradientDrawable)getContext().getDrawable(R.drawable.myroom_image);
-//        imgView.setBackground(drawable);
-//        imgView.setClipToOutline(true);
-
         //add values to the profile layout
         name.setText(input_username);
         id.setText(input_id);
-        //program.setText(input_file);
+        program.setText(input_program);
         field.setText(fields);
         followerNum.setText(String.valueOf(input_follower));
         followingNum.setText(String.valueOf(input_follow));
         Picasso.get().load(input_profile_img).into(profileImg);
-
 
         //Create tabs on TabLayout
         TabLayout.Tab tab = null;
@@ -114,7 +114,6 @@ public class MyRoomFragment extends Fragment {
         tabLayout.addTab(tab);
         tab = tabLayout.newTab().setText("커스텀목록3");
         tabLayout.addTab(tab);
-
 
         RecyclerView.Adapter adapter = new MyroomAdapter(itemL);
         recyclerView.setAdapter(adapter);

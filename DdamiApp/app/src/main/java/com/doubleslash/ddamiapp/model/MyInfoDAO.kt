@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MyInfoDAO(
     @SerializedName("myInfo")
-    val myInfo: MyInfo,
+    val myInfo: MyInfoX,
     @SerializedName("result")
     val result: Int
 )

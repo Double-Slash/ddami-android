@@ -272,7 +272,6 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void verify(JsonObject inputJson) {
-        //verify(inputJson);
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
         inputJson.addProperty("token", token);
         ApiService.INSTANCE.getVerifyUser().verify(inputJson)
@@ -286,6 +285,5 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
                             Log.e("fff!!!", it.toString());
                         }
                 );
-
     }
 }

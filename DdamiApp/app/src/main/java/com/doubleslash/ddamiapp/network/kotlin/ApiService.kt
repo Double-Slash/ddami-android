@@ -46,7 +46,4 @@ object ApiService {
         retrofit.create(MyInfoApi::class.java)
     }
 
-    val test : testApi by lazy {
-        retrofit.create(testApi::class.java)
-    }
 }
