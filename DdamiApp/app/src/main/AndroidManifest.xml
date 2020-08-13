@@ -14,11 +14,6 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             android:name=".activity.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
@@ -33,6 +28,11 @@
 
         <activity android:name=".activity.WritingActivity" />
 
+
+<!--        <activity-->
+<!--            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"-->
+<!--            android:name=".activity.DetailActivity" />-->
+
         <activity
             android:name=".activity.shop.ShopWritingActivity2_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -43,6 +43,19 @@
             android:name=".activity.shop.ShopWritingActivity1_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.login.SignUpActivity"></activity>
+        <activity android:name=".activity.login.SignUpSecondActivity"></activity>
+
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".activity.login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
