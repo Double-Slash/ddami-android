@@ -12,10 +12,12 @@ public class LikeItem {
     private Boolean heart;
     private ArrayList<String> likelist;
 
-    public LikeItem(String image, String title, String profile, String nicname) {
+    public LikeItem(String image, String title,
+                    //String profile,
+                    String nicname) {
         this.image = image;
         this.title = title;
-        this.profile = profile;
+       // this.profile = profile;
         this.nicname = nicname;
     }
 

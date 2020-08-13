@@ -18,12 +18,7 @@ interface DetailPieceApi {
 //        ): Single<DetailPieceDAO>
 
         @GET("/piece/detail/{FileId}")
-        fun getDeatil22(@Path("FileId") FileId: String): Call<DetailPieceObjDAO>
-//        fun getDeatil(@Body Body: JsonObject
-//        ): Single<DetailPieceDAO>
-
-        @GET("/piece/detail/{FileId}")
-        fun getDeatil(@Path("FileId") FileId: String, @Body Body: JsonObject): Single<DetailPieceDAO>
+        fun getDeatil(@Path("FileId") FileId: String): Single<DetailPieceDAO>
 
 
 }

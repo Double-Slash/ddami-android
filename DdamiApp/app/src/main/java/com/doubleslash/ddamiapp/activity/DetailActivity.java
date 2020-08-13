@@ -75,22 +75,27 @@ public class DetailActivity extends AppCompatActivity {
         detail_img_recyclerview = (RecyclerView)findViewById(R.id.detail_img_recyclerview);
 
 
-//작품 등록 또는 메인의 아이템 누르면
         JsonObject inputJson = new JsonObject();
-
 
 
         Intent intent = getIntent();
         String fileId = intent.getStringExtra("FileId");
         //String fileId = getArguments().getString("FileId");
 
-        ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId,inputJson)
+        Log.d("진희: fileId 확인 ",fileId );
+        ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
 
-                            detailCatagoly.setText(it.getPiece().getHasField().toString());  //list로
+                            ArrayList<String> hasField = new ArrayList<>();
+                            for(int i =0; i<it.getPiece().getHasField().size(); i++){
+                                String fielditem = it.getPiece().getHasField().get(i);
+                                hasField.add(fielditem);
+                            }
+                            Log.e("진희: hasField list ", hasField.toString());
+                            detailCatagoly.setText(hasField.toString());
 //                            String replace = detailCatagoly.getText().toString();
 //                            replace = replace.replace("[","");
 //                            replace = replace.replace("]","");
@@ -123,50 +128,7 @@ public class DetailActivity extends AppCompatActivity {
 
                             detailText.setText(it.getPiece().getDescription());
 
-
-
-                            heart.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-//                                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-
-                                    Log.e("tttestlllbbb",it.toString());
-                                    if(it.getPiece().getLikeByUser() == false){
-                                        heart.setSelected(true);
-
-                                        inputJson.addProperty("likeField",true);
-//
-//
-//                                        intent.putExtra("likeField",true);
-//                                        startActivity(intent);
-//                                        finish();
-
-                                        Log.e("tttestlllttt",it.toString());
-
-                                    }else if (it.getPiece().getLikeByUser() == true) {
-                                        heart.setSelected(false);
-
-                                        inputJson.addProperty("likeField",false);
-
-//
-//                                        intent.putExtra("likeField",false);
-//                                        startActivity(intent);
-//                                        finish();
-
-                                        Log.e("tttestlllfff",it.toString());
-                                    }
-//                                    누르면 fullHeart로
-//                                    작품 상세보기 like배열에 사용자 기본키 저장
-//                                    작품 상세보기 likeCount++, 사용자 상세보기 like++ == heartCnt
-//                                    작품 상세보기 likeByMe = true
-                                }
-                            });
                             Log.e("tttestlll",it.toString());
-
-
-
-
-
 
                             //comments
                             Log.e("tttest",it.toString());
@@ -177,6 +139,21 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(fileId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    Log.e("tttest",it.toString());
+                                },it -> {
+                                    Log.e("ffffailed",it.toString());
+                                });
+            }
+        });
 
 
         detailBack.setOnClickListener(new View.OnClickListener() {
