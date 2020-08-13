@@ -11,5 +11,5 @@ import retrofit2.http.Path
 
 interface FollowApi {
    @POST("/user/follow/{id}")
-   fun follow(@Path("id") id : String, @Body Body:JsonObject) : Single<FollowDAO>
+   fun follow(@Path("id") Id : String, @Body Body:JsonObject) : Single<FollowDAO>
 }
