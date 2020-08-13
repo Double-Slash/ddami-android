@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_chatting" />
     <fragment
         android:id="@+id/page_shop"
-        android:name="com.doubleslash.ddamiapp.fragment.Shop.ShopFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
 
@@ -33,4 +33,9 @@
         android:name="com.doubleslash.ddamiapp.fragment.MyRoomFragment"
         android:label="fragment_my_room"
         tools:layout="@layout/fragment_my_room" />
+    <fragment
+        android:id="@+id/get_item_list"
+        android:name="com.doubleslash.ddamiapp.fragment.MyRoomFragment"
+        android:label="fragment_get_item"
+        tools:layout="@layout/get_list_item" />
 </navigation>

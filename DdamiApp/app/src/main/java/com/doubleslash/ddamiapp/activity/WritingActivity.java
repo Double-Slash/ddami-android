@@ -2,16 +2,20 @@ package com.doubleslash.ddamiapp.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -19,16 +23,35 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.model.UploadPieceDAO;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WritingActivity extends AppCompatActivity {
     private static final int PICK_ALBUM = 1;
@@ -37,6 +60,14 @@ public class WritingActivity extends AppCompatActivity {
     int writingLayoutId = 0, writingImgId=0;
     static int writing_imgLayoutCount =0;
     String writing_layout, writing_img;
+    ArrayList<String> fileUri;
+    EditText e_writingContent, e_writingTitle;
+    Cursor cursor;
+    String filePath;
+    int column_index;
+    Bitmap originalBm;
+    Uri takePhotoUri;
+    Fragment filterFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +81,8 @@ public class WritingActivity extends AppCompatActivity {
                 takePhoto();
             }
         });
+//        filterFragment = getSupportFragmentManager().findFragmentById(R.id.filter_fragment);
+
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +91,15 @@ public class WritingActivity extends AppCompatActivity {
                 goToAlbum();
             }
         });
-
+        findViewById(R.id.btnReg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImgUpload();
+            }
+        });
+        //0이 거래 대기
+        //1이 거래중
+        //-1 거래완료
     }
     private void tedPermission(){//권한 요청 함수
          PermissionListener permissionListener = new PermissionListener() {
@@ -87,35 +128,51 @@ public class WritingActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        fileUri = new ArrayList<>();
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_ALBUM) {
             Uri photoUri = data.getData();
-            Cursor cursor = null;
+            cursor = null;
             try {
                 String[] proj = { MediaStore.Images.Media.DATA };
                 assert photoUri != null;
                 cursor = getContentResolver().query(photoUri, proj, null, null, null);
                 assert cursor != null;
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
 
                 tempFile = new File(cursor.getString(column_index));
-
             } finally {
                 if (cursor != null) {
                     cursor.close();
                 }
             }
             setImage();
+        }
+        else if(requestCode==PICK_CAMERA){
+//            Intent takePictyreIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            if(takePictyreIntent.resolveActivity(getPackageManager()) != null){
+//                File photoFile = null;
+//                try{
+//                    photoFile = createImageFile();
+//                } catch (IOException e) {
+//                    Toast.makeText(getApplicationContext(), "createImageFile Failed", Toast.LENGTH_LONG).show();
+//                    e.printStackTrace();
+//                }
+//                if(photoFile != null){
+////                    takePhotoUri = Uri.fromFile(photoFile);
+//                    takePhotoUri = FileProvider.getUriForFile(this,"{package_name}.fileprovider",tempFile);
+//                    takePictyreIntent.putExtra(MediaStore.EXTRA_OUTPUT, takePhotoUri);
+//                    startActivityForResult(takePictyreIntent, requestCode);
+//                }
+//            }
+            setImage();
 
         }
-        else if(requestCode==PICK_ALBUM){
-            setImage();
-        }
-        if(requestCode==PICK_CAMERA && resultCode==Activity.RESULT_OK){
-            setImage();
-        }
+        fileUri.add(cursor.getString(column_index));
+
     }
+
     private void setImage(){
         int id =0;
         id = writing_imgLayoutCount;
@@ -125,12 +182,33 @@ public class WritingActivity extends AppCompatActivity {
         ImageView iv = new ImageView(this);
         iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
+        originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         iv.setImageBitmap(originalBm);
+        iv.setId(writingImgId);
         LinearLayout imgLayout = (LinearLayout)findViewById(R.id.writingImgLayout);
         imgLayout.addView(iv,300,200);
-
     }
+//    public void uriFile(File file){
+//        Uri uri = Uri.parse(file.getAbsolutePath());
+//        fileUri = new ArrayList<>();
+//        cursor = null;
+//        try {
+//            String[] proj = { MediaStore.Images.Media.DATA };
+//            assert uri != null;
+//            cursor = getContentResolver().query(uri, proj, null, null, null);
+//            assert cursor != null;
+//            System.out.println(file.getAbsolutePath()+ "ddddddddddddddddddddddddddddddddddddddd");
+//            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//
+//            file = new File(cursor.getString(column_index));
+//            fileUri.add(cursor.getString(column_index));
+//        } finally {
+//            if (cursor != null) {
+//                cursor.close();
+//            }
+//        }
+//
+//    }
     private void takePhoto(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -152,11 +230,76 @@ public class WritingActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
         String imageFileName = "ddamiImg01_" + timeStamp + "_";
         // 이미지가 저장될 폴더 이름
+        filePath = Environment.getExternalStorageDirectory() + "/ddamiImg/";
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/ddamiImg/");
         if (!storageDir.exists()) storageDir.mkdirs();
         // 빈 파일 생성
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
         return image;
     }
+    public void ImgUpload(){
 
+        e_writingContent = findViewById(R.id.writingContent);
+        e_writingTitle = findViewById(R.id.writingTitle);
+        ArrayList<MultipartBody.Part> imgList = new ArrayList<>();
+        for(int i = 0; i < fileUri.size(); i++){
+            File file = new File(fileUri.get(i));
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
+            imgList.add(MultipartBody.Part.createFormData("img", file.getName(), requestBody));
+        }
+
+        Intent intent = getIntent();
+        String token = intent.getExtras().getString("token");
+        RequestBody content = RequestBody.create(MediaType.parse("text/plain"),e_writingContent.getText().toString());
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), e_writingTitle.getText().toString());
+        if(e_writingTitle.getText().toString().equals(null) || e_writingTitle.getText().toString().equals(null) ){
+            Toast.makeText(getApplicationContext(),"비어져 있는 칸이 있습니다. ", Toast.LENGTH_LONG).show();
+        }
+        else {
+            ApiService.INSTANCE.getUploadPieceService().UploadPiece(token,
+                    title, content, imgList).enqueue(new Callback<UploadPieceDAO.UploadPieceResponse>() {
+                @Override
+                public void onResponse(Call<UploadPieceDAO.UploadPieceResponse> call, Response<UploadPieceDAO.UploadPieceResponse> response) {
+                    UploadPieceDAO.UploadPieceResponse result = response.body();
+
+                    Toast.makeText(WritingActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
+                    if (result.getState() == 0) {
+                        System.out.println("sdfsdfsdfdfdfsfsdfsd");
+                        finish();
+                    }
+                    if (response.isSuccessful()) {
+
+                    } else {
+                        ResponseBody error = response.errorBody();
+                        System.out.println(error.toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UploadPieceDAO.UploadPieceResponse> call, Throwable t) {
+                    Toast.makeText(WritingActivity.this, "회원가입 에러", Toast.LENGTH_LONG).show();
+                    Log.e("회원가입 에러", t.getMessage());
+                    t.printStackTrace();
+                }
+            });
+        }
+    }
+//    public void FilterAdd(View view){
+//        getSupportFragmentManager().beginTransaction().replace(R.id.writingView,filterFragment);
+//    }
+
+
+//    public File SaveBitmapToFileCache(Bitmap bitmap, String strFilePath) {
+//        File fileCacheItem = new File(strFilePath);
+//        OutputStream out = null;
+//        try { fileCacheItem.createNewFile();
+//            out = new FileOutputStream(fileCacheItem);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+//
+//        }
+//        catch (Exception e) { e.printStackTrace(); }
+//        finally { try { out.close(); }
+//        catch (IOException e) { e.printStackTrace(); } }
+//        return fileCacheItem;
+//    }
 }

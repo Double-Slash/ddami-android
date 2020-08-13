@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.doubleslash.ddamiapp.R
 import com.doubleslash.ddamiapp.activity.MainActivity
+import com.doubleslash.ddamiapp.activity.WritingActivity
 import com.doubleslash.ddamiapp.network.kotlin.ApiService
 import com.doubleslash.ddamiapp.util.KeyboardVisibilityUtils
 import com.google.gson.JsonObject
@@ -56,9 +57,12 @@ class LoginActivity : AppCompatActivity() {
                 .subscribe({
                     Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    val intent2 = Intent(this,WritingActivity::class.java)
                     intent.putExtra("token", it.token)
                     intent.putExtra("id", input.get("userId").toString())
+                    intent2.putExtra("token", it.token)
                     startActivity(intent)
+                    startActivity(intent2)
                     finish()
                 }, {
                     Toast.makeText(applicationContext, "$it", Toast.LENGTH_SHORT).show()

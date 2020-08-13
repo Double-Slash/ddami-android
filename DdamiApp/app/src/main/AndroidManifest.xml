@@ -45,15 +45,17 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".activity.WritingActivity" />
+        <activity android:name=".activity.WritingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
         <activity
-            android:name=".activity.Shop.ShopWritingActivity2_1"
+            android:name=".activity.shop.ShopWritingActivity2_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".activity.Shop.ShopWritingActivity1_2"
+            android:name=".activity.shop.ShopWritingActivity1_2"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".activity.Shop.ShopWritingActivity1_1"
+            android:name=".activity.shop.ShopWritingActivity1_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".activity.MainActivity" >
         </activity>

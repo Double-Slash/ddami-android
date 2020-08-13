@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:id="@+id/get_item_listLayout"
+    android:layout_height="147dp">
+    <ImageView
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/get_item_img"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_marginLeft="14dp"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="62dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="20dp"
+        android:text="작품 이름"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:id="@+id/piece_name"
+        />
+        <TextView
+            android:layout_width="62dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="8dp"
+            android:text="대학교 이름"
+            android:textSize="13dp"
+            android:id="@+id/get_item_univ"
+            />
+        <TextView
+            android:layout_width="39dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:text="3개월 전"
+            android:textSize="11dp"
+            android:id="@+id/get_item_date"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <TextView
+            android:layout_width="47dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="8dp"
+            android:text="거래상태"
+            android:textSize="12dp"
+            android:id="@+id/deal_state"
+            />
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="72dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="7dp"
+                android:text="5000원"
+                android:textSize="17dp"
+                android:id="@+id/piece_price"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

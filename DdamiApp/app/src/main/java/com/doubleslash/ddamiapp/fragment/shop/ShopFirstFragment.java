@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.fragment.Shop;
+package com.doubleslash.ddamiapp.fragment.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.MainActivity;
-import com.doubleslash.ddamiapp.activity.Shop.ShopWritingActivity1_1;
+import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity1_1;
 
-import com.doubleslash.ddamiapp.fragment.FilterFragment;
-import com.doubleslash.ddamiapp.fragment.SettingFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**

@@ -1,19 +1,17 @@
-package com.doubleslash.ddamiapp.activity.Shop;
+package com.doubleslash.ddamiapp.activity.shop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopListFragment1;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopListFragment2;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopListFragment3;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopListFragment4;
-import com.doubleslash.ddamiapp.fragment.Shop.ShopListFragment5;
+import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment1;
+import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment2;
+import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment3;
+import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment4;
+import com.doubleslash.ddamiapp.fragment.shop.ShopListFragment5;
 import com.google.android.material.tabs.TabLayout;
 
 public class ShopWritingActivity2_1 extends AppCompatActivity {

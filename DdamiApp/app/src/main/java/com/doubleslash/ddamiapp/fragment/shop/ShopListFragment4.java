@@ -1,6 +1,5 @@
-package com.doubleslash.ddamiapp.fragment.Shop;
+package com.doubleslash.ddamiapp.fragment.shop;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,15 +10,12 @@ import android.view.ViewGroup;
 
 import com.doubleslash.ddamiapp.R;
 
-import com.doubleslash.ddamiapp.activity.Shop.ShopWritingActivity2_1;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShopSecondFragment#newInstance} factory method to
+ * Use the {@link ShopListFragment4#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopSecondFragment extends Fragment {
+public class ShopListFragment4 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +26,7 @@ public class ShopSecondFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ShopSecondFragment() {
+    public ShopListFragment4() {
         // Required empty public constructor
     }
 
@@ -40,11 +36,11 @@ public class ShopSecondFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopSecondFragment.
+     * @return A new instance of fragment ShopListFragment4.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopSecondFragment newInstance(String param1, String param2) {
-        ShopSecondFragment fragment = new ShopSecondFragment();
+    public static ShopListFragment4 newInstance(String param1, String param2) {
+        ShopListFragment4 fragment = new ShopListFragment4();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,25 +57,10 @@ public class ShopSecondFragment extends Fragment {
         }
     }
 
-    // 따미샵-재료: 플로팅버튼 이벤트처리
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_shop_second, container, false);
-        FloatingActionButton btn = v.findViewById(R.id.floatingBtn_2);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
-            }
-        });
-
-        return v;
-
+        return inflater.inflate(R.layout.fragment_shop_list4, container, false);
     }
-
-
 }

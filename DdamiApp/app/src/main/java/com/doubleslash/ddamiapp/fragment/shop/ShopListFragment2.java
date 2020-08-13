@@ -1,4 +1,4 @@
-package com.doubleslash.ddamiapp.fragment.Shop;
+package com.doubleslash.ddamiapp.fragment.shop;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.doubleslash.ddamiapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShopListFragment5#newInstance} factory method to
+ * Use the {@link ShopListFragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopListFragment5 extends Fragment {
+public class ShopListFragment2 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class ShopListFragment5 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ShopListFragment5() {
+    public ShopListFragment2() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class ShopListFragment5 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopListFragment5.
+     * @return A new instance of fragment ShopListFragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopListFragment5 newInstance(String param1, String param2) {
-        ShopListFragment5 fragment = new ShopListFragment5();
+    public static ShopListFragment2 newInstance(String param1, String param2) {
+        ShopListFragment2 fragment = new ShopListFragment2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class ShopListFragment5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_list5, container, false);
+        return inflater.inflate(R.layout.fragment_shop_list2, container, false);
     }
 }
