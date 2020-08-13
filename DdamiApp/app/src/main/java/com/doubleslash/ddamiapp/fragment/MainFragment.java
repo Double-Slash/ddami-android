@@ -34,16 +34,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.rxkotlin.Observables;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class MainFragment extends Fragment implements OnItemClickListener {
     MainItem item;
     TextView filter;
     TextView userName;
+    TextView sort_popularity;
+    TextView sort_recent;
+
     ImageView userThumbnail;
 
     private LinearLayout mChipContainer;
     private RecyclerView recyclerView;
+    private CompositeDisposable mAllDisposable;
+
+    private BehaviorSubject<String> mSortType;
+    private BehaviorSubject<String> mFilterType;
 
 
     public static MainFragment newInstance() {
@@ -82,7 +92,7 @@ public class MainFragment extends Fragment implements OnItemClickListener {
         }
 
         initViews(view);
-        pieceSearch();
+        initRx();
 
         final List<String> filters = new ArrayList<>();
         filters.add("공예 디자인");
@@ -99,16 +109,48 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
         userThumbnail.setBackground(new ShapeDrawable(new OvalShape()));
         userThumbnail.setClipToOutline(true);
+
+        sort_popularity = view.findViewById(R.id.filter_popularity);
+        sort_recent = view.findViewById(R.id.filter_recent);
+
+        filter = view.findViewById(R.id.tv_filter);
+
+        mSortType = BehaviorSubject.createDefault("L");
+        mFilterType = BehaviorSubject.createDefault("");
+
+        mAllDisposable = new CompositeDisposable();
+
+        sort_popularity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSortType.onNext("L");
+            }
+        });
+
+        sort_recent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSortType.onNext("V");
+            }
+        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFilterType.onNext("sample19");
+            }
+        });
     }
 
     @SuppressLint("CheckResult")
-    private void pieceSearch() {
+    private void pieceSearch(String sortType) {
 
         ArrayList<MainItem> items = new ArrayList<>();
 
         JsonObject inputJson = new JsonObject();
 
         inputJson.addProperty("list", 0);
+        inputJson.addProperty("sortingBy", sortType);
 
         ApiService.INSTANCE.getHomeService().pieceSearch(inputJson)
                 .subscribeOn(Schedulers.io())
@@ -123,10 +165,11 @@ public class MainFragment extends Fragment implements OnItemClickListener {
                                 piece.getViews(),
                                 piece.getLikeCount()));
                     }
-                    recyclerView.setAdapter(new MainAdapter(items,this::onHomeItemClicked));
+                    recyclerView.setAdapter(new MainAdapter(items, this::onHomeItemClicked));
                 }, it -> {
                     Log.e("Failed", it.toString());
                 });
+
     }
 
     @SuppressLint("CheckResult")
@@ -161,6 +204,27 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onHomeItemClicked(MainItem item) {
-        Toast.makeText(getContext(),item.getNickname(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), item.getNickname(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void initRx() {
+        mAllDisposable.add(Observables.INSTANCE.combineLatest(mSortType, mFilterType)
+                .doOnNext(it->{
+                    if(it.getFirst() == null || it.getSecond() == null){
+                        mSortType.onNext("L");
+                        mFilterType.onNext("");
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .distinctUntilChanged()
+                .doOnNext(
+                        it -> {
+                            pieceSearch(it.getFirst());
+                        }
+
+                )
+                .subscribe()
+        );
     }
 }
