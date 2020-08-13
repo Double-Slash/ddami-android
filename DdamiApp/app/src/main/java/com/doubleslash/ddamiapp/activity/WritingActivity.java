@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.fragment.FilterFragment;
 import com.doubleslash.ddamiapp.model.UploadPieceDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.gun0912.tedpermission.PermissionListener;
@@ -68,11 +69,17 @@ public class WritingActivity extends AppCompatActivity {
     Bitmap originalBm;
     Uri takePhotoUri;
     Fragment filterFragment;
+    FragmentManager manager;
+    private FragmentTransaction transaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing);
         tedPermission();
+//        filterFragment = new FilterFragment();
+//        manager = getSupportFragmentManager();
+//        transaction = manager.beginTransaction();
+//        transaction.replace(R.id.filter_whole_layout, filterFragment).commitAllowingStateLoss();
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +104,12 @@ public class WritingActivity extends AppCompatActivity {
                 ImgUpload();
             }
         });
+//        findViewById(R.id.add_filter).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                transaction.replace(R.id.filter_whole_layout,filterFragment).commitAllowingStateLoss();
+//            }
+//        });
         //0이 거래 대기
         //1이 거래중
         //-1 거래완료
@@ -142,6 +155,8 @@ public class WritingActivity extends AppCompatActivity {
                 cursor.moveToFirst();
 
                 tempFile = new File(cursor.getString(column_index));
+                fileUri.add(cursor.getString(column_index));
+
             } finally {
                 if (cursor != null) {
                     cursor.close();
@@ -150,26 +165,8 @@ public class WritingActivity extends AppCompatActivity {
             setImage();
         }
         else if(requestCode==PICK_CAMERA){
-//            Intent takePictyreIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            if(takePictyreIntent.resolveActivity(getPackageManager()) != null){
-//                File photoFile = null;
-//                try{
-//                    photoFile = createImageFile();
-//                } catch (IOException e) {
-//                    Toast.makeText(getApplicationContext(), "createImageFile Failed", Toast.LENGTH_LONG).show();
-//                    e.printStackTrace();
-//                }
-//                if(photoFile != null){
-////                    takePhotoUri = Uri.fromFile(photoFile);
-//                    takePhotoUri = FileProvider.getUriForFile(this,"{package_name}.fileprovider",tempFile);
-//                    takePictyreIntent.putExtra(MediaStore.EXTRA_OUTPUT, takePhotoUri);
-//                    startActivityForResult(takePictyreIntent, requestCode);
-//                }
-//            }
             setImage();
-
         }
-        fileUri.add(cursor.getString(column_index));
 
     }
 
@@ -188,27 +185,6 @@ public class WritingActivity extends AppCompatActivity {
         LinearLayout imgLayout = (LinearLayout)findViewById(R.id.writingImgLayout);
         imgLayout.addView(iv,300,200);
     }
-//    public void uriFile(File file){
-//        Uri uri = Uri.parse(file.getAbsolutePath());
-//        fileUri = new ArrayList<>();
-//        cursor = null;
-//        try {
-//            String[] proj = { MediaStore.Images.Media.DATA };
-//            assert uri != null;
-//            cursor = getContentResolver().query(uri, proj, null, null, null);
-//            assert cursor != null;
-//            System.out.println(file.getAbsolutePath()+ "ddddddddddddddddddddddddddddddddddddddd");
-//            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//
-//            file = new File(cursor.getString(column_index));
-//            fileUri.add(cursor.getString(column_index));
-//        } finally {
-//            if (cursor != null) {
-//                cursor.close();
-//            }
-//        }
-//
-//    }
     private void takePhoto(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -277,29 +253,12 @@ public class WritingActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<UploadPieceDAO.UploadPieceResponse> call, Throwable t) {
-                    Toast.makeText(WritingActivity.this, "회원가입 에러", Toast.LENGTH_LONG).show();
-                    Log.e("회원가입 에러", t.getMessage());
+                    Toast.makeText(WritingActivity.this, "글작성 에러", Toast.LENGTH_LONG).show();
+                    Log.e("글작성 에러", t.getMessage());
                     t.printStackTrace();
                 }
             });
         }
     }
-//    public void FilterAdd(View view){
-//        getSupportFragmentManager().beginTransaction().replace(R.id.writingView,filterFragment);
-//    }
 
-
-//    public File SaveBitmapToFileCache(Bitmap bitmap, String strFilePath) {
-//        File fileCacheItem = new File(strFilePath);
-//        OutputStream out = null;
-//        try { fileCacheItem.createNewFile();
-//            out = new FileOutputStream(fileCacheItem);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//
-//        }
-//        catch (Exception e) { e.printStackTrace(); }
-//        finally { try { out.close(); }
-//        catch (IOException e) { e.printStackTrace(); } }
-//        return fileCacheItem;
-//    }
 }

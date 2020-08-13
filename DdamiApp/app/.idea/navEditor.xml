@@ -13,8 +13,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+<<<<<<< HEAD
                             <option name="x" value="500" />
                             <option name="y" value="368" />
+=======
+                            <option name="x" value="280" />
+                            <option name="y" value="692" />
+>>>>>>> 35be80c... 임시저장 합침
                           </Point>
                         </option>
                       </LayoutPositions>
