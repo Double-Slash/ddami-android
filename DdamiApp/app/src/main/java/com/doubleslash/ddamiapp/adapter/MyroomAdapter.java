@@ -36,3 +36,4 @@ public class MyroomAdapter extends RecyclerView.Adapter<MyroomHolder> {
         holder.adapt(items.get(position));
     }
 }
+

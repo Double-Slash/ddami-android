@@ -3,7 +3,6 @@ package com.doubleslash.ddamiapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,20 +13,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import androidx.appcompat.widget.AppCompatImageView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-
 import com.doubleslash.ddamiapp.activity.MainActivity;
-
-import com.doubleslash.ddamiapp.activity.DetailActivity;
-
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
 import com.doubleslash.ddamiapp.model.MyroomItem;
@@ -42,6 +34,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
 
 public class MyRoomFragment extends Fragment {
     TabLayout tabLayout;
@@ -131,7 +124,6 @@ public class MyRoomFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-
 
         GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override
