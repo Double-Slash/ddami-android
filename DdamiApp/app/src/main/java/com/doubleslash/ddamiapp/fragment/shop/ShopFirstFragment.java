@@ -2,11 +2,6 @@ package com.doubleslash.ddamiapp.fragment.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +10,14 @@ import android.widget.TextView;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity1_1;
 import com.doubleslash.ddamiapp.activity.MainActivity;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.fragment.FilterFragment;
-import com.doubleslash.ddamiapp.fragment.SettingFragment;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -85,16 +85,19 @@ public class ShopFirstFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
+                    getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
             }
         });
 
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity)getActivity()).replaceFragment(FilterFragment.newInstance());
-//            }
-//        });
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FilterFragment.newInstance().show(getChildFragmentManager(),"tag");
+
+            }
+        });
+
 
         return v;
     }

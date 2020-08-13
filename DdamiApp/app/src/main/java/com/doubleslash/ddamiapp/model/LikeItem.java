@@ -2,20 +2,22 @@ package com.doubleslash.ddamiapp.model;
 
 import java.util.ArrayList;
 
-public class LikeVO {
+public class LikeItem {
 
     private int num;
     private String image;
     private String title;
     private String profile;
     private String nicname;
-    private String heart;
+    private Boolean heart;
     private ArrayList<String> likelist;
 
-    public LikeVO(String image, String title, String profile, String nicname) {
+    public LikeItem(String image, String title,
+                    //String profile,
+                    String nicname) {
         this.image = image;
         this.title = title;
-        this.profile = profile;
+       // this.profile = profile;
         this.nicname = nicname;
     }
 
@@ -58,15 +60,15 @@ public class LikeVO {
     public void setNicname(String nicname) {
         this.nicname = nicname;
     }
-/*
-    public String getHeart() {
+
+    public Boolean getHeart() {
         return heart;
     }
 
-    public void setHeart(String heart) {
+    public void setHeart(Boolean heart) {
         this.heart = heart;
     }
-*/
+
     public ArrayList<String> getLikelist() {
         return likelist;
     }

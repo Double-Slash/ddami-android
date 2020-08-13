@@ -61,4 +61,6 @@
     <string name="shop_writing1_2_tv_explain">작품 설명</string>
     <string name="shop_writing2_1_tv_explain">재료 설명</string>
     <string name="shop_writing1_2_tv_area">분야</string>
+
+    <string name="default_notification_channel_id">ddami</string>
 </resources>

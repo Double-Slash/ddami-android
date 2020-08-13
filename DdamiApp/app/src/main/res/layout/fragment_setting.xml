@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#F0F0F6">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:orientation="horizontal"
@@ -33,7 +33,26 @@
             />
 
 
-    </LinearLayout>
+    </LinearLayout>-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/set_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/set"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="설정"
+            android:textColor="#232323"
+            android:fontFamily="@font/nanum_square_bold"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

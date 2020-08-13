@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
-import android.transition.Scene;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +71,10 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//
+//
+//        Bundle bundle = this.getArguments();
+//        String str = bundle.getString("filter");
 
         FragmentActivity activity = getActivity();
         if (activity != null) {
