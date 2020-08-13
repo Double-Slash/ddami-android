@@ -1,13 +1,17 @@
 package com.doubleslash.ddamiapp.fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.doubleslash.ddamiapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -29,8 +33,14 @@ public class FilterFragment extends BottomSheetDialogFragment {
     private ArrayList<String> likeFieldList;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
-    public static FilterFragment newInstance() {
+    public static FilterFragment newInstance()
+    {
         return new FilterFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -518,20 +528,24 @@ public class FilterFragment extends BottomSheetDialogFragment {
                 if(apply.isEnabled()==true) {
                     //클릭된 버튼 텍스트 메인으로 보내기
                     if(allSpace.isSelected()){
-                        MainFragment fragment = new MainFragment();
-                        String strAllSpa = allSpace.getText().toString();
+
+                        String strAllSpa = "공간 디자인 "+allSpace.getText().toString();
+
+
+                    //    MainFragment fragment = new MainFragment();
+//                        Intent intent = new Intent(getActivity(),MainFragment.class);
+//
+//                        intent.putExtra("filter",strAllSpa);
+
                         Bundle bundle = new Bundle();
                         bundle.putString("filter", strAllSpa);
-                        fragment.setArguments(bundle);
+                        //fragment.setArguments(intent);
+//
+//                        getParentFragmentManager().setFramentResult("filter",bundle);
+
+                      //  Toast.makeText(getActivity(),"filter = " + bundle, Toast.LENGTH_LONG).show();
                         //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
                     }
-
-//                    //Main에 추가
-//                    TextView tv = view.findViewById(R.id.textViewAmount);
-//                    tv.setText(getArguments().getString("amount"));
-//                    //
-
-
 
                 }
             }

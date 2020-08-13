@@ -1,6 +1,11 @@
 package com.doubleslash.ddamiapp.model
 
+
+import com.google.gson.annotations.SerializedName
+
 data class DetailPieceDAO(
-        val piece: DetailPieceObjDAO,
-        val result: Int
+        @SerializedName("piece")
+    val piece: DetailPieceObjDAO,
+        @SerializedName("result")
+    val result: Int
 )

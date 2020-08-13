@@ -85,7 +85,7 @@ public class ShopFirstFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
+                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity1_1.class));
             }
         });
 

@@ -66,6 +66,7 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
         });
 
 
+
         Log.e("진희: token :", token);
 
         ApiService.INSTANCE.getLikeList().getLikeList(token)
@@ -90,21 +91,6 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
 
                             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
                             like_recyclerview.setLayoutManager(mLayoutManager);
-
-
-                            //작품 상세보기 likeByMe = true면 추가
-
-
-//                            LikeItem item1 = new LikeItem("http://222.251.129.150/uploads/1597061667017.jpg", "타이틀1", "http://222.251.129.150/uploads/1597061667017.jpghttp://222.251.129.150/uploads/1597061667017.jpg","진희1");
-//                            LikeItem item2 = new LikeItem("http://222.251.129.150/uploads/1597061667017.jpg", "타이틀2", "http://222.251.129.150/uploads/1597061667017.jpg","진희2");
-//                            LikeItem item3 = new LikeItem("https://t1.daumcdn.net/cfile/tistory/2744FB4058719BE733", "타이틀3", "http://222.251.129.150/uploads/1597061667017.jpg","진희3");
-//                            LikeItem item4 = new LikeItem("https://www.enewstoday.co.kr/news/photo/201805/1188725_303007_1317.jpg", "타이틀4", "http://222.251.129.150/uploads/1597061667017.jpg","진희4");
-//
-//                            list.add(item1);
-//                            list.add(item2);
-//                            list.add(item3);
-//                            list.add(item4);
-//
 
 
                             //comments

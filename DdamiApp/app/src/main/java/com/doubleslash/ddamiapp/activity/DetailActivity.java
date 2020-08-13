@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
 import com.doubleslash.ddamiapp.adapter.DetailImgAdapter;
+import com.doubleslash.ddamiapp.model.CommentItem;
 import com.doubleslash.ddamiapp.model.DetailImgItem;
+import com.doubleslash.ddamiapp.model.DetailPieceCommentDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
 
@@ -42,9 +44,6 @@ public class DetailActivity extends AppCompatActivity {
     TextView detailText;
     RecyclerView detail_img_recyclerview;
 
-    private ArrayList<String> mGroupList = null;
-    private ArrayList<ArrayList<String>> mChildList = null;
-    private ArrayList<String> mChildListContent = null;
     ExpandableListView commentView;
     RecyclerView recyclerView;
 
@@ -102,7 +101,7 @@ public class DetailActivity extends AppCompatActivity {
 
                             detailTitle.setText(it.getPiece().getTitle());
 
-                            detailNicname.setText(it.getPiece().getAuthor().getUserName());
+                            detailNicname.setText(it.getPiece().getAuthor().getUserId());
 
                             viewCnt.setText(String.valueOf(it.getPiece().getViews()));
                             heartCnt.setText(String.valueOf(it.getPiece().getLikeCount()));
@@ -123,9 +122,10 @@ public class DetailActivity extends AppCompatActivity {
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
                             recyclerView.setLayoutManager(linearLayoutManager);
 
-
-
                             detailText.setText(it.getPiece().getDescription());
+
+                            //comments
+
 
                             Log.e("tttestlll",it.toString());
 
@@ -146,21 +146,21 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
 
         //Log.d("진희: token 확인 ",token );
-
-        heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                it -> {
-                                    Log.e("tttest",it.toString());
-                                },it -> {
-                                    Log.e("ffffailed",it.toString());
-                                });
-            }
-        });
+//
+//        heart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(
+//                                it -> {
+//                                    Log.e("tttest",it.toString());
+//                                },it -> {
+//                                    Log.e("ffffailed",it.toString());
+//                                });
+//            }
+//        });
 
 
         detailBack.setOnClickListener(new View.OnClickListener() {
@@ -186,28 +186,40 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
-
         commentView = (ExpandableListView)findViewById(R.id.comments_view);
 
-        mGroupList = new ArrayList<String>();
-        mChildList = new ArrayList<ArrayList<String>>();
-        mChildListContent = new ArrayList<String>();
+        ArrayList<String> mGroupList = new ArrayList<String>();
+        ArrayList<ArrayList<String>> mChildList = new ArrayList<ArrayList<String>>();
+        ArrayList<String>  mChildListContent1 = new ArrayList<String>();
+        ArrayList<String>  mChildListContent2 = new ArrayList<String>();
+        ArrayList<String>  mChildListContent3 = new ArrayList<String>();
 
         /*댓글 sample data / 서버에서 불러오기  */
-        mGroupList.add("a");
-        mGroupList.add("b");
-        mGroupList.add("c");
 
-        mChildListContent.add("1");
-        mChildListContent.add("2");
-        mChildListContent.add("3");
 
-        mChildList.add(mChildListContent);
-        mChildList.add(mChildListContent);
-        mChildList.add(mChildListContent);
+        //group에 content, child에 id
+        mGroupList.add("지니");
+        mGroupList.add("가옥");
+        mGroupList.add("영환");
 
-        /********************************************************/
+        mChildListContent1.add("멋지다");
+        mChildListContent1.add("우와");
+        mChildListContent1.add("안녕~~~");
 
+        mChildListContent2.add("헉");
+        mChildListContent2.add("예뻐요");
+        mChildListContent2.add("하트각");
+
+        mChildListContent3.add("팔아줘");
+        mChildListContent3.add("잘해따");
+        mChildListContent3.add("귀여워억");
+
+        mChildList.add(mChildListContent1);
+        mChildList.add(mChildListContent2);
+        mChildList.add(mChildListContent3);
+
+//        /********************************************************/
+//
         commentView.setAdapter(new CommentAdapter(getApplicationContext(), mGroupList, mChildList));
 
         setExpandableListViewHeight(commentView, -1);

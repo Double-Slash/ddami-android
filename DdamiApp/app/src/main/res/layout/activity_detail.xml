@@ -76,13 +76,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         >
+
         <ImageView
             android:id="@+id/detail_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="5dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_brightness_1_puple_24dp"
+            android:background="@drawable/img_shop_detailview_writer"
             />
         <TextView
             android:id="@+id/detail_nic"
@@ -90,6 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/detail_profile"
             android:fontFamily="@font/nanum_square_regular"
+            android:layout_marginTop="5dp"
             android:textSize="15dp"
             android:textColor="#3C3C3C"
             android:text="닉네임"
@@ -109,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/detail_heart"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/nanum_square_regular"
             android:textSize="14dp"
@@ -129,6 +132,7 @@
             android:id="@+id/detail_heartCnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_alignParentEnd="true"
             android:fontFamily="@font/nanum_square_regular"
             android:textSize="14dp"
@@ -220,8 +224,7 @@
                     android:id="@+id/comment_profile"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/ic_brightness_1_puple_24dp"
-                    android:backgroundTint="#B3B3B3"
+                    android:background="@drawable/img_shop_detailview_writer"
                     android:layout_margin="16dp"
                     />
 
