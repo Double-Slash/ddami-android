@@ -3,7 +3,6 @@ package com.doubleslash.ddamiapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,30 +13,28 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import androidx.appcompat.widget.AppCompatImageView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-
 import com.doubleslash.ddamiapp.activity.MainActivity;
-
-import com.doubleslash.ddamiapp.activity.DetailActivity;
-
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
 import com.doubleslash.ddamiapp.model.MyroomItem;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class MyRoomFragment extends Fragment {
     TabLayout tabLayout;
@@ -73,9 +70,10 @@ public class MyRoomFragment extends Fragment {
         if (!getArguments().getBoolean("Myroom")) {
             btn_fab.setVisibility(View.GONE);
             btn_modify.setVisibility(View.GONE);
-            btn_follow.setVisibility(View.VISIBLE);
+//            btn_follow.setVisibility(View.VISIBLE);
         }
 
+        btn_follow.setVisibility(View.VISIBLE);
         //get values from bundle
         String input_id = getArguments().getString("Id");
         int input_field_size = getArguments().getInt("FieldCount");
@@ -127,7 +125,6 @@ public class MyRoomFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-
         GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
@@ -167,56 +164,7 @@ public class MyRoomFragment extends Fragment {
         };
 
         recyclerView.addOnItemTouchListener(onItemTouchListener);
-
-//        bundle.putString("FileId", input_fileId);
-//        DetailFragment detail = new DetailFragment();
-//        detail.setArguments(bundle);
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-//                .add(R.id.nav_host_fragment, detail)
-//                .commit();
-
-
-//        GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
-//            @Override
-//            public boolean onSingleTapUp(MotionEvent e) {
-//                return true;
-//            }
-//        });
-//
-//        RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-//                //get corresponding item
-//                View childView = rv.findChildViewUnder(e.getX(), e.getY());
-//                if (childView != null && gestureDetector.onTouchEvent(e)) {
-//                    //get position of current item
-//                    int currentPosition = rv.getChildAdapterPosition(childView);
-//
-//                    //get data
-//                    MyroomItem currentItem = itemL.get(currentPosition);
-//                    Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
-//
-//                    //switch fragment to DetailActivity onItemClicked
-//                    Intent intent = new Intent(getActivity(), DetailActivity.class);
-//                    intent.putExtra("FileId", currentItem.getId());
-//                    startActivity(intent);
-//                    return true;
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//            }
-//        };
-
-        recyclerView.addOnItemTouchListener(onItemTouchListener);
-
+        
         //FloatingActionButton onClick event
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,7 +176,26 @@ public class MyRoomFragment extends Fragment {
 
 
         //button display depends on the state
-
+        btn_follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JsonObject input = new JsonObject();
+                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+                input.addProperty("token", token);
+                ApiService.INSTANCE.getFollowService().follow("5f34f2f999fef948e0f8b10b",input)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    Log.e("sss!!!", it.toString());
+                                },
+                                it -> {
+                                    Log.e("fff!!!", it.toString());
+                                }
+                        );
+            }
+        });
         return view;
+
     }
 }

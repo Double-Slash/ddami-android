@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.shop.ShopListFragment5">
+    tools:context=".fragment.Shop.ShopListFragment5">
 
     <TextView
         android:id="@+id/textView13"
