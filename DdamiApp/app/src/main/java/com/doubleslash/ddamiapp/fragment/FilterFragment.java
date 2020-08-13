@@ -1,28 +1,21 @@
 package com.doubleslash.ddamiapp.fragment;
 
-import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.network.kotlin.ApiService;
-import com.google.gson.JsonObject;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 import static android.graphics.Color.rgb;
 
-public class FilterFragment extends Fragment {
+public class FilterFragment extends BottomSheetDialogFragment {
     AppCompatButton allSpace, livingSpace, build, interior, inner, envir
             , allModern, painting, sculp
             , allCraft, pottery, metals, fiber, woodworking
@@ -41,6 +34,7 @@ public class FilterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
+
 
 
         allSpace = (AppCompatButton)view.findViewById(R.id.btn_allSpace);
@@ -515,97 +509,79 @@ public class FilterFragment extends Fragment {
         /***************************************************/
 
         apply.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 //버튼이 활성화 되어있는 경우
                 if(apply.isEnabled()==true) {
-                    //클릭된 버튼 서버likeField에 추가
+                    //클릭된 버튼 텍스트 메인으로 보내기
+                    if(allSpace.isSelected()){
+                        MainFragment fragment = new MainFragment();
+                        String strAllSpa = allSpace.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("filter", strAllSpa);
+                        fragment.setArguments(bundle);
+                        //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
+                    }
+
+//                    //Main에 추가
+//                    TextView tv = view.findViewById(R.id.textViewAmount);
+//                    tv.setText(getArguments().getString("amount"));
+//                    //
+
+
 
                 }
-
-
             }
         });
 
-        
+
+
+
 
         /***************************************서버***********************************************/
 
         likeFieldList= new ArrayList<>();
 
         //사용자 살세보기의 likeField 사용
-        JsonObject inputJson = new JsonObject();
-        ApiService.INSTANCE.getUserDetailService().getUser(inputJson)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        it -> {
-//                            try {
-                            //배열에 서버 likeField값 넣기
-//                                JSONArray jsonArray = new JSONArray(it.getUser().getLikeField());
-//                                for(int i = 0 ; i<jsonArray.length(); i++) {
-//                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                                    String likeField = jsonObject.getString("likeField");
-//                                    likeFieldList.add(likeField);
-//
-//                                    Log.i("JSON Parser", likeField);
-//                                    Log.e("tttestlllike",likeFieldList.toString());
-//                                }
-//                            } catch (JSONException e) {
-//
-//                                Log.e("JSON Parser", "Error parsing data " + e.toString());
-//                            }
 
-                            reset.setOnClickListener(new View.OnClickListener() {
-                                @SuppressLint("CheckResult")
-                                @Override
-                                public void onClick(View view) {
-                                    //서버에 있는 likeField배열 모두 삭제 //list.removeAll();
-                                    Log.e("ttttttt",it.getUser().getLikeField().toString());
-                                    it.getUser().getLikeField().clear();
-                                    Log.e("ttttttt",it.getUser().getLikeField().toString());
+        reset.setOnClickListener(new View.OnClickListener() {
 
-                                    //클릭된 버튼 모두 unclick //작용하기 비활성화
-                                    allSpace.setSelected(false);  livingSpace.setSelected(false);  build.setSelected(false);  interior.setSelected(false);
-                                    inner.setSelected(false);  envir.setSelected(false);  allModern.setSelected(false);  painting.setSelected(false);
-                                    sculp.setSelected(false);  allCraft.setSelected(false);  pottery.setSelected(false);  metals.setSelected(false);
-                                    fiber.setSelected(false);  woodworking.setSelected(false);  picture.setSelected(false);  illust.setSelected(false);
-                                    allVideo.setSelected(false);  animation.setSelected(false);  movie.setSelected(false);  motion.setSelected(false);
-                                    docu.setSelected(false);  allIndus.setSelected(false);  goods.setSelected(false);  industSpace.setSelected(false);
-                                    UXUI.setSelected(false);  car.setSelected(false);  allClothes.setSelected(false);
+            @Override
+            public void onClick(View view) {
+//                //서버에 있는 likeField배열 모두 삭제 //list.removeAll();
+//                Log.e("ttttttt",it.getUser().getLikeField().toString());
+//                it.getUser().getLikeField().clear();
+//                Log.e("ttttttt",it.getUser().getLikeField().toString());
 
-                                    allSpace.setTextColor(rgb(128, 128, 128));  livingSpace.setTextColor(rgb(128, 128, 128));
-                                    build.setTextColor(rgb(128, 128, 128));  interior.setTextColor(rgb(128, 128, 128));
-                                    inner.setTextColor(rgb(128, 128, 128));  envir.setTextColor(rgb(128, 128, 128));
-                                    allModern.setTextColor(rgb(128, 128, 128));  painting.setTextColor(rgb(128, 128, 128));
-                                    sculp.setTextColor(rgb(128, 128, 128));  allCraft.setTextColor(rgb(128, 128, 128));
-                                    pottery.setTextColor(rgb(128, 128, 128));  metals.setTextColor(rgb(128, 128, 128));
-                                    fiber.setTextColor(rgb(128, 128, 128));  woodworking.setTextColor(rgb(128, 128, 128));
-                                    picture.setTextColor(rgb(128, 128, 128));  illust.setTextColor(rgb(128, 128, 128));
-                                    allVideo.setTextColor(rgb(128, 128, 128));  animation.setTextColor(rgb(128, 128, 128));
-                                    movie.setTextColor(rgb(128, 128, 128));  motion.setTextColor(rgb(128, 128, 128));
-                                    docu.setTextColor(rgb(128, 128, 128));  allIndus.setTextColor(rgb(128, 128, 128));
-                                    goods.setTextColor(rgb(128, 128, 128));  industSpace.setTextColor(rgb(128, 128, 128));
-                                    UXUI.setTextColor(rgb(128, 128, 128));  car.setTextColor(rgb(128, 128, 128));
-                                    allClothes.setTextColor(rgb(128, 128, 128));
+                //클릭된 버튼 모두 unclick //작용하기 비활성화
+                allSpace.setSelected(false);  livingSpace.setSelected(false);  build.setSelected(false);  interior.setSelected(false);
+                inner.setSelected(false);  envir.setSelected(false);  allModern.setSelected(false);  painting.setSelected(false);
+                sculp.setSelected(false);  allCraft.setSelected(false);  pottery.setSelected(false);  metals.setSelected(false);
+                fiber.setSelected(false);  woodworking.setSelected(false);  picture.setSelected(false);  illust.setSelected(false);
+                allVideo.setSelected(false);  animation.setSelected(false);  movie.setSelected(false);  motion.setSelected(false);
+                docu.setSelected(false);  allIndus.setSelected(false);  goods.setSelected(false);  industSpace.setSelected(false);
+                UXUI.setSelected(false);  car.setSelected(false);  allClothes.setSelected(false);
 
-                                    apply.setEnabled(false);
+                allSpace.setTextColor(rgb(128, 128, 128));  livingSpace.setTextColor(rgb(128, 128, 128));
+                build.setTextColor(rgb(128, 128, 128));  interior.setTextColor(rgb(128, 128, 128));
+                inner.setTextColor(rgb(128, 128, 128));  envir.setTextColor(rgb(128, 128, 128));
+                allModern.setTextColor(rgb(128, 128, 128));  painting.setTextColor(rgb(128, 128, 128));
+                sculp.setTextColor(rgb(128, 128, 128));  allCraft.setTextColor(rgb(128, 128, 128));
+                pottery.setTextColor(rgb(128, 128, 128));  metals.setTextColor(rgb(128, 128, 128));
+                fiber.setTextColor(rgb(128, 128, 128));  woodworking.setTextColor(rgb(128, 128, 128));
+                picture.setTextColor(rgb(128, 128, 128));  illust.setTextColor(rgb(128, 128, 128));
+                allVideo.setTextColor(rgb(128, 128, 128));  animation.setTextColor(rgb(128, 128, 128));
+                movie.setTextColor(rgb(128, 128, 128));  motion.setTextColor(rgb(128, 128, 128));
+                docu.setTextColor(rgb(128, 128, 128));  allIndus.setTextColor(rgb(128, 128, 128));
+                goods.setTextColor(rgb(128, 128, 128));  industSpace.setTextColor(rgb(128, 128, 128));
+                UXUI.setTextColor(rgb(128, 128, 128));  car.setTextColor(rgb(128, 128, 128));
+                allClothes.setTextColor(rgb(128, 128, 128));
 
-                                }
-                            });
+                apply.setEnabled(false);
 
-                            apply.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //클릭된 버튼 서버 likeField배열에 추가, 이전 화면으로 돌아가기
-                                }
-                            });
-                            Log.e("tttest",it.toString());
-                        },it -> {
-                            Log.e("fffailed",it.toString());
-                        });
-
-
+            }
+        });
 
         return view;
     }

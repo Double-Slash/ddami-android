@@ -20,9 +20,9 @@
 
     <fragment
         android:id="@+id/page_chat"
-        android:name="com.doubleslash.ddamiapp.fragment.ChattingFragment"
+        android:name="com.doubleslash.ddamiapp.fragment.SettingFragment"
         android:label="fragment_chatting"
-        tools:layout="@layout/fragment_chatting" />
+        tools:layout="@layout/fragment_setting" />
     <!--************************-->
     <fragment
         android:id="@+id/page_shop"

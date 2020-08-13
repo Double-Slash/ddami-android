@@ -2,10 +2,8 @@ package com.doubleslash.ddamiapp.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -23,12 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
 import com.doubleslash.ddamiapp.adapter.DetailImgAdapter;
-import com.doubleslash.ddamiapp.adapter.MainAdapter;
-import com.doubleslash.ddamiapp.fragment.ActivitisFragment;
 import com.doubleslash.ddamiapp.model.DetailImgItem;
-import com.doubleslash.ddamiapp.model.DetailPieceDAO;
-import com.doubleslash.ddamiapp.model.DetailPieceObjDAO;
-import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
 
@@ -85,7 +78,13 @@ public class DetailActivity extends AppCompatActivity {
 //작품 등록 또는 메인의 아이템 누르면
         JsonObject inputJson = new JsonObject();
 
-        ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
+
+
+        Intent intent = getIntent();
+        String fileId = intent.getStringExtra("FileId");
+        //String fileId = getArguments().getString("FileId");
+
+        ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId,inputJson)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

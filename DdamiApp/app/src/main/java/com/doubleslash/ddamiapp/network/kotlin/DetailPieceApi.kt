@@ -13,10 +13,17 @@ import retrofit2.http.Path
 
 
 interface DetailPieceApi {
-        @POST("/piece/detail/5f3242d6eaf0a645c0d38b64") //{_id}
-        fun getDeatil(@Body Body: JsonObject
-        ): Single<DetailPieceDAO>
+//        @POST("/piece/detail/5f3242d6eaf0a645c0d38b64") //{_id}
+//        fun getDeatil(@Body Body: JsonObject
+//        ): Single<DetailPieceDAO>
 
-        @GET("/piece/detail/{_id}")
-        fun getDeatil22(@Path("_id") _id: String): Call<DetailPieceObjDAO>
+        @GET("/piece/detail/{FileId}")
+        fun getDeatil22(@Path("FileId") FileId: String): Call<DetailPieceObjDAO>
+//        fun getDeatil(@Body Body: JsonObject
+//        ): Single<DetailPieceDAO>
+
+        @GET("/piece/detail/{FileId}")
+        fun getDeatil(@Path("FileId") FileId: String, @Body Body: JsonObject): Single<DetailPieceDAO>
+
+
 }
