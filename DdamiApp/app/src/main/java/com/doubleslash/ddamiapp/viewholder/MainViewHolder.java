@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.adapter.LikeAdapter;
+import com.doubleslash.ddamiapp.adapter.OnItemClickListener;
 import com.doubleslash.ddamiapp.model.MainItem;
 import com.squareup.picasso.Picasso;
 
@@ -28,7 +30,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
     private TextView like = itemView.findViewById(R.id.tv_like);
 
     @SuppressLint("SetTextI18n")
-    public void adapt(MainItem mainItem){
+    public void adapt(MainItem mainItem, OnItemClickListener clickListener) {
 
         Picasso.get().load(mainItem.getImage()).fit().into(imageView);
         title.setText(mainItem.getTitle());
@@ -40,5 +42,15 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
         userThumbnail.setBackground(new ShapeDrawable(new OvalShape()));
         userThumbnail.setClipToOutline(true);
         Picasso.get().load(mainItem.getThumbnail()).into(userThumbnail);
+
+        imageView.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clickListener.onHomeItemClicked(mainItem);
+                    }
+                }
+        );
     }
 }

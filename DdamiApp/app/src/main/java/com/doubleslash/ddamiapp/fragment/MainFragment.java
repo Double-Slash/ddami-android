@@ -24,6 +24,7 @@ import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.login.CustomBaseView;
 import com.doubleslash.ddamiapp.adapter.MainAdapter;
+import com.doubleslash.ddamiapp.adapter.OnItemClickListener;
 import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.model.Piece;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
@@ -36,7 +37,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnItemClickListener {
     MainItem item;
     TextView filter;
     TextView userName;
@@ -119,7 +120,7 @@ public class MainFragment extends Fragment {
                                 piece.getViews(),
                                 piece.getLikeCount()));
                     }
-                    recyclerView.setAdapter(new MainAdapter(items));
+                    recyclerView.setAdapter(new MainAdapter(items,this::onHomeItemClicked));
                 }, it -> {
                     Log.e("Failed", it.toString());
                 });
@@ -152,5 +153,11 @@ public class MainFragment extends Fragment {
 
             mChipContainer.addView(filterView);
         }
+    }
+
+
+    @Override
+    public void onHomeItemClicked(MainItem item) {
+        Toast.makeText(getContext(),item.getNickname(),Toast.LENGTH_SHORT).show();
     }
 }
