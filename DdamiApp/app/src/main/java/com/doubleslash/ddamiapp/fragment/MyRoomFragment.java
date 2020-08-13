@@ -177,43 +177,43 @@ public class MyRoomFragment extends Fragment {
 //                .commit();
 
 
-        GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return true;
-            }
-        });
-
-        RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                //get corresponding item
-                View childView = rv.findChildViewUnder(e.getX(), e.getY());
-                if (childView != null && gestureDetector.onTouchEvent(e)) {
-                    //get position of current item
-                    int currentPosition = rv.getChildAdapterPosition(childView);
-
-                    //get data
-                    MyroomItem currentItem = itemL.get(currentPosition);
-                    Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
-
-                    //switch fragment to DetailActivity onItemClicked
-                    Intent intent = new Intent(getActivity(), DetailActivity.class);
-                    intent.putExtra("FileId", currentItem.getId());
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-            }
-        };
+//        GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+//            @Override
+//            public boolean onSingleTapUp(MotionEvent e) {
+//                return true;
+//            }
+//        });
+//
+//        RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+//                //get corresponding item
+//                View childView = rv.findChildViewUnder(e.getX(), e.getY());
+//                if (childView != null && gestureDetector.onTouchEvent(e)) {
+//                    //get position of current item
+//                    int currentPosition = rv.getChildAdapterPosition(childView);
+//
+//                    //get data
+//                    MyroomItem currentItem = itemL.get(currentPosition);
+//                    Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
+//
+//                    //switch fragment to DetailActivity onItemClicked
+//                    Intent intent = new Intent(getActivity(), DetailActivity.class);
+//                    intent.putExtra("FileId", currentItem.getId());
+//                    startActivity(intent);
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//            }
+//        };
 
         recyclerView.addOnItemTouchListener(onItemTouchListener);
 
