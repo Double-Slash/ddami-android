@@ -6,6 +6,6 @@ import com.doubleslash.ddamiapp.model.LikeVO;
 import com.doubleslash.ddamiapp.model.MainItem;
 
 public interface OnItemClickListener {
-    void onHomeItemClicked(MainItem item);
+    void onHomeViewItemClicked(MainItem item);
 }
 
