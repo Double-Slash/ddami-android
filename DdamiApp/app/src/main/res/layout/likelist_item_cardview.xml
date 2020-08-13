@@ -5,9 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_like_list"
     android:orientation="vertical"
-    android:layout_margin="8dp"
-    android:layout_width="180dp"
-    android:layout_height="200dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <!--
     style="@style/CustomCardViewStyle"
@@ -15,9 +14,10 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/likelist_cardView"
         app:cardElevation="0dp"
-        android:layout_width="180dp"
+        android:layout_width="170dp"
         android:layout_height="200dp"
         card_view:cardUseCompatPadding="true"
+        android:layout_margin="10dp"
         >
 
         <RelativeLayout

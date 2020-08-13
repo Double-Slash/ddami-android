@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView nav_profile_img;
     Fragment fragment;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
