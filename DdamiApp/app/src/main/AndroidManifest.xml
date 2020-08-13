@@ -29,9 +29,9 @@
         <activity android:name=".activity.WritingActivity" />
 
 
-        <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:name=".activity.DetailActivity" />
+<!--        <activity-->
+<!--            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"-->
+<!--            android:name=".activity.DetailActivity" />-->
 
         <activity
             android:name=".activity.shop.ShopWritingActivity2_1"
