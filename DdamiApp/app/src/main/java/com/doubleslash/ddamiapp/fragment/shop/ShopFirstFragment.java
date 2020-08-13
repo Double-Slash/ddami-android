@@ -15,7 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.DetailActivity;
+import com.doubleslash.ddamiapp.fragment.FilterFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -87,41 +89,11 @@ public class ShopFirstFragment extends Fragment {
             }
         });
 
-//        DialogFragment dialogView = layoutInflater.inflate(R.layout.fragment_filter, null);
-//        DialogFragment dialog = BottomSheetDialog(this);
-//        dialog.setContentView(dialogView);
-//        dialog.show();
-//
-//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
-//        bottomSheetDialog.setContentView(R.layout.fragment_filter);
-//        bottomSheetDialog.show();
-//
-
-//
-//
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity)getActivity()).replaceFragment(FilterFragment.newInstance());
-//            }
-//        });
-
-//                FilterFragment bottomSheetDialog = FilterFragment.newInstance();
-//                bottomSheetDialog.setContentView(R.layout.fragment_filter);
-//                bottomSheetDialog.show(getSupportFragmentManager(),"bottomSheet");
-
-//
-//        //persistentBottomSheet로 사용할 view 획득
-//        View bottomSheet = (CoordinatorLayout)v.findViewById(R.id.filter_whole_layout);
-//        //획득한 view를 bottomsheet로 지정
-//        BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(bottomSheet);
-
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
-                bottomSheetDialog.setContentView(R.layout.fragment_filter);
-                bottomSheetDialog.show();
+
+                FilterFragment.newInstance().show(getChildFragmentManager(),"tag");
 
             }
         });

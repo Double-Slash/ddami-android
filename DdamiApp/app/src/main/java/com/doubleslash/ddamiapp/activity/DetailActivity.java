@@ -80,7 +80,6 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String fileId = intent.getStringExtra("FileId");
-        //String fileId = getArguments().getString("FileId");
 
         Log.d("진희: fileId 확인 ",fileId );
         ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId)
@@ -140,10 +139,18 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
+
+        //Intent intent2 = getIntent();
+
+        String token = getIntent().getStringExtra("token");
+        Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
+
+        //Log.d("진희: token 확인 ",token );
+
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(fileId)
+                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(

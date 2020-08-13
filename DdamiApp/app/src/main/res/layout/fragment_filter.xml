@@ -4,18 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/filter_whole_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00ffffff"
-    app:behavior_peekHeight="600dp"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-    >
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+   >
 
     <RelativeLayout
         android:id="@+id/filter_top_iconLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-       android:background="@drawable/shape_filter_layout"
+        android:background="@drawable/shape_filter_layout"
+        android:backgroundTintMode="@android:color/transparent"
         >
 
         <ImageButton

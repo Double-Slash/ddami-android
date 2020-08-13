@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,10 +34,19 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
     private RecyclerView like_recyclerview;
     private LikeAdapter mLikeAdapter;
     private ArrayList<LikeItem> list = new ArrayList<>(); //서버에서 불러오기
+    String token;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
     public static LikeFragment newInstance() {
         return new LikeFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        token = getActivity().getIntent().getStringExtra("token");
+
     }
 
     @SuppressLint("CheckResult")
@@ -55,8 +66,9 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
         });
 
 
-        JsonObject inputJson = new JsonObject();
-        ApiService.INSTANCE.getLikeList().getLikeList()
+        Log.e("진희: token :", token);
+
+        ApiService.INSTANCE.getLikeList().getLikeList(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
