@@ -5,7 +5,7 @@
     android:id="@+id/shop_2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Shop.ShopSecondFragment">
+    tools:context=".fragment.shop.ShopSecondFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingBtn_2"

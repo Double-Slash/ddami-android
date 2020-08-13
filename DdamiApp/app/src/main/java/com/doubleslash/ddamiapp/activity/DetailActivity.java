@@ -1,9 +1,9 @@
-package com.doubleslash.ddamiapp.fragment;
+package com.doubleslash.ddamiapp.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,11 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
+import com.doubleslash.ddamiapp.adapter.DetailImgAdapter;
+import com.doubleslash.ddamiapp.model.DetailImgItem;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
 
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailFragment extends Fragment {
+public class DetailActivity extends AppCompatActivity {
 
 
     ImageButton detailBack, heart, etc, addComment;
@@ -43,90 +46,60 @@ public class DetailFragment extends Fragment {
     private ArrayList<ArrayList<String>> mChildList = null;
     private ArrayList<String> mChildListContent = null;
     ExpandableListView commentView;
+    RecyclerView recyclerView;
 
-
-    // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
-    public static DetailFragment newInstance() {
-        return new DetailFragment();
-    }
 
     @SuppressLint("CheckResult")
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
 
-        detailBack=(ImageButton)view.findViewById(R.id.detail_back);
-        heart=(ImageButton)view.findViewById(R.id.heart);
-        etc=(ImageButton)view.findViewById(R.id.etc);
-        detailCatagoly=(TextView)view.findViewById(R.id.detail_catagoly);
-        detailTitle=(TextView)view.findViewById(R.id.detail_title);
-        detailNicname=(TextView)view.findViewById(R.id.detail_nic);
-        viewCnt=(TextView)view.findViewById(R.id.detail_viewCnt);
-        heartCnt=(TextView)view.findViewById(R.id.detail_heartCnt);
-        detailProfile=(ImageView)view.findViewById(R.id.detail_profile);
-        commentProfile=(ImageView)view.findViewById(R.id.comment_profile);
-        pieceDetail=(LinearLayout)view.findViewById(R.id.piece_deatil);
-        addComment=(ImageButton)view.findViewById(R.id.add_comment);
-        commentWrite=(EditText)view.findViewById(R.id.comment_write);
+        detailBack=(ImageButton)findViewById(R.id.detail_back);
+        heart=(ImageButton)findViewById(R.id.heart);
+        etc=(ImageButton)findViewById(R.id.etc);
+        detailCatagoly=(TextView)findViewById(R.id.detail_catagoly);
+        detailTitle=(TextView)findViewById(R.id.detail_title);
+        detailNicname=(TextView)findViewById(R.id.detail_nic);
+        viewCnt=(TextView)findViewById(R.id.detail_viewCnt);
+        heartCnt=(TextView)findViewById(R.id.detail_heartCnt);
+        detailProfile=(ImageView)findViewById(R.id.detail_profile);
+        commentProfile=(ImageView)findViewById(R.id.comment_profile);
+        pieceDetail=(LinearLayout)findViewById(R.id.piece_deatil);
+        addComment=(ImageButton)findViewById(R.id.add_comment);
+        commentWrite=(EditText)findViewById(R.id.comment_write);
 
 
 
-        detailText = (TextView) view.findViewById(R.id.detail_text);
-        detail_img_recyclerview = (RecyclerView) view.findViewById(R.id.detail_img_recyclerview);
+        detailText = (TextView) findViewById(R.id.detail_text);
+        detail_img_recyclerview = (RecyclerView)findViewById(R.id.detail_img_recyclerview);
 
 
-//작품 등록 또는 메인의 아이템 누르면
         JsonObject inputJson = new JsonObject();
-            /*
-            inputJson.put("result", id);     //0,1
-            inputJson.put("obj", pw);       //작품
-                inputJson.put("fileUrl",);          //imagelist
-                inputJson.put("comments",);         //댓글 배열
-                inputJson.put("hasField",);         //분야(카테고리) 배열
-                inputJson.put("views",);         //조회수
-                inputJson.put("like",);         //좋아요 누른 사람 기본키 배열//heart 누르면 여기에 추가
-                inputJson.put("likeCount",);         //좋아요 수
-                inputJson.put("_id",);         //??
-                inputJson.put("title",);         //제목
-                inputJson.put("description",);         //내용
-                inputJson.put("author",);         //작가
-                    inputJson.put("_id",);         //작가 아이디
-                    inputJson.put("userNickname",);         //작가 닉네임
-                inputJson.put("created",);         //등록 시간
-                inputJson.put("likeByUser",);         //내가 좋아요 눌렀는지 아닌지
-             */
-            /*
-        inputJson.get("result");
 
-        inputJson.get("obj");
-        inputJson.get("fileUrl");       //imgList //recyclerview에 추가
-        inputJson.get("comments");      //댓글 배열
-        inputJson.get("hasField");      //분야(카테고리) 배열 // detailCatagoly
-        inputJson.get("views");         //조회수   //viewCnt
-        inputJson.get("like");          //좋아요 누른 사람 기본키 배열
-        inputJson.get("likeCount");     //좋아요 수     //heartCnt
-        inputJson.get("_id");           //사용자 기본키
-        inputJson.get("title");                     //detailTitle
-        inputJson.get("description");   //내용        //detailText
 
-        inputJson.get("author");
-        inputJson.get("_id");           //작가 기본키
-        inputJson.get("userNickname");  //작가 닉네임    //detailNicname
+        Intent intent = getIntent();
+        String fileId = intent.getStringExtra("FileId");
 
-        inputJson.get("created");       //등록 시간
-        inputJson.get("likeByUser");    //좋아요 true false
-
-             */
-
-        //    Single<DetailPieceDAO> deatil = DetailPieceApi.getDeatil(inputJson);
-
-        ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
+        Log.d("진희: fileId 확인 ",fileId );
+        ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
-                            // detailCatagoly.setText(it.getPiece().getHasField());  //list로
+
+                            ArrayList<String> hasField = new ArrayList<>();
+                            for(int i =0; i<it.getPiece().getHasField().size(); i++){
+                                String fielditem = it.getPiece().getHasField().get(i);
+                                hasField.add(fielditem);
+                            }
+                            Log.e("진희: hasField list ", hasField.toString());
+                            detailCatagoly.setText(hasField.toString());
+//                            String replace = detailCatagoly.getText().toString();
+//                            replace = replace.replace("[","");
+//                            replace = replace.replace("]","");
+//                            replace = replace.replace(","," / ");
+
                             detailTitle.setText(it.getPiece().getTitle());
 
                             detailNicname.setText(it.getPiece().getAuthor().getUserName());
@@ -135,8 +108,26 @@ public class DetailFragment extends Fragment {
                             heartCnt.setText(String.valueOf(it.getPiece().getLikeCount()));
 
                             //recyclerview 이미지 추가
+                            recyclerView = (RecyclerView) findViewById(R.id.detail_img_recyclerview);
+
+                            ArrayList<DetailImgItem> imgs = new ArrayList<>();
+
+                            for(int i = 0; i<it.getPiece().getFileUrl().size(); i++){
+                                String pieceUrl = it.getPiece().getFileUrl().get(i);
+                                imgs.add(new DetailImgItem(pieceUrl));
+                            }
+
+                            RecyclerView.Adapter adapter = new DetailImgAdapter(imgs);
+                            recyclerView.setAdapter(adapter);
+
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+
+
 
                             detailText.setText(it.getPiece().getDescription());
+
+                            Log.e("tttestlll",it.toString());
 
                             //comments
                             Log.e("tttest",it.toString());
@@ -149,10 +140,34 @@ public class DetailFragment extends Fragment {
 
 
 
+        //Intent intent2 = getIntent();
+
+        String token = getIntent().getStringExtra("token");
+        Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
+
+        //Log.d("진희: token 확인 ",token );
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    Log.e("tttest",it.toString());
+                                },it -> {
+                                    Log.e("ffffailed",it.toString());
+                                });
+            }
+        });
+
+
         detailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //뒤록 가기
+                onBackPressed();
             }
         });
 
@@ -160,15 +175,7 @@ public class DetailFragment extends Fragment {
         String text = detailText.getText().toString();
         text = text.replace("\\\n", System.getProperty("line.separator"));
 
-        heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //누르면 fullHeart로
-                //작품 상세보기 like배열에 사용자 기본키 저장
-                //작품 상세보기 likeCount++, 사용자 상세보기 like++ == heartCnt
-                //작품 상세보기 likeByMe = true
-            }
-        });
+
 
         //댓글 작성 버튼
         addComment.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +187,7 @@ public class DetailFragment extends Fragment {
 
 
 
-        commentView = (ExpandableListView)view.findViewById(R.id.comments_view);
+        commentView = (ExpandableListView)findViewById(R.id.comments_view);
 
         mGroupList = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
@@ -201,14 +208,14 @@ public class DetailFragment extends Fragment {
 
         /********************************************************/
 
-        commentView.setAdapter(new CommentAdapter(getActivity(), mGroupList, mChildList));
+        commentView.setAdapter(new CommentAdapter(getApplicationContext(), mGroupList, mChildList));
 
         setExpandableListViewHeight(commentView, -1);
 
         commentView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Toast.makeText(getActivity(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
 
                 setExpandableListViewHeight(parent, groupPosition);
 
@@ -221,7 +228,7 @@ public class DetailFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(getActivity(), "c click = " + childPosition,
+                Toast.makeText(getApplicationContext(), "c click = " + childPosition,
                         Toast.LENGTH_SHORT).show();
 
                 return false;
@@ -231,7 +238,7 @@ public class DetailFragment extends Fragment {
         commentView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getActivity(), "g Collapse = " + groupPosition,
+                Toast.makeText(getApplicationContext(), "g Collapse = " + groupPosition,
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -239,13 +246,11 @@ public class DetailFragment extends Fragment {
         commentView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity(), "g Expand = " + groupPosition,
+                Toast.makeText(getApplicationContext(), "g Expand = " + groupPosition,
                         Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        return view;
     }
 
     private void setExpandableListViewHeight(ExpandableListView listView,
