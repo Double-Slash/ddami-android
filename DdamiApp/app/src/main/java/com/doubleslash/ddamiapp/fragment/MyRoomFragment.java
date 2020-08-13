@@ -23,13 +23,17 @@ import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
 import com.doubleslash.ddamiapp.model.MyroomItem;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MyRoomFragment extends Fragment {
@@ -66,9 +70,10 @@ public class MyRoomFragment extends Fragment {
         if (!getArguments().getBoolean("Myroom")) {
             btn_fab.setVisibility(View.GONE);
             btn_modify.setVisibility(View.GONE);
-            btn_follow.setVisibility(View.VISIBLE);
+//            btn_follow.setVisibility(View.VISIBLE);
         }
 
+        btn_follow.setVisibility(View.VISIBLE);
         //get values from bundle
         String input_id = getArguments().getString("Id");
         int input_field_size = getArguments().getInt("FieldCount");
@@ -170,6 +175,26 @@ public class MyRoomFragment extends Fragment {
             }
         });
 
+        btn_follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JsonObject input = new JsonObject();
+                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+                input.addProperty("token", token);
+                ApiService.INSTANCE.getFollowService().follow("5f34f2f999fef948e0f8b10b",input)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    Log.e("sss!!!", it.toString());
+                                },
+                                it -> {
+                                    Log.e("fff!!!", it.toString());
+                                }
+                        );
+            }
+        });
         return view;
+
     }
 }
