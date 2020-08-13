@@ -12,15 +12,25 @@ public class ShopWorkItem {
     int mPrice;
     int mViews;
     int mLike;
+    String id;
 
-    public ShopWorkItem(List<String> mImage, List<String> mHasField, String mWork, String mUniv, int mPrice, int mViews, int mLike) {
-        this.mImageArr = mImage;
-        this.mHasField=mHasField;
+    public ShopWorkItem(List<String> mImageArr, List<String> mHasField, String mWork, String mUniv, int mPrice, int mViews, int mLike, String id) {
+        this.mImageArr = mImageArr;
+        this.mHasField = mHasField;
         this.mWork = mWork;
         this.mUniv = mUniv;
         this.mPrice = mPrice;
-        this.mViews=mViews;
-        this.mLike=mLike;
+        this.mViews = mViews;
+        this.mLike = mLike;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<String> getmHasField() {

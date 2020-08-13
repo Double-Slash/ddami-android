@@ -58,4 +58,12 @@ object ApiService {
         retrofit.create(ShopFeedApi::class.java)
     }
 
+    val ShopMaterialUploadService : ShopMaterialUploadApi by lazy {
+        retrofit.create(ShopMaterialUploadApi::class.java)
+    }
+
+    val ShopWorkDetailService : ShopWorkDetailApi by lazy {
+        retrofit.create(ShopWorkDetailApi::class.java)
+    }
+
 }

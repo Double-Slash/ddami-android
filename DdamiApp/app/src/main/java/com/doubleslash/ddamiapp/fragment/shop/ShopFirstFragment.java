@@ -84,7 +84,7 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
 
                             for(int i = 0; i<it.getProducts().size(); i++){
                                 Product product = it.getProducts().get(i);
-                                mData.add(new ShopWorkItem(product.getPieces().get(0).getFileUrl(), product.getHasField(), product.getTitle(), product.getLocationName(), product.getPrice(), product.getViews(), product.getLikeCount()));
+                                mData.add(new ShopWorkItem(product.getPieces().get(0).getFileUrl(), product.getHasField(), product.getTitle(), product.getLocationName(), product.getPrice(), product.getViews(), product.getLikeCount(),product.get_id()));
                             }
 
                             mAdapter = new ShopWorkAdapter(mData,this::onShopWorkClicked);
@@ -170,11 +170,12 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
     @Override
     public void onShopWorkClicked(ShopWorkItem shopWorkItem) {
         Toast.makeText(getContext(), shopWorkItem.getmWork(), Toast.LENGTH_LONG).show();
-        this.shopWorkItem=shopWorkItem;
-        //getActivity().startActivity(new Intent(getActivity(), ShopWorkDetailActivity.class));
+        Intent detailShopIntent = new Intent(getActivity(),ShopWorkDetailActivity.class);
+        detailShopIntent.putExtra("id",shopWorkItem.getId());
+        startActivity(detailShopIntent);
     }
 
-    public static ShopWorkItem getShopWorkItem(){
-        return shopWorkItem;
-    }
+    //public static ShopWorkItem getShopWorkItem(){
+       //return shopWorkItem;
+    //}
 }

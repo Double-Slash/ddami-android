@@ -150,12 +150,15 @@ public class ShopSecondFragment extends Fragment implements OnShopMaterialItemCl
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(
                                             subs -> {
-                                                if(!subs.getUser().getState()){
-                                                    getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
-                                                }
-                                                if(subs.getUser().getState()){
-                                                    getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
-                                                }
+                                                //if(!subs.getUser().getState()){
+                                                    //getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
+                                                //}
+                                               // if(subs.getUser().getState()){
+                                                    Intent intent=new Intent(getActivity(), ShopWritingActivity2_1.class);
+                                                    intent.putExtra("token", token);
+                                                    startActivity(intent);
+                                                    //getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+                                                //}
                                             },
                                             subs -> {
                                                 Log.e("미대생 인증 확인 오류", it.toString());

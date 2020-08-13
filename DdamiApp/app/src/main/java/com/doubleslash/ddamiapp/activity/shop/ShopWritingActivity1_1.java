@@ -116,7 +116,6 @@ public class ShopWritingActivity1_1 extends AppCompatActivity {
                 .subscribe(
                         it -> {
 
-
                         }, it -> {
                             Log.e("failed", it.toString());
                         }
