@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/page_main">
 
-
     <fragment
         android:id="@+id/page_main"
         android:name="com.doubleslash.ddamiapp.fragment.MainFragment"
@@ -27,6 +26,5 @@
         android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
-
 
 </navigation>
