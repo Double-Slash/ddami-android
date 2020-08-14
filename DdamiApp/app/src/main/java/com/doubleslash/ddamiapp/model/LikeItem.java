@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 public class LikeItem {
 
-    private int num;
+    private String pieceId;
     private String image;
     private String title;
     private String profile;
     private String nicname;
     private Boolean heart;
-    private ArrayList<String> likelist;
 
-    public LikeItem(String image, String title,
+    public LikeItem(String pieceId, String image, String title,
                     //String profile,
                     String nicname) {
+        this.pieceId = pieceId;
         this.image = image;
         this.title = title;
         // this.profile = profile;
         this.nicname = nicname;
     }
 
-    public int getNum() {
-        return num;
+    public String getPieceId() {
+        return pieceId;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setPieceId(String pieceId) {
+        this.pieceId = pieceId;
     }
 
     public String getImage() {
@@ -68,17 +68,6 @@ public class LikeItem {
     public void setHeart(Boolean heart) {
         this.heart = heart;
     }
-
-    public ArrayList<String> getLikelist() {
-        return likelist;
-    }
-
-    public void setLikelist(ArrayList<String> likelist) {
-        this.likelist = likelist;
-    }
-
-
-
     @Override
     public String toString() {
         return "ListVO{" +
@@ -86,8 +75,7 @@ public class LikeItem {
                 ", title='" + title + '\'' +
                 ", profile='" + profile + '\'' +
                 ", nicname='" + nicname + '\'' +
-                ", heart='" + heart + '\'' +
-                ", likelist=" + likelist +
+                ", pieceId='" + pieceId +
                 '}';
     }
 }

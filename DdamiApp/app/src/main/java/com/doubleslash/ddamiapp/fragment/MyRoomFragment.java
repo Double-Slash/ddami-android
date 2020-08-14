@@ -14,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
@@ -44,6 +46,15 @@ public class MyRoomFragment extends Fragment {
     RecyclerView recyclerView;
     Button btn_modify, btn_follow;
     FloatingActionButton btn_fab;
+
+    String token;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        token = getActivity().getIntent().getStringExtra("token");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -146,8 +157,9 @@ public class MyRoomFragment extends Fragment {
                     Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
 
                     //switch fragment to DetailActivity onItemClicked
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
                     intent.putExtra("FileId", currentItem.getId());
+                    intent.putExtra("token", token);
                     startActivity(intent);
                     return true;
                 }
@@ -164,7 +176,7 @@ public class MyRoomFragment extends Fragment {
         };
 
         recyclerView.addOnItemTouchListener(onItemTouchListener);
-        
+
         //FloatingActionButton onClick event
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override

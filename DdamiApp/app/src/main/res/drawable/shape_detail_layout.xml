@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:width="200dp" android:gravity="right" android:drawable="@drawable/img_detailview_graphic2">
+        <shape >
+            <solid android:color="#00000000" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:top="5dp" />
+            <solid android:color="#00CCCCCC" />
+            <corners android:topLeftRadius="14dp"/>
+
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:top="5dp" />
+            <solid android:color="#00CCCCCC" />
+            <corners android:topLeftRadius="14dp"/>
+
+        </shape>
+    </item><item>
+    <shape>
+        <padding android:top="5dp" />
+        <solid android:color="#00CCCCCC" />
+        <corners android:topLeftRadius="14dp"/>
+
+    </shape>
+</item>
     <!-- Drop Shadow Stack -->
     <item>
         <shape>
@@ -10,6 +38,7 @@
 
         </shape>
     </item>
+
     <item>
         <shape>
             <padding android:left="5dp" android:top="4dp" />
@@ -42,6 +71,7 @@
 
         </shape>
     </item>
+
     <item>
         <shape>
             <padding android:left="2dp"/>
@@ -50,6 +80,7 @@
 
         </shape>
     </item>
+
     <!--Background-->
     <item>
         <shape
@@ -60,5 +91,6 @@
         </shape>
 
     </item>
+
 
 </layer-list>

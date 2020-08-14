@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.doubleslash.ddamiapp.R
+import com.doubleslash.ddamiapp.activity.DetailActivity
 import com.doubleslash.ddamiapp.activity.MainActivity
+import com.doubleslash.ddamiapp.fragment.LikeFragment
+import com.doubleslash.ddamiapp.fragment.MyRoomFragment
 import com.doubleslash.ddamiapp.network.kotlin.ApiService
 import com.doubleslash.ddamiapp.util.KeyboardVisibilityUtils
 import com.google.gson.JsonObject
@@ -60,6 +64,22 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("id", input.get("userId").toString())
                     startActivity(intent)
                     finish()
+
+
+                    val detailintent = Intent(this@LoginActivity, DetailActivity::class.java)
+                    detailintent.putExtra("token", it.token)
+//                    finish()
+
+                    val fragment: Fragment = LikeFragment() // Fragment 생성
+                    val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
+                    bundle.putString("token", it.token) // key , value
+                    fragment.setArguments(bundle)
+
+                    val fragment2: Fragment = MyRoomFragment() // Fragment 생성
+                    val bundle2 = Bundle(1) // 파라미터는 전달할 데이터 개수
+                    bundle2.putString("token", it.token) // key , value
+                    fragment2.setArguments(bundle2)
+
                 }, {
                     Toast.makeText(applicationContext, "$it", Toast.LENGTH_SHORT).show()
                     Log.e("영환", it.toString())

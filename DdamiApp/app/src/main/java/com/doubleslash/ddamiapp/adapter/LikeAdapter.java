@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.model.LikeItem;
+import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.viewholder.LikeViewHolder;
 
 import java.util.ArrayList;
@@ -16,21 +17,21 @@ import java.util.ArrayList;
 public class LikeAdapter extends RecyclerView.Adapter<LikeViewHolder> {
 
 
-    public LikeAdapter(ArrayList<LikeItem> list_like) {
-        this.list_like = list_like;
-    }
-
     private ArrayList<LikeItem> list_like;
+    public OnLikeItemClickListener onLikeListItemClicked;
 
-    public OnItemClickListener mOnItemClickListener = null;
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, LikeItem likeVO);
+    public LikeAdapter(ArrayList<LikeItem> list_like, OnLikeItemClickListener itemViewClickListener) {
+        this.list_like = list_like;
+        this.onLikeListItemClicked = itemViewClickListener;
     }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mOnItemClickListener = listener;
-    }
+//
+//    public interface OnItemClickListener {
+//        void onItemClick(LikeItem likeVO);
+//    }
+//
+//    public void setOnItemClickListener(OnItemClickListener listener) {
+//        this.mOnItemClickListener = listener;
+//    }
 
     @NonNull
     @Override
@@ -41,24 +42,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull LikeViewHolder holder, int position) {
-        holder.adapt(list_like.get(position));
-//
-//        holder.heartPiece.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//                holder.heartPiece.setImageResource(R.drawable.btn_detailview_heart);
-//            }
-//        });
-//        holder.layoutLikeList.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                //작업물 상세로 이동
-//                mOnItemClickListener.onItemClick(v, likeVO);
-//            }
-//        });
+        holder.adapt(list_like.get(position),onLikeListItemClicked);
     }
 
     @Override
