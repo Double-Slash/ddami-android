@@ -97,8 +97,9 @@
         android:clickable="true"
         app:fabSize="normal"
         android:src="@drawable/plus_sign"
-        app:backgroundTint="#F7606B" />
-
+        app:backgroundTint="#F7606B"
+        app:tint = "#FFF"
+        app:srcCompat="@drawable/ic_plus"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

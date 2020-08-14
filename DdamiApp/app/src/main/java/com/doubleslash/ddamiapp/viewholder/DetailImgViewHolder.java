@@ -17,16 +17,16 @@ import com.squareup.picasso.Picasso;
 
 public class DetailImgViewHolder extends RecyclerView.ViewHolder {
 
-        public DetailImgViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
+    public DetailImgViewHolder(@NonNull View itemView) {
+        super(itemView);
+    }
 
-        private ImageView imageView = itemView.findViewById(R.id.detail_img_item);
+    private ImageView imageView = itemView.findViewById(R.id.detail_img_item);
 
-        @SuppressLint("SetTextI18n")
-        public void adapt(DetailImgItem detailItem){
+    @SuppressLint("SetTextI18n")
+    public void adapt(DetailImgItem detailItem){
 
-            Picasso.get().load(detailItem.getImage()).fit().into(imageView);
-        }
+        Picasso.get().load(detailItem.getImage()).fit().into(imageView);
+    }
 
 }

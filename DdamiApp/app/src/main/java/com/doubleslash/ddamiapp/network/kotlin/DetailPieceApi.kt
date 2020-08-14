@@ -1,6 +1,8 @@
 package com.doubleslash.ddamiapp.network.kotlin
 
+import android.bluetooth.BluetoothClass.Device
 import com.doubleslash.ddamiapp.model.DetailPieceDAO
+import com.doubleslash.ddamiapp.model.DetailPieceObjDAO
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.Call

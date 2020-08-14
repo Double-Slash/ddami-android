@@ -19,6 +19,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 import static android.graphics.Color.rgb;
 
 public class FilterFragment extends BottomSheetDialogFragment {
@@ -33,8 +36,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
     private ArrayList<String> likeFieldList;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
-    public static FilterFragment newInstance()
-    {
+    public static FilterFragment newInstance() {
         return new FilterFragment();
     }
 
@@ -528,26 +530,36 @@ public class FilterFragment extends BottomSheetDialogFragment {
                 if(apply.isEnabled()==true) {
                     //클릭된 버튼 텍스트 메인으로 보내기
                     if(allSpace.isSelected()){
-
-                        String strAllSpa = "공간 디자인 "+allSpace.getText().toString();
-
-
-                    //    MainFragment fragment = new MainFragment();
-//                        Intent intent = new Intent(getActivity(),MainFragment.class);
-//
-//                        intent.putExtra("filter",strAllSpa);
-
+                        MainFragment fragment = new MainFragment();
+                        String strAllSpa = allSpace.getText().toString();
                         Bundle bundle = new Bundle();
                         bundle.putString("filter", strAllSpa);
-                        //fragment.setArguments(intent);
-//
-//                        getParentFragmentManager().setFramentResult("filter",bundle);
-
-                      //  Toast.makeText(getActivity(),"filter = " + bundle, Toast.LENGTH_LONG).show();
+                        fragment.setArguments(bundle);
                         //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
+  //                      String strAllSpa = "공간 디자인 "+allSpace.getText().toString();
+
+
+//                        //    MainFragment fragment = new MainFragment();
+////                        Intent intent = new Intent(getActivity(),MainFragment.class);
+////
+////                        intent.putExtra("filter",strAllSpa);
+//
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("filter", strAllSpa);
+//                        //fragment.setArguments(intent);
+////
+////                        getParentFragmentManager().setFramentResult("filter",bundle);
+//
+//                        //  Toast.makeText(getActivity(),"filter = " + bundle, Toast.LENGTH_LONG).show();
+//                        //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
+//
+
                     }
 
                 }
+
+
+
             }
         });
 

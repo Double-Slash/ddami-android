@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -122,10 +123,9 @@ public class DetailActivity extends AppCompatActivity {
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
                             recyclerView.setLayoutManager(linearLayoutManager);
 
+
+
                             detailText.setText(it.getPiece().getDescription());
-
-                            //comments
-
 
                             Log.e("tttestlll",it.toString());
 
@@ -145,22 +145,22 @@ public class DetailActivity extends AppCompatActivity {
         String token = getIntent().getStringExtra("token");
         Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
 
-        //Log.d("진희: token 확인 ",token );
-//
-//        heart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(
-//                                it -> {
-//                                    Log.e("tttest",it.toString());
-//                                },it -> {
-//                                    Log.e("ffffailed",it.toString());
-//                                });
-//            }
-//        });
+        Log.d("진희: token 확인 ",token );
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    Log.e("tttest",it.toString());
+                                },it -> {
+                                    Log.e("ffffailed",it.toString());
+                                });
+            }
+        });
 
 
         detailBack.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +184,7 @@ public class DetailActivity extends AppCompatActivity {
                 //commentWrite.getText() 서버comments에 추가, 서버에서 불러와서 view에 추가
             }
         });
+
 
 
         commentView = (ExpandableListView)findViewById(R.id.comments_view);

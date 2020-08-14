@@ -66,7 +66,6 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
         });
 
 
-
         Log.e("진희: token :", token);
 
         ApiService.INSTANCE.getLikeList().getLikeList(token)

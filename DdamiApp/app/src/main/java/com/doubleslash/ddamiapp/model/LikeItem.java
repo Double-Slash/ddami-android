@@ -17,7 +17,7 @@ public class LikeItem {
                     String nicname) {
         this.image = image;
         this.title = title;
-       // this.profile = profile;
+        // this.profile = profile;
         this.nicname = nicname;
     }
 

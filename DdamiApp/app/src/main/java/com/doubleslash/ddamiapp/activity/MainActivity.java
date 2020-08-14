@@ -1,6 +1,5 @@
 package com.doubleslash.ddamiapp.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -37,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -58,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     TextView nav_header_program;
     ImageView nav_profile_img;
     Fragment fragment;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,46 +81,59 @@ public class MainActivity extends AppCompatActivity {
         nav_header_program = (TextView) findViewById(R.id.nav_header_program);
         nav_profile_img = (ImageView) findViewById(R.id.nav_profile_img);
 
-        JsonObject inputJson = new JsonObject();
         Bundle bundle = new Bundle();
 
-        ApiService.INSTANCE.getMyroomUser().myroom(inputJson)
+        JsonObject input = new JsonObject();
+        String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+        input.addProperty("token", token2);
+        ApiService.INSTANCE.getMyroomUser().myroom(input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
-                            Log.e("sss", it.toString());
-                            bundle.putString("Id", it.getUser().getUserId());
-                            for (int i = 0; i < it.getUser().getLikeField().size(); i++) {
-                                bundle.putString("LikeField" + String.valueOf(i), it.getUser().getLikeField().get(i));
+                            Log.e("sss@@@!!!", it.toString());
+                            bundle.putBoolean("Myroom", true);
+                            bundle.putString("Id", it.getMyInfo().getUserId());
+                            for (int i = 0; i < it.getMyInfo().getLikeField().size(); i++) {
+                                bundle.putString("LikeField" + String.valueOf(i), it.getMyInfo().getLikeField().get(i).toString());
                             }
-                            bundle.putInt("FieldCount", it.getUser().getLikeField().size());
-                            bundle.putInt("Follow", it.getUser().getFollow());
-                            bundle.putInt("Follower", it.getUser().getFollower());
-                            for (int i = 0; i < it.getUser().getMyPieces().size(); i++) {
-                                bundle.putString("File" + String.valueOf(i), it.getUser().getMyPieces().get(i).getFileUrl().get(0));
-                                bundle.putString("FileId" + String.valueOf(i), it.getUser().getMyPieces().get(i).getId());
+                            bundle.putInt("FieldCount", it.getMyInfo().getLikeField().size());
+                            bundle.putInt("Follow", it.getMyInfo().getFollow());
+                            bundle.putInt("Follower", it.getMyInfo().getFollowerCount());
+                            for (int i = 0; i < it.getMyInfo().getMyPieces().size(); i++) {
+                                bundle.putString("File" + String.valueOf(i), it.getMyInfo().getMyPieces().get(i).getFileUrl().get(0));
+                                bundle.putString("FileId" + String.valueOf(i), it.getMyInfo().getMyPieces().get(i).getId());
                             }
-                            Log.e("hhhhhere", String.valueOf(it.getUser().getMyPieces().size()));
-                            bundle.putInt("FileCount", it.getUser().getMyPieces().size());
-                            bundle.putString("Username", it.getUser().getUserName());
-                            bundle.putString("ProfileImg", it.getUser().getImageUrl());
-                            bundle.putBoolean("State", it.getUser().getState());
+                            bundle.putInt("FileCount", it.getMyInfo().getMyPieces().size());
+                            bundle.putString("Username", it.getMyInfo().getUserName());
+                            bundle.putString("ProfileImg", it.getMyInfo().getImageUrl());
+                            bundle.putString("Program", it.getMyInfo().getStudent().getDepartment());
 
                             //set profile img
-                            Picasso.get().load(it.getUser().getImageUrl()).into(nav_profile_img);
+                            Picasso.get().load(it.getMyInfo().getImageUrl()).into(nav_profile_img);
+                        },
+                        it -> {
+                            Log.e("fff@@@!!!", it.toString());
+                        }
+                );
 
-                            //if user is verified
-                            if (it.getUser().getState()) {
-                                //set btn_verification invisible, show program instead
-                                //set nav_myroom visible in the navigation menu
+        JsonObject input_v = new JsonObject();
+        input_v.addProperty("token", token2);
+        ApiService.INSTANCE.getMyInfo().myinfo(input_v)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            Log.e("sss!!!", it.toString());
+                            if (it.getMyInfo().getState()) {
                                 btn_verification.setVisibility(View.GONE);
                                 nav_header_program.setVisibility(View.VISIBLE);
+                                nav_header_program.setText(it.getMyInfo().getStudent().getDepartment());
                                 nav_myroom.setVisibility(View.VISIBLE);
                             }
                         },
                         it -> {
-                            Log.e("fff", it.toString());
+                            Log.e("fff!!!", it.toString());
                         }
                 );
 
@@ -142,10 +151,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MainFragment main = new MainFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, main)
-                        .commit();
+                replaceFragment(main);
             }
         });
 
@@ -155,10 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 MyRoomFragment myroom = new MyRoomFragment();
                 drawerLayout.closeDrawers();
                 myroom.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, myroom)
-                        .commit();
+                replaceFragment(myroom);
             }
         });
 
@@ -167,10 +170,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LikeFragment like = new LikeFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, like)
-                        .commit();
+                replaceFragment(like);
             }
         });
 
@@ -179,10 +179,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ShopFragment shop = new ShopFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, shop)
-                        .commit();
+                replaceFragment(shop);
             }
         });
 
@@ -205,10 +202,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ActivitisFragment activities = new ActivitisFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, activities)
-                        .commit();
+                replaceFragment(activities);
             }
         });
 
@@ -217,10 +211,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ActivitisFragment activities = new ActivitisFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, activities)
-                        .commit();
+                replaceFragment(activities);
             }
         });
 
@@ -229,10 +220,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SettingFragment settings = new SettingFragment();
                 drawerLayout.closeDrawers();
-                getSupportFragmentManager().beginTransaction()
-                        .remove(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))
-                        .add(R.id.nav_host_fragment, settings)
-                        .commit();
+                replaceFragment(settings);
             }
         });
 
@@ -262,10 +250,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //화면 전환
-    public void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment, fragment).commit();
+    public void replaceFragment(Fragment fr) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if(fragment != null)
+            getSupportFragmentManager().beginTransaction().remove(fragment).add(R.id.nav_host_fragment,fr).commit();
     }
 
     private void initViews() {

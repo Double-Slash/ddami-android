@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class MyLikeListItemDAO(
         @SerializedName("author")
-    val author: MyLikePieceAuthorDAO,
+        val author: MyLikePieceAuthorDAO,
         @SerializedName("fileUrl")
-    val fileUrl: List<String>,
+        val fileUrl: List<String>,
         @SerializedName("_id")
-    val id: String,
+        val id: String,
         @SerializedName("title")
-    val title: String
+        val title: String
 )

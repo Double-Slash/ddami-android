@@ -11,6 +11,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             android:name=".activity.login.LoginActivity">
 
@@ -33,7 +34,11 @@
 
         <activity android:name=".activity.WritingActivity" />
 
-        <activity android:name=".activity.DetailActivity" />
+
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".activity.DetailActivity" />
+
         <activity
             android:name=".activity.shop.ShopWritingActivity2_1"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -46,12 +51,30 @@
         <activity android:name=".activity.MainActivity">
         </activity>
 
-        <service
-            android:name=".activity.FCMActivity"
-            android:stopWithTask="false">
-        </service>
+        <activity android:name=".activity.login.SignUpActivity"></activity>
+        <activity android:name=".activity.login.SignUpSecondActivity"></activity>
+
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".activity.login.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".activity.verification.VerifiedActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity"/>
+        </activity>
+        <activity android:name=".activity.verification.VerificationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity"/>
@@ -65,9 +88,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id"/>
+
+        <service
+            android:name=".activity.FCMActivity"
+            android:stopWithTask="false">
+           <!-- <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="@string/default_notification_channel_id"/>-->
+        </service>
+
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

@@ -11,12 +11,12 @@
         android:name="com.doubleslash.ddamiapp.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+
     <fragment
         android:id="@+id/page_activities"
         android:name="com.doubleslash.ddamiapp.fragment.ActivitisFragment"
         android:label="fragment_activitis"
         tools:layout="@layout/fragment_activitis" />
-
     <fragment
         android:id="@+id/page_chat"
         android:name="com.doubleslash.ddamiapp.fragment.ChattingFragment"

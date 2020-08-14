@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
@@ -20,10 +21,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.login.CustomBaseView;
 import com.doubleslash.ddamiapp.adapter.MainAdapter;
 import com.doubleslash.ddamiapp.adapter.OnItemClickListener;
+import com.doubleslash.ddamiapp.adapter.OnItemProfileClickListener;
 import com.doubleslash.ddamiapp.model.MainItem;
 import com.doubleslash.ddamiapp.model.Piece;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
@@ -34,16 +37,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.rxkotlin.Observables;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
-public class MainFragment extends Fragment implements OnItemClickListener {
+public class MainFragment extends Fragment implements OnItemClickListener, OnItemProfileClickListener {
     MainItem item;
     TextView filter;
     TextView userName;
+    TextView sort_popularity;
+    TextView sort_recent;
+
     ImageView userThumbnail;
+
+    String token;
 
     private LinearLayout mChipContainer;
     private RecyclerView recyclerView;
+    private CompositeDisposable mAllDisposable;
+
+    private BehaviorSubject<String> mSortType;
+    private BehaviorSubject<String> mFilterType;
 
 
     public static MainFragment newInstance() {
@@ -55,7 +70,8 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String token = getActivity().getIntent().getStringExtra("token");
+        token = getActivity().getIntent().getStringExtra("token");
+
         getUserInfo(token);
 //
 //        getParentFragmentManager()setFragmentResultListener("key", this, new FragmentResultListener() {
@@ -88,6 +104,10 @@ public class MainFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//
+//
+//        Bundle bundle = this.getArguments();
+//        String str = bundle.getString("filter");
 
         FragmentActivity activity = getActivity();
         if (activity != null) {
@@ -95,7 +115,8 @@ public class MainFragment extends Fragment implements OnItemClickListener {
         }
 
         initViews(view);
-        pieceSearch();
+       // pieceSearch();
+        initRx();
 
         final List<String> filters = new ArrayList<>();
         filters.add("공예 디자인");
@@ -112,16 +133,48 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
         userThumbnail.setBackground(new ShapeDrawable(new OvalShape()));
         userThumbnail.setClipToOutline(true);
+
+        sort_popularity = view.findViewById(R.id.filter_popularity);
+        sort_recent = view.findViewById(R.id.filter_recent);
+
+        filter = view.findViewById(R.id.tv_filter);
+
+        mSortType = BehaviorSubject.createDefault("L");
+        mFilterType = BehaviorSubject.createDefault("");
+
+        mAllDisposable = new CompositeDisposable();
+
+        sort_popularity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSortType.onNext("L");
+            }
+        });
+
+        sort_recent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSortType.onNext("V");
+            }
+        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFilterType.onNext("sample19");
+            }
+        });
     }
 
     @SuppressLint("CheckResult")
-    private void pieceSearch() {
+    private void pieceSearch(String sortType) {
 
         ArrayList<MainItem> items = new ArrayList<>();
 
         JsonObject inputJson = new JsonObject();
 
         inputJson.addProperty("list", 0);
+        inputJson.addProperty("sortingBy", sortType);
 
         ApiService.INSTANCE.getHomeService().pieceSearch(inputJson)
                 .subscribeOn(Schedulers.io())
@@ -129,14 +182,15 @@ public class MainFragment extends Fragment implements OnItemClickListener {
                 .subscribe(it -> {
                     for (int i = 0; i < it.getPieces().size(); i++) {
                         Piece piece = it.getPieces().get(i);
-                        items.add(new MainItem(piece.getFileUrl().get(0),
+                        items.add(new MainItem(piece.getId(),
+                                piece.getFileUrl().get(0),
                                 piece.getTitle(),
                                 piece.getAuthor().getUserId(),
                                 piece.getAuthor().getImageUrl(),
                                 piece.getViews(),
                                 piece.getLikeCount()));
                     }
-                    recyclerView.setAdapter(new MainAdapter(items,this::onHomeItemClicked));
+                    recyclerView.setAdapter(new MainAdapter(items, this::onHomeViewItemClicked, this::onHomeProfileItemClicked));
                 }, it -> {
                     Log.e("Failed", it.toString());
                 });
@@ -173,7 +227,39 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
 
     @Override
-    public void onHomeItemClicked(MainItem item) {
-        Toast.makeText(getContext(),item.getNickname(),Toast.LENGTH_SHORT).show();
+    public void onHomeViewItemClicked(MainItem item) {
+        Toast.makeText(getContext(), item.getNickname(), Toast.LENGTH_SHORT).show();
+
+        Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
+        detailIntent.putExtra("token", token);
+        detailIntent.putExtra("FileId", item.getPieceId());
+        startActivity(detailIntent);
+
+    }
+
+    @Override
+    public void onHomeProfileItemClicked(MainItem item) {
+        Toast.makeText(getContext(), item.getNickname(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void initRx() {
+        mAllDisposable.add(Observables.INSTANCE.combineLatest(mSortType, mFilterType)
+                .doOnNext(it -> {
+                    if (it.getFirst() == null || it.getSecond() == null) {
+                        mSortType.onNext("L");
+                        mFilterType.onNext("");
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .distinctUntilChanged()
+                .doOnNext(
+                        it -> {
+                            pieceSearch(it.getFirst());
+                        }
+
+                )
+                .subscribe()
+        );
     }
 }
