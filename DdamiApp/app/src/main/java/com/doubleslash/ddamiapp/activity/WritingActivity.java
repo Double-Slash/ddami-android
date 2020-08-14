@@ -225,7 +225,8 @@ public class WritingActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        String token = intent.getExtras().getString("token");
+        String token = intent.getStringExtra("token");
+        System.out.println(token+"vvvvvvvvvvvvvvvvvvvvvvvvv");
         RequestBody content = RequestBody.create(MediaType.parse("text/plain"),e_writingContent.getText().toString());
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"), e_writingTitle.getText().toString());
         if(e_writingTitle.getText().toString().equals(null) || e_writingTitle.getText().toString().equals(null) ){

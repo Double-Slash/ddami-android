@@ -62,10 +62,11 @@ class LoginActivity : AppCompatActivity() {
                 .subscribe({
                     Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    val intent2 = Intent(this,WritingActivity::class.java)
+//                    val intent2 = Intent(this,WritingActivity::class.java)
                     intent.putExtra("token", it.token)
                     intent.putExtra("id", input.get("userId").toString())
-                    intent2.putExtra("token", it.token)
+
+//                    intent2.putExtra("token", it.token)
                     startActivity(intent)
 
 //                    val detailintent = Intent(this@LoginActivity, DetailActivity::class.java)
@@ -76,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                     val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
                     bundle.putString("token", it.token) // key , value
                     fragment.setArguments(bundle)
-                    startActivity(intent2)
                     finish()
                 }, {
                     Toast.makeText(applicationContext, "$it", Toast.LENGTH_SHORT).show()

@@ -69,6 +69,11 @@ object ApiService {
     val uploadPieceService : UploadPieceApi by lazy {
         retrofit.create(UploadPieceApi::class.java)
     }
-
+    val GetItemApi : GetItemApI by lazy {
+        retrofit.create(GetItemApi::class.java)
+    }
+    val GetItemTFApi : GetItemTFApi by lazy {
+        retrofit.create(GetItemTFApi::class.java)
+    }
 }
 

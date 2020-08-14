@@ -39,16 +39,16 @@
 
     <Button
         android:id="@+id/btnReg"
-        android:layout_width="54dp"
-        android:layout_height="32dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:background="@drawable/shop_custom_radius_gray"
         android:text="등록"
         android:textColor="#FFFFFF"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="14dp"
         android:layout_marginRight="16dp"
-        android:textSize="16dp" />
+        android:textSize="13dp" />
 
 
 </LinearLayout>

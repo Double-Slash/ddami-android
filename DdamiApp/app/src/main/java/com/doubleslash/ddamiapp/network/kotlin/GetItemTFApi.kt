@@ -1,0 +1,12 @@
+package com.doubleslash.ddamiapp.network.kotlin
+
+import com.doubleslash.ddamiapp.model.DetailPieceDAO
+import io.reactivex.Single
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+
+interface GetItemTFApi {
+    @POST("/user/like/products/{FileId}")
+    fun getItemService(@Header("x-access-token") token:String, @Path("FileId") FileId: String): Single<DetailPieceDAO>
+}

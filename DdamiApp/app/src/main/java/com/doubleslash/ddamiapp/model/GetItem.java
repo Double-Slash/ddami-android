@@ -67,7 +67,7 @@ public class GetItem {
         this.getItemArrayList = getItemArrayList;
     }
 
-    public GetItem(String image, String piece_name, String user_univ, String piece_price, String piece_date, String deal_state
+    public GetItem(String image, String piece_name, String user_univ
     ) {
         this.image = image;
         this.piece_name = piece_name;

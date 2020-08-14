@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/writingView"
+
     android:orientation="vertical">
 <!--    <androidx.fragment.app.FragmentContainerView-->
 <!--        android:id="@+id/filter_fragment"-->
@@ -30,9 +31,16 @@
             android:id="@+id/writingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/setting_layout"
+
             android:orientation="vertical"
             tools:context=".WritingActivity">
-
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_below="@+id/filter_imageBtn"
+                android:background="#F0F0F6" />
             <EditText
                 android:id="@+id/writingTitle"
                 android:layout_width="match_parent"
@@ -71,26 +79,26 @@
                 <RadioGroup
                     android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/rg_btn1"
                         android:layout_width="67dp"
-                        android:layout_height="14dp"
+                        android:layout_height="20dp"
                         android:layout_weight="1"
                         android:text="커스텀목록1" />
 
                     <RadioButton
                         android:id="@+id/rg_btn2"
                         android:layout_width="67dp"
-                        android:layout_height="14dp"
+                        android:layout_height="20dp"
                         android:layout_weight="1"
                         android:text="커스텀목록2" />
                     <RadioButton
                         android:id="@+id/rg_btn3"
                         android:layout_width="67dp"
-                        android:layout_height="14dp"
+                        android:layout_height="20dp"
                         android:layout_weight="1"
                         android:text="커스텀목록2" />
                 </RadioGroup>
@@ -100,7 +108,7 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                android:layout_width="27dp"
+                android:layout_width="30dp"
                 android:layout_height="17dp"
                 android:text="분야"
                 android:textStyle="bold"
@@ -108,10 +116,10 @@
                 android:layout_marginLeft="16dp"
                 />
                 <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_input_add"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
                     android:layout_marginLeft="270dp"
+                    android:background="@drawable/ic_btn_add"
                     android:id="@+id/add_filter"
                     android:onClick="FilterAdd"
                     />
@@ -125,8 +133,7 @@
                     android:id="@+id/mainFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:name="com.doubleslash.ddamiapp.fragment.FilterFragment"/>
-
+                        android:name="com.doubleslash.ddamiapp.fragment.FilterFragment"/>
                 </FrameLayout>
             </LinearLayout>
             <LinearLayout
@@ -147,16 +154,19 @@
 
                 <Button
                     android:id="@+id/btnCamera"
-                    android:layout_width="18.85dp"
+                    android:layout_width="20dp"
                     android:layout_height="16.97dp"
-                    android:layout_marginRight="25.4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/ic_photo_camera"
                     />
 
                 <Button
                     android:id="@+id/btnGallery"
-                    android:layout_width="10.41dp"
-                    android:layout_height="20.83dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/ic_attach_file" />
             </LinearLayout>
         </LinearLayout>

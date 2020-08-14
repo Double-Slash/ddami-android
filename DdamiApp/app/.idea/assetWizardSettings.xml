@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_img_trash" />
-                            <entry key="sourceFile" value="C:\Users\Hello\Downloads\img_trash.svg" />
+                            <entry key="outputName" value="ic_btn_add" />
+                            <entry key="sourceFile" value="C:\Users\Hello\Downloads\btn_add.svg" />
                           </map>
                         </option>
                       </PersistentState>

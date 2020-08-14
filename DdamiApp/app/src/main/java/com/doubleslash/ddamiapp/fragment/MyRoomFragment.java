@@ -110,6 +110,8 @@ public class MyRoomFragment extends Fragment {
         followerNum.setText(String.valueOf(input_follower));
         followingNum.setText(String.valueOf(input_follow));
         Picasso.get().load(input_profile_img).into(profileImg);
+        Bundle bundle = this.getArguments();
+        String token = bundle.getString("token");
 
         //Create tabs on TabLayout
         TabLayout.Tab tab = null;
@@ -221,8 +223,10 @@ public class MyRoomFragment extends Fragment {
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), WritingActivity.class));
-
+                System.out.println(token+ "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+                Intent intent = new Intent(getActivity(), WritingActivity.class);
+                intent.putExtra("token",token);
+                startActivity(intent);
             }
         });
 

@@ -728,6 +728,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.verification.VerificationActivity;
 import com.doubleslash.ddamiapp.fragment.ActivitisFragment;
+import com.doubleslash.ddamiapp.fragment.GetItemFragment;
 import com.doubleslash.ddamiapp.fragment.LikeFragment;
 import com.doubleslash.ddamiapp.fragment.MainFragment;
 import com.doubleslash.ddamiapp.fragment.MyRoomFragment;
@@ -762,7 +763,7 @@ public class MainActivity extends AppCompatActivity {
     TextView nav_header_program;
     ImageView nav_profile_img;
     Fragment fragment;
-
+    String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -770,7 +771,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         String id = getIntent().getStringExtra("id");
-        String token = getIntent().getStringExtra("token");
+        token = getIntent().getStringExtra("token");
 
         Toast.makeText(this, "id = " + id + "token = " + token, Toast.LENGTH_LONG).show();
 
@@ -865,9 +866,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MyRoomFragment myroom = new MyRoomFragment();
+                MyRoomFragment myroom2 = new MyRoomFragment();
                 drawerLayout.closeDrawers();
                 myroom.setArguments(bundle);
+                System.out.println(token);
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("token",token);
+                myroom2.setArguments(bundle2);
                 replaceFragment(myroom);
+
             }
         });
 
@@ -879,7 +886,14 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(like);
             }
         });
-
+        nav_shop_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetItemFragment getItem = new GetItemFragment();
+                drawerLayout.closeDrawers();
+                replaceFragment(getItem);
+            }
+        });
         nav_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
