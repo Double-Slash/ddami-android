@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FFFFFF"
+tools:context=".activity.shop.ShopNormalActivity">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ddami_logo" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="따미샵 작품 등록"
+        android:textSize="24sp"
+        android:fontFamily="@font/nanum_square_bold"
+        android:textColor="#322FA0"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nanum_square_regular"
+        android:textColor="#4D4D4D"
+        android:lineSpacingExtra="10dp"
+        android:text="글 작성을 하기 위해서는\n미대생 인증이 필요합니다 :) "/>
+
+    <LinearLayout
+        android:layout_width="190dp"
+        android:layout_height="91dp"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/shop_custom_normal_radius_blue">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GO"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/nanum_square_extrabold"
+            android:textAlignment="center"
+            android:textSize="27sp"/>
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="미대생 인증하러 가기"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/nanum_square_regular"
+            android:textSize="13sp"
+            android:textAlignment="center"/>
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

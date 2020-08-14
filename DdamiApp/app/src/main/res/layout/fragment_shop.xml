@@ -28,17 +28,21 @@
             android:id="@+id/layout_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="#707070">
+            app:tabIndicatorColor="#322FA0"
+            app:tabSelectedTextColor="#322FA0"
+            app:tabTextAppearance="@style/shop_tab_font_selected">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/shop_tab1" />
+                android:text="@string/shop_tab1"
+                android:id="@+id/tab1"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/shop_tab2" />
+                android:text="@string/shop_tab2"
+                android:id="@+id/tab2"/>
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -46,7 +50,6 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
     </LinearLayout>
 

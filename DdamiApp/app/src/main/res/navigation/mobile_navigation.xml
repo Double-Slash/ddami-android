@@ -5,45 +5,50 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/page_main">
 
-
     <fragment
         android:id="@+id/page_main"
-        android:name="com.doubleslash.ddamiapp.fragment.MainFragment"
-        android:label="fragment_main"
+        android:name="com.doubleslash.ddamiapp.fragment.MainFragmentKotlin"
+        android:label="따미마을"
         tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/page_activities"
         android:name="com.doubleslash.ddamiapp.fragment.ActivitisFragment"
-        android:label="fragment_activitis"
+        android:label="대외활동"
         tools:layout="@layout/fragment_activitis" />
     <fragment
         android:id="@+id/page_chat"
         android:name="com.doubleslash.ddamiapp.fragment.ChattingFragment"
-        android:label="fragment_chatting"
+        android:label="채팅"
         tools:layout="@layout/fragment_chatting" />
     <fragment
         android:id="@+id/page_shop"
         android:name="com.doubleslash.ddamiapp.fragment.shop.ShopFragment"
-        android:label="fragment_shop"
+        android:label="따미샵"
         tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/page_myroom"
         android:name="com.doubleslash.ddamiapp.fragment.MyRoomFragment"
-        android:label="fragment_my_room"
+        android:label="내 작업실"
         tools:layout="@layout/fragment_my_room" />
 
     <fragment
         android:id="@+id/page_like"
         android:name="com.doubleslash.ddamiapp.fragment.LikeFragment"
-        android:label="fragment_like_list"
+        android:label="좋아요한 작품"
         tools:layout="@layout/fragment_like_list"/>
 
     <fragment
         android:id="@+id/page_verfication"
         android:name="com.doubleslash.ddamiapp.fragment.VerificationFragment"
-        android:label="fragment_verification"
+        android:label="미대생 인증"
         tools:layout="@layout/fragment_verification"/>
+
+    <dialog
+        android:id="@+id/page_filter"
+        android:name="com.doubleslash.ddamiapp.fragment.FilterFragmentKotlin"
+        android:label="필터"
+        tools:layout="@layout/fragment_filter"/>
 
 </navigation>

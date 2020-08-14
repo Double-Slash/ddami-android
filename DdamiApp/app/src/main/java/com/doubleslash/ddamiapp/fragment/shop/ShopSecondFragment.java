@@ -1,64 +1,114 @@
 package com.doubleslash.ddamiapp.fragment.shop;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.doubleslash.ddamiapp.R;
 
+import com.doubleslash.ddamiapp.activity.shop.ShopNormalActivity;
+import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity1_1;
 import com.doubleslash.ddamiapp.activity.shop.ShopWritingActivity2_1;
+import com.doubleslash.ddamiapp.adapter.OnShopItemClickListener;
+import com.doubleslash.ddamiapp.adapter.OnShopMaterialItemClickListener;
+import com.doubleslash.ddamiapp.adapter.ShopMaterialAdapter;
+import com.doubleslash.ddamiapp.adapter.ShopWorkAdapter;
+import com.doubleslash.ddamiapp.model.Product;
+import com.doubleslash.ddamiapp.model.ProductX;
+import com.doubleslash.ddamiapp.model.ShopMaterialItem;
+import com.doubleslash.ddamiapp.model.ShopWorkItem;
+import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonObject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShopSecondFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ShopSecondFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ShopSecondFragment() {
-        // Required empty public constructor
-    }
+public class ShopSecondFragment extends Fragment implements OnShopMaterialItemClickListener {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopSecondFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShopSecondFragment newInstance(String param1, String param2) {
-        ShopSecondFragment fragment = new ShopSecondFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    // 따미샵-작품샵 배열
+    ArrayList<ShopMaterialItem> mData=null;
+    RecyclerView.Adapter mAdapter=null;
+    RecyclerView recyclerView=null;
+
+    Context context;
+    static ShopMaterialItem shopMaterialItem;
+
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = view.findViewById(R.id.shop_second_recyclerview);
+        mData = new ArrayList<ShopMaterialItem>();
+
+        //ShopWorkItem work1 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        //ShopWorkItem work2 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        //ShopWorkItem work3 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        //ShopWorkItem work4 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        //ShopWorkItem work5 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        //ShopWorkItem work6 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+
+        //mData.add(work1);
+        //mData.add(work2);
+        //mData.add(work3);
+        //mData.add(work4);
+        //mData.add(work5);
+        //mData.add(work6);
+
+
+        // 따미샵 - 작품샵 - 서버연결
+        JsonObject input = new JsonObject();
+        ApiService.INSTANCE.getShopMaterialService().shopMaterial(input)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            //Toast.makeText(context, "서버 연결 성공"+it.getProducts().get(0).get_id(), Toast.LENGTH_SHORT).show();
+                            Log.e("서버 연결 확인",it.getProducts().get(0).getFileUrl().toString());
+
+                            for(int i = 0; i<it.getProducts().size(); i++){
+                                ProductX productx = it.getProducts().get(i);
+                                String tag="판매";
+                                if(productx.getPrice()==0){
+                                    tag="나눔";
+                                }
+                                mData.add(new ShopMaterialItem(productx.getFileUrl(), tag, productx.getTitle(), productx.getLocationName(), productx.getPrice(), productx.getViews(), productx.getLikeCount()));
+                            }
+
+                            mAdapter = new ShopMaterialAdapter(mData,this::onShopMaterialClicked);
+                            recyclerView.setAdapter(mAdapter);
+
+                            GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
+                            recyclerView.setLayoutManager(gridLayoutManager);
+
+                        }, it -> {
+                            Toast.makeText(context, "서버 연결 실패", Toast.LENGTH_SHORT).show();
+
+                        });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     // 따미샵-재료: 플로팅버튼 이벤트처리
@@ -73,7 +123,12 @@ public class ShopSecondFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+                //getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+
+                String token=getActivity().getIntent().getStringExtra("token");
+
+                // 미대생 인증 확인
+                getUserInfo(token);
             }
         });
 
@@ -81,5 +136,44 @@ public class ShopSecondFragment extends Fragment {
 
     }
 
+    @SuppressLint("CheckResult")
+    private void getUserInfo(String token) {
+        JsonObject inputJson = new JsonObject();
 
+        inputJson.addProperty("token", token);
+        ApiService.INSTANCE.getHomeService().userAuth(inputJson).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            ApiService.INSTANCE.getShopUser().shopUserAuth(it.getMyInfo().getId())
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            subs -> {
+                                                //if(!subs.getUser().getState()){
+                                                //getActivity().startActivity(new Intent(getActivity(), ShopNormalActivity.class));
+                                                //}
+                                                // if(subs.getUser().getState()){
+                                                Intent intent=new Intent(getActivity(), ShopWritingActivity2_1.class);
+                                                intent.putExtra("token", token);
+                                                startActivity(intent);
+                                                //getActivity().startActivity(new Intent(getActivity(), ShopWritingActivity2_1.class));
+                                                //}
+                                            },
+                                            subs -> {
+                                                Log.e("미대생 인증 확인 오류", it.toString());
+                                            }
+                                    );
+                        }, it -> {
+                            Log.e("failed", it.toString());
+                        }
+                );
+    }
+
+
+    @Override
+    public void onShopMaterialClicked(ShopMaterialItem shopMaterialItem) {
+        Toast.makeText(getContext(), shopMaterialItem.getmMaterial(), Toast.LENGTH_LONG).show();
+
+    }
 }

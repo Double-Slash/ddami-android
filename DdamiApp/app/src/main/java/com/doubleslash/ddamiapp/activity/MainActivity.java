@@ -23,7 +23,7 @@ import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.verification.VerificationActivity;
 import com.doubleslash.ddamiapp.fragment.ActivitisFragment;
 import com.doubleslash.ddamiapp.fragment.LikeFragment;
-import com.doubleslash.ddamiapp.fragment.MainFragment;
+import com.doubleslash.ddamiapp.fragment.MainFragmentKotlin;
 import com.doubleslash.ddamiapp.fragment.MyRoomFragment;
 import com.doubleslash.ddamiapp.fragment.SettingFragment;
 import com.doubleslash.ddamiapp.fragment.shop.ShopFragment;
@@ -34,7 +34,6 @@ import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         nav_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainFragment main = new MainFragment();
+                MainFragmentKotlin main = new MainFragmentKotlin();
                 drawerLayout.closeDrawers();
                 replaceFragment(main);
             }
@@ -231,11 +230,11 @@ public class MainActivity extends AppCompatActivity {
 //        Bundle bundle = new Bundle();
 //        bundle.putString("id", id);
 //
-//        fragment = new MainFragment();
+//        fragment = new MainFragmentKotlin();
 //        fragment.setArguments(bundle);
 
 
-//        Intent tokenIntent = new Intent(this, MainFragment.class);
+//        Intent tokenIntent = new Intent(this, MainFragmentKotlin.class);
 //        tokenIntent.putExtra("token",token);
 //        startActivity(tokenIntent);
 
