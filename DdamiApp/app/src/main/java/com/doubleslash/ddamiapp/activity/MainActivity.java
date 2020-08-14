@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Button btn_verification;
     TextView nav_main, nav_myroom, nav_like, nav_shop, nav_purchase, nav_shop_like, nav_activities, nav_interested_activities, nav_settings;
-    TextView nav_header_program;
+    TextView nav_header_program, nav_tv_name;
     ImageView nav_profile_img;
     Fragment fragment;
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         nav_settings = (TextView) findViewById(R.id.nav_settings);
         nav_header_program = (TextView) findViewById(R.id.nav_header_program);
         nav_profile_img = (ImageView) findViewById(R.id.nav_profile_img);
-
+        nav_tv_name = (TextView) findViewById(R.id.textView_name);
         Bundle bundle = new Bundle();
 
         JsonObject input = new JsonObject();
@@ -109,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
                             bundle.putString("ProfileImg", it.getMyInfo().getImageUrl());
                             bundle.putString("Program", it.getMyInfo().getStudent().getDepartment());
 
-                            //set profile img
+                            //set profile nav_profile
                             Picasso.get().load(it.getMyInfo().getImageUrl()).into(nav_profile_img);
+                            nav_tv_name.setText(it.getMyInfo().getUserName());
+
                         },
                         it -> {
                             Log.e("fff@@@!!!", it.toString());
@@ -251,9 +254,8 @@ public class MainActivity extends AppCompatActivity {
 
     //화면 전환
     public void replaceFragment(Fragment fr) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        if(fragment != null)
-            getSupportFragmentManager().beginTransaction().remove(fragment).add(R.id.nav_host_fragment,fr).commit();
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, fr).addToBackStack("a").commit();
     }
 
     private void initViews() {

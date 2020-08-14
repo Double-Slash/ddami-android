@@ -164,7 +164,7 @@ public class MyRoomFragment extends Fragment {
         };
 
         recyclerView.addOnItemTouchListener(onItemTouchListener);
-        
+
         //FloatingActionButton onClick event
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override

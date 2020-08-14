@@ -45,7 +45,7 @@
         android:text="미대생 인증"
         android:textSize="12dp"
         android:background="@drawable/verify_btn"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="#fff"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_name"
