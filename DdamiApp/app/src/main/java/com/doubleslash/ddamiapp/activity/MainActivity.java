@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     TextView nav_header_program, nav_tv_name;
     ImageView nav_profile_img;
     Fragment fragment;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         String id = getIntent().getStringExtra("id");
-        String token = getIntent().getStringExtra("token");
+        token = getIntent().getStringExtra("token");
 
         Toast.makeText(this, "id = " + id + "token = " + token, Toast.LENGTH_LONG).show();
 
@@ -85,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
 
         JsonObject input = new JsonObject();
-        String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
-        input.addProperty("token", token2);
+        input.addProperty("token", token);
         ApiService.INSTANCE.getMyroomUser().myroom(input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         it -> {
                             Log.e("sss@@@!!!", it.toString());
                             bundle.putBoolean("Myroom", true);
-                            bundle.putString("Id", it.getMyInfo().getUserId());
+                            bundle.putString("UserId", it.getMyInfo().getUserId());
                             for (int i = 0; i < it.getMyInfo().getLikeField().size(); i++) {
                                 bundle.putString("LikeField" + String.valueOf(i), it.getMyInfo().getLikeField().get(i).toString());
                             }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 );
 
         JsonObject input_v = new JsonObject();
-        input_v.addProperty("token", token2);
+        input_v.addProperty("token", token);
         ApiService.INSTANCE.getMyInfo().myinfo(input_v)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MyRoomFragment myroom = new MyRoomFragment();
                 drawerLayout.closeDrawers();
+                bundle.putString("token", token);
                 myroom.setArguments(bundle);
                 replaceFragment(myroom);
             }
@@ -321,6 +322,8 @@ public class MainActivity extends AppCompatActivity {
 
     //open verifiedActivity
     private void openNewActivity() {
-        startActivity(new Intent(getApplicationContext(), VerificationActivity.class));
+        Intent intent = new Intent(getApplicationContext(), VerificationActivity.class);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 }

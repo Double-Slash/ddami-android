@@ -24,58 +24,68 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
-                onShowKeyboard = { keyboardHeight ->
-                    sv_login.run {
-                        smoothScrollTo(scrollX, scrollY + keyboardHeight)
-                    }
-                })
 
-        btn_sign_up.setOnClickListener {
-            val id = et_id.text.toString()
-            val pw = et_name.text.toString()
-            val inputJson = JsonObject()
-
-            inputJson.addProperty("userId", id)
-            inputJson.addProperty("userPassword", pw)
-
-            login(inputJson)
-        }
-
-        tv_signUp.setOnClickListener {
-            val signUpIntent = Intent(this@LoginActivity, SignUpActivity::class.java)
-            startActivity(signUpIntent)
-        }
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
-    @SuppressLint("CheckResult")
-    fun login(input: JsonObject) {
-        ApiService.loginService.login(input)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra("token", it.token)
-                    intent.putExtra("id", input.get("userId").toString())
-                    startActivity(intent)
-                    finish()
-                }, {
-                    Toast.makeText(applicationContext, "$it", Toast.LENGTH_SHORT).show()
-                    Log.e("영환", it.toString())
-                })
-    }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            if (System.currentTimeMillis() - backTime < 2000) {
-                finish()
-            }
-            Toast.makeText(this, "종료하시려면 다시한번 눌러주세요.", Toast.LENGTH_SHORT).show()
-            backTime = System.currentTimeMillis()
-        } else {
-            supportFragmentManager.popBackStack()
-        }
-    }
+
+//        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//
+//        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
+//                onShowKeyboard = { keyboardHeight ->
+//                    sv_login.run {
+//                        smoothScrollTo(scrollX, scrollY + keyboardHeight)
+//                    }
+//                })
+//
+//        btn_sign_up.setOnClickListener {
+//            val id = et_id.text.toString()
+//            val pw = et_name.text.toString()
+//            val inputJson = JsonObject()
+//
+//            inputJson.addProperty("userId", id)
+//            inputJson.addProperty("userPassword", pw)
+//
+//            login(inputJson)
+//        }
+//
+//        tv_signUp.setOnClickListener {
+//            val signUpIntent = Intent(this@LoginActivity, SignUpActivity::class.java)
+//            startActivity(signUpIntent)
+//        }
+//    }
+//
+//    @SuppressLint("CheckResult")
+//    fun login(input: JsonObject) {
+//        ApiService.loginService.login(input)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                    intent.putExtra("token", it.token)
+//                    intent.putExtra("id", input.get("userId").toString())
+//                    startActivity(intent)
+//                    finish()
+//                }, {
+//                    Toast.makeText(applicationContext, "$it", Toast.LENGTH_SHORT).show()
+//                    Log.e("영환", it.toString())
+//                })
+//    }
+//
+//    override fun onBackPressed() {
+//        if (supportFragmentManager.backStackEntryCount == 0) {
+//            if (System.currentTimeMillis() - backTime < 2000) {
+//                finish()
+//            }
+//            Toast.makeText(this, "종료하시려면 다시한번 눌러주세요.", Toast.LENGTH_SHORT).show()
+//            backTime = System.currentTimeMillis()
+//        } else {
+//            supportFragmentManager.popBackStack()
+//        }
+//    }
 
 }

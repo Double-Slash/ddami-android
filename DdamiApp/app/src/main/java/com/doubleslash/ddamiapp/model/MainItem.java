@@ -8,8 +8,9 @@ public class MainItem {
     private String thumbnail;
     private int viewCount;
     private int likeCount;
+    private String authId;
 
-    public MainItem(String pieceId, String image, String title, String nickname, String thumbnail, int viewCount, int likeCount) {
+    public MainItem(String pieceId, String image, String title, String nickname, String thumbnail, int viewCount, int likeCount, String authId) {
         this.image = image;
         this.title = title;
         this.nickname = nickname;
@@ -17,6 +18,7 @@ public class MainItem {
         this.viewCount = viewCount;
         this.likeCount = likeCount;
         this.pieceId = pieceId;
+        this.authId = authId;
     }
 
     public String getPieceId() {
@@ -73,5 +75,13 @@ public class MainItem {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
     }
 }

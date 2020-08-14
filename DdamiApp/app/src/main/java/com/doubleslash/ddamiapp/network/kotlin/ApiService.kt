@@ -42,6 +42,10 @@ object ApiService {
         retrofit.create(UserApi::class.java)
     }
 
+    val userRoomService : UserRoomApi by lazy {
+        retrofit.create(UserRoomApi::class.java)
+    }
+
     val signUpService : SignUpApi by lazy {
         retrofit.create(SignUpApi::class.java)
     }
@@ -57,5 +61,4 @@ object ApiService {
     val followService : FollowApi by lazy {
         retrofit.create(FollowApi::class.java)
     }
-
 }
