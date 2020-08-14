@@ -70,10 +70,9 @@ public class MyRoomFragment extends Fragment {
         if (!getArguments().getBoolean("Myroom")) {
             btn_fab.setVisibility(View.GONE);
             btn_modify.setVisibility(View.GONE);
-//            btn_follow.setVisibility(View.VISIBLE);
+            btn_follow.setVisibility(View.VISIBLE);
         }
 
-        btn_follow.setVisibility(View.VISIBLE);
         //get values from bundle
         String input_id = getArguments().getString("Id");
         int input_field_size = getArguments().getInt("FieldCount");
@@ -179,20 +178,27 @@ public class MyRoomFragment extends Fragment {
         btn_follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JsonObject input = new JsonObject();
-                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
-                input.addProperty("token", token);
-                ApiService.INSTANCE.getFollowService().follow("5f34f2f999fef948e0f8b10b",input)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                it -> {
-                                    Log.e("sss!!!", it.toString());
-                                },
-                                it -> {
-                                    Log.e("fff!!!", it.toString());
-                                }
-                        );
+//                JsonObject input = new JsonObject();
+//                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
+//                input.addProperty("token", token);
+//                ApiService.INSTANCE.getFollowService().follow("5f34f2f999fef948e0f8b10b",input)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(
+//                                it -> {
+//                                    Log.e("sss!!!", it.toString());
+//                                },
+//                                it -> {
+//                                    Log.e("fff!!!", it.toString());
+//                                }
+//                        );
+                if(btn_follow.getText().toString().equals("+ Follow")) {
+                    btn_follow.setText("Unfollow");
+                    followerNum.setText(Integer.valueOf(followerNum.getText().toString()) + 1);
+                } else if(btn_follow.getText().toString().equals("Unfollow")) {
+                    btn_follow.setText("+ Follow");
+                    followerNum.setText(Integer.valueOf(followerNum.getText().toString()) - 1);
+                }
             }
         });
         return view;

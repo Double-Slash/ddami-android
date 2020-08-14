@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.DetailActivity;
+//import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.login.CustomBaseView;
 import com.doubleslash.ddamiapp.adapter.MainAdapter;
