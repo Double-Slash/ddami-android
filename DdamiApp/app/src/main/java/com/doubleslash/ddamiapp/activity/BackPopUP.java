@@ -38,10 +38,9 @@ public class BackPopUP extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.cancelWriting:
-                dismiss();
-            case R.id.noCancel:
                 ((WritingActivity)context).finish();
-                break;
+            case R.id.noCancel:
+                this.dismiss();
         }
     }
 

@@ -120,6 +120,8 @@ public class WritingActivity extends AppCompatActivity {
                 ImgUpload();
             }
         });
+        fileUri = new ArrayList<>();
+
         //0이 거래 대기
         //1이 거래중
         //-1 거래완료
@@ -151,7 +153,6 @@ public class WritingActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        fileUri = new ArrayList<>();
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_ALBUM) {
             Uri photoUri = data.getData();
@@ -245,7 +246,6 @@ public class WritingActivity extends AppCompatActivity {
         return image;
     }
     public void ImgUpload(){
-
         e_writingContent = findViewById(R.id.writingContent);
         e_writingTitle = findViewById(R.id.writingTitle);
         ArrayList<MultipartBody.Part> imgList = new ArrayList<>();
@@ -352,6 +352,7 @@ public class WritingActivity extends AppCompatActivity {
     }
 
     public void LoadingWriting(View view){
+
         checkSave();
     }
     @Override

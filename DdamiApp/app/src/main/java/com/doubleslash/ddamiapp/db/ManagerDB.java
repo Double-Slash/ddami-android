@@ -24,7 +24,7 @@ public class ManagerDB extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private final String CREATE_DOCUMENT_TABLE = "CREATE TABLE IF NOT EXISTS Document(title TEXT, content TEXT)";
     private final String CREATE_IMG_TABLE = "CREATE TABLE IF NOT EXISTS Img(id integer primary key autoincrement,img BLOB)";
-    private final String CREATE_FILE_URI = "CREATE TABLE IF NOT EXISTS FileUri(id integer primary key autoincrement, pileUri TEXT)";
+    private final String CREATE_FILE_URI = "CREATE TABLE IF NOT EXISTS FileUri(id integer primary key autoincrement, fileUri TEXT)";
     public static Context con;
 
 
@@ -104,23 +104,10 @@ public class ManagerDB extends SQLiteOpenHelper {
         database.insert( "Img" , null, cv );
     }
     public void addFileUri( String fileUri) throws SQLiteException {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("fileUri", fileUri);
-        database.insert( "FileUri" , null, cv );
+        db = getWritableDatabase();
+        db.execSQL("INSERT INTO FileUri VALUES(null,'"+fileUri+"')");
     }
-    public void addEntryCopy( byte[] image) throws SQLiteException {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("img", image);
-        database.insert( "Img" , null, cv );
-    }
-    public void addFileUriCopy( String fileUri) throws SQLiteException {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("fileUri", fileUri);
-        database.insert( "FileUri" , null, cv );
-    }
+
     public int DocumentCountDB(){
         int documentCount = 0;
         db = getWritableDatabase();
