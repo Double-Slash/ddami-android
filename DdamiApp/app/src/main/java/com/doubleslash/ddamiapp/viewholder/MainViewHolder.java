@@ -5,13 +5,13 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.adapter.LikeAdapter;
 import com.doubleslash.ddamiapp.adapter.OnItemClickListener;
 import com.doubleslash.ddamiapp.model.MainItem;
 import com.squareup.picasso.Picasso;
@@ -28,9 +28,10 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
     private ImageView userThumbnail = itemView.findViewById(R.id.author_thumbnail);
     private TextView view = itemView.findViewById(R.id.tv_view);
     private TextView like = itemView.findViewById(R.id.tv_like);
+    private LinearLayout profile = itemView.findViewById(R.id.li_profile);
 
     @SuppressLint("SetTextI18n")
-    public void adapt(MainItem mainItem, OnItemClickListener clickListener) {
+    public void adapt(MainItem mainItem, OnItemClickListener viewClickListener,OnItemClickListener profileClickListener) {
 
         Picasso.get().load(mainItem.getImage()).fit().into(imageView);
         title.setText(mainItem.getTitle());
@@ -48,9 +49,20 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        clickListener.onHomeItemClicked(mainItem);
+                        viewClickListener.onHomeViewItemClicked(mainItem);
                     }
                 }
         );
+
+        profile.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        profileClickListener.onHomeViewItemClicked(mainItem);
+                    }
+                }
+        );
+
+
     }
 }

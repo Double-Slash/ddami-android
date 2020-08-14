@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(
                         it -> {
                             Log.e("sss!!!", it.toString());
-                            if(it.getMyInfo().getState()) {
-                                //btn_verification.setVisibility(View.GONE);
-                                //nav_header_program.setVisibility(View.VISIBLE);
+                            if (it.getMyInfo().getState()) {
+                                btn_verification.setVisibility(View.GONE);
+                                nav_header_program.setVisibility(View.VISIBLE);
                                 nav_header_program.setText(it.getMyInfo().getStudent().getDepartment());
                                 nav_myroom.setVisibility(View.VISIBLE);
                             }
