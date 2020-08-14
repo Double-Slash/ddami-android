@@ -1,19 +1,24 @@
 package com.doubleslash.ddamiapp.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.LikeAdapter;
-import com.doubleslash.ddamiapp.model.LikeVO;
+import com.doubleslash.ddamiapp.model.LikeItem;
+import com.doubleslash.ddamiapp.model.MyLikeListItemDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
 
@@ -24,11 +29,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickListener {
 
-    Button likeBack;
+    ImageButton likeBack;
 
     private RecyclerView like_recyclerview;
     private LikeAdapter mLikeAdapter;
-    private ArrayList<LikeVO> list = new ArrayList<>(); //서버에서 불러오기
+    private ArrayList<LikeItem> list = new ArrayList<>(); //서버에서 불러오기
+    String token;
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
     public static LikeFragment newInstance() {
@@ -36,19 +42,54 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        token = getActivity().getIntent().getStringExtra("token");
+
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_like_list, container, false);
 
-        //  likeBack = (Button) view.findViewById(R.id.like_back);
+        likeBack = (ImageButton) view.findViewById(R.id.like_back);
+
+        likeBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(LikeFragment.this).commit();
+                fragmentManager.popBackStack();
+            }
+        });
 
 
-        JsonObject inputJson = new JsonObject();
-        //likeByUser :Boolean 사용
-        ApiService.INSTANCE.getDetailPieceService().getDeatil(inputJson)
+        Log.e("진희: token :", token);
+
+        ApiService.INSTANCE.getLikeList().getLikeList(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
+
+                            like_recyclerview = (RecyclerView) view.findViewById(R.id.like_recyclerview);
+
+                            for (int i = 0; i < it.getLikes().size(); i++) {
+                                MyLikeListItemDAO like = it.getLikes().get(i);
+                                list.add(new LikeItem(like.getFileUrl().get(0),
+                                        like.getTitle(),
+                                 //       like.getAuthor().getUserProfile(),
+                                        like.getAuthor().getUserId()));
+                            }
+                            mLikeAdapter = new LikeAdapter(list);
+                            mLikeAdapter.setOnItemClickListener(this);
+
+                            like_recyclerview.setAdapter(mLikeAdapter);
+
+                            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+                            like_recyclerview.setLayoutManager(mLayoutManager);
 
 
                             //comments
@@ -57,57 +98,14 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
                             Log.e("failed",it.toString());
                         });
 
-
-        like_recyclerview = (RecyclerView) view.findViewById(R.id.like_recyclerview);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        like_recyclerview.setLayoutManager(mLayoutManager);
-        mLikeAdapter = new LikeAdapter(getActivity(), list); //getLikeList()
-        mLikeAdapter.setOnItemClickListener(this);
-
-        like_recyclerview.setAdapter(mLikeAdapter);
-
-        //작품 상세보기 likeByMe = true면 추가
-
-
         return view;
     }
 
     @Override
-    public void onItemClick(View view, LikeVO likeVO) {
+    public void onItemClick(View view, LikeItem likeVO) {
+        //작품 상세보시로 이동, id값 같이
         Log.e("RecyclerVIew :: ", likeVO.toString());
     }
-    /*
-    private ArrayList<LikeVO> getLikeList() {
-        ArrayList<LikeVO> likeList = new ArrayList<>();
-        Gson gson = new Gson();
-
-        try {
-            //json파일??서버??
-            InputStream is = getAssets().open("likelist.json");
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray jsonArray = jsonObject.getJSONArray("likelist");
-
-            int index = 0;
-            while (index < jsonArray.length()) {
-                LikeVO likeVO = gson.fromJson(jsonArray.get(index).toString(), LikeVO.class);
-                likeList.add(likeVO);
-
-                index++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return likeList;
-    }
-
-     */
 
 }
 

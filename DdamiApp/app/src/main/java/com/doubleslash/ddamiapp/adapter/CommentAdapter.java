@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.model.CommentItem;
 
 import java.util.ArrayList;
 
@@ -72,6 +73,7 @@ public class CommentAdapter extends BaseExpandableListAdapter {
         }
 
         viewHolder.commentNic.setText(getGroup(groupPosition));
+        viewHolder.commentContext.setText(getGroup(groupPosition));
 
         return v;
     }
@@ -98,12 +100,14 @@ public class CommentAdapter extends BaseExpandableListAdapter {
         if(v == null){
             viewHolder = new ViewHolder();
             v = inflater.inflate(R.layout.detail_item_comments, null);
+            viewHolder.commentNic = (TextView)v.findViewById(R.id.comment_nic);
             viewHolder.commentContext = (TextView) v.findViewById(R.id.comment_contexts);
             v.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)v.getTag();
         }
 
+        viewHolder.commentNic.setText(getChild(groupPosition, childPosition));
         viewHolder.commentContext.setText(getChild(groupPosition, childPosition));
 
         return v;

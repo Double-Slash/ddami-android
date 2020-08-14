@@ -1,6 +1,7 @@
 package com.doubleslash.ddamiapp.model;
 
 public class MainItem {
+    private String pieceId;
     private String image;
     private String title;
     private String nickname;
@@ -8,13 +9,22 @@ public class MainItem {
     private int viewCount;
     private int likeCount;
 
-    public MainItem(String image, String title, String nickname, String thumbnail, int viewCount, int likeCount) {
+    public MainItem(String pieceId, String image, String title, String nickname, String thumbnail, int viewCount, int likeCount) {
         this.image = image;
         this.title = title;
         this.nickname = nickname;
         this.thumbnail = thumbnail;
         this.viewCount = viewCount;
         this.likeCount = likeCount;
+        this.pieceId = pieceId;
+    }
+
+    public String getPieceId() {
+        return pieceId;
+    }
+
+    public void setPieceId(String pieceId) {
+        this.pieceId = pieceId;
     }
 
     public int getViewCount() {

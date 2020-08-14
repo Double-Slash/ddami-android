@@ -3,9 +3,9 @@ package com.doubleslash.ddamiapp.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailPieceDAO(
-        @SerializedName("piece")
-    val piece: DetailPieceObjDAO,
+data class LikeTFDAO(
+        @SerializedName("message")
+        val message: String,
         @SerializedName("result")
-    val result: Int
+        val result: Int
 )

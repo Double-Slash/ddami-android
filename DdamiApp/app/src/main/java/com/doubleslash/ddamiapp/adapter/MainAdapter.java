@@ -16,11 +16,13 @@ import java.util.ArrayList;
 public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     private ArrayList<MainItem> items;
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemViewClickListener;
+    private OnItemClickListener onItemProfileClickListener;
 
-    public MainAdapter(ArrayList<MainItem> items,OnItemClickListener itemClickListener) {
+    public MainAdapter(ArrayList<MainItem> items,OnItemClickListener itemViewClickListener,OnItemClickListener itemProfileClickListener) {
         this.items = items;
-        this.onItemClickListener = itemClickListener;
+        this.onItemViewClickListener = itemViewClickListener;
+        this.onItemProfileClickListener = itemProfileClickListener;
     }
 
     @NonNull
@@ -32,7 +34,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-        holder.adapt(items.get(position),onItemClickListener);
+        holder.adapt(items.get(position), onItemViewClickListener,onItemProfileClickListener);
     }
 
     @Override

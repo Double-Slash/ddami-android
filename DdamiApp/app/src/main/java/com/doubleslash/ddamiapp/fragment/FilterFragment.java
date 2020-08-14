@@ -1,18 +1,21 @@
 package com.doubleslash.ddamiapp.fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.network.kotlin.ApiService;
-import com.google.gson.JsonObject;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.graphics.Color.rgb;
 
-public class FilterFragment extends Fragment {
+public class FilterFragment extends BottomSheetDialogFragment {
     AppCompatButton allSpace, livingSpace, build, interior, inner, envir
             , allModern, painting, sculp
             , allCraft, pottery, metals, fiber, woodworking
@@ -38,8 +41,14 @@ public class FilterFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
+
 
 
         allSpace = (AppCompatButton)view.findViewById(R.id.btn_allSpace);
@@ -71,53 +80,6 @@ public class FilterFragment extends Fragment {
         UXUI = (AppCompatButton)view.findViewById(R.id.btn_UXUI);
         car = (AppCompatButton)view.findViewById(R.id.btn_car);
         allClothes = (AppCompatButton)view.findViewById(R.id.btn_allClothes);
-
-
-
-        likeFieldList= new ArrayList<>();
-
-        //사용자 살세보기의 likeField 사용
-        JsonObject inputJson = new JsonObject();
-        ApiService.INSTANCE.getUserDetailService().getUser(inputJson)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        it -> {
-//                            try {
-                            //배열에 서버 likeField값 넣기
-//                                JSONArray jsonArray = new JSONArray(it.getUser().getLikeField());
-//                                for(int i = 0 ; i<jsonArray.length(); i++) {
-//                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                                    String likeField = jsonObject.getString("likeField");
-//                                    likeFieldList.add(likeField);
-//
-//                                    Log.i("JSON Parser", likeField);
-//                                    Log.e("tttestlllike",likeFieldList.toString());
-//                                }
-//                            } catch (JSONException e) {
-//
-//                                Log.e("JSON Parser", "Error parsing data " + e.toString());
-//                            }
-
-                            reset.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //서버에 있는 likeField배열 모두 삭제 //list.removeAll();
-
-                                }
-                            });
-
-                            apply.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //클릭된 버튼 서버 likeField배열에 추가, 이전 화면으로 돌아가기
-                                }
-                            });
-                            Log.e("tttest",it.toString());
-                        },it -> {
-                            Log.e("fffailed",it.toString());
-                        });
-
 
         /*각 버튼 클릭 이벤트*/
         apply_Enabled();
@@ -561,21 +523,65 @@ public class FilterFragment extends Fragment {
         /***************************************************/
 
         apply.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 //버튼이 활성화 되어있는 경우
                 if(apply.isEnabled()==true) {
-                    //클릭된 버튼 서버likeField에 추가
+                    //클릭된 버튼 텍스트 메인으로 보내기
+                    if(allSpace.isSelected()){
+                        MainFragment fragment = new MainFragment();
+                        String strAllSpa = allSpace.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("filter", strAllSpa);
+                        fragment.setArguments(bundle);
+                        //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
+  //                      String strAllSpa = "공간 디자인 "+allSpace.getText().toString();
+
+
+//                        //    MainFragment fragment = new MainFragment();
+////                        Intent intent = new Intent(getActivity(),MainFragment.class);
+////
+////                        intent.putExtra("filter",strAllSpa);
+//
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("filter", strAllSpa);
+//                        //fragment.setArguments(intent);
+////
+////                        getParentFragmentManager().setFramentResult("filter",bundle);
+//
+//                        //  Toast.makeText(getActivity(),"filter = " + bundle, Toast.LENGTH_LONG).show();
+//                        //Navigation.findNavController(view).navigate(R.id.btn_allSpace, bundle);
+//
+
+                    }
 
                 }
+
 
 
             }
         });
 
+
+
+
+
+        /***************************************서버***********************************************/
+
+        likeFieldList= new ArrayList<>();
+
+        //사용자 살세보기의 likeField 사용
+
         reset.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+//                //서버에 있는 likeField배열 모두 삭제 //list.removeAll();
+//                Log.e("ttttttt",it.getUser().getLikeField().toString());
+//                it.getUser().getLikeField().clear();
+//                Log.e("ttttttt",it.getUser().getLikeField().toString());
+
                 //클릭된 버튼 모두 unclick //작용하기 비활성화
                 allSpace.setSelected(false);  livingSpace.setSelected(false);  build.setSelected(false);  interior.setSelected(false);
                 inner.setSelected(false);  envir.setSelected(false);  allModern.setSelected(false);  painting.setSelected(false);
@@ -602,13 +608,8 @@ public class FilterFragment extends Fragment {
 
                 apply.setEnabled(false);
 
-                //서버 likeField 배열 모두 삭제
-
-
-
             }
         });
-
 
         return view;
     }
