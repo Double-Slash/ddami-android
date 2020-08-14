@@ -25,6 +25,7 @@
         android:layout_marginBottom="12dp"
         android:textColor="#4D4D4D"
         android:id="@+id/btnTemp_save"
+        android:onClick="TempSavePopUp"
         />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="68dp"
@@ -35,15 +36,16 @@
         android:text="불러오기"
         android:id="@+id/btnLoading"
         android:textColor="#4D4D4D"
+        android:onClick="LoadingWriting"
         />
 
     <Button
         android:id="@+id/btnReg"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:background="@drawable/shop_custom_radius_gray"
         android:text="등록"
         android:textColor="#FFFFFF"
+        android:background="@drawable/shop_custom_radius_gray"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="14dp"

@@ -1,8 +1,11 @@
 package com.doubleslash.ddamiapp.activity;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.db.ManagerDB;
 import com.doubleslash.ddamiapp.fragment.FilterFragment;
 import com.doubleslash.ddamiapp.model.UploadPieceDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
@@ -53,6 +58,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import static com.doubleslash.ddamiapp.db.ManagerDB.managerDB;
 
 public class WritingActivity extends AppCompatActivity {
     private static final int PICK_ALBUM = 1;
@@ -71,6 +77,8 @@ public class WritingActivity extends AppCompatActivity {
     Fragment filterFragment;
     FragmentManager manager;
     private FragmentTransaction transaction;
+    ImageView iv;
+    Button temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +97,7 @@ public class WritingActivity extends AppCompatActivity {
             }
         });
 //        filterFragment = getSupportFragmentManager().findFragmentById(R.id.filter_fragment);
-
+        temp = findViewById(R.id.tempSave);
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,18 +106,19 @@ public class WritingActivity extends AppCompatActivity {
                 goToAlbum();
             }
         });
+        managerDB = ManagerDB.getInstance(this);
+        findViewById(R.id.btnLoading).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkSave();
+            }
+        });
         findViewById(R.id.btnReg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImgUpload();
             }
         });
-//        findViewById(R.id.add_filter).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                transaction.replace(R.id.filter_whole_layout,filterFragment).commitAllowingStateLoss();
-//            }
-//        });
         //0이 거래 대기
         //1이 거래중
         //-1 거래완료
@@ -176,7 +185,7 @@ public class WritingActivity extends AppCompatActivity {
         writing_img = "writing_img"+writing_imgLayoutCount;
         writingImgId = getResources().getIdentifier(writing_img,"id",getPackageName());
         System.out.println(writing_img+" ssssssssss");
-        ImageView iv = new ImageView(this);
+        iv = new ImageView(this);
         iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         BitmapFactory.Options options = new BitmapFactory.Options();
         originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
@@ -260,6 +269,95 @@ public class WritingActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    public void checkSave() {
+        try {
+            LinearLayout imgLayout = findViewById(R.id.writingImgLayout);
+            if (managerDB.DocumentCountDB() > 0) {
+                e_writingContent = findViewById(R.id.writingContent);
+                e_writingTitle = findViewById(R.id.writingTitle);
+                e_writingContent.setText(managerDB.contentDB());
+                e_writingTitle.setText(managerDB.titleDB());
+                if (e_writingTitle.getText().toString() == null)
+                    e_writingTitle.setText("");
+                if (e_writingContent.getText().toString() == null)
+                    e_writingContent.setText("");
+
+                if (managerDB.ImgCountDB() > 0) {
+                    LinearLayout linearLayout = new LinearLayout(this);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT
+                    );
+                    linearLayout.setLayoutParams(layoutParams);
+                    writing_img = "writing_img" + writing_imgLayoutCount;
+                    writingImgId = getResources().getIdentifier(writing_img, "id", getPackageName());
+                    imgLayout = findViewById(R.id.writingImgLayout);
+                    for (int i = 0; i < managerDB.ImgCountDB(); i++) {
+                        iv = new ImageView(this);
+                        iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        iv.setImageBitmap(managerDB.imgDB());
+                        linearLayout.addView(iv,300,300);
+                    }
+                    imgLayout.addView(linearLayout);
+
+                }
+            }
+        }catch (NullPointerException e){
+            System.out.println(" ddfsf");
+        }
+
+    }
+    public void tempSave(){
+        e_writingContent = findViewById(R.id.writingContent);
+        e_writingTitle = findViewById(R.id.writingTitle);
+        if(e_writingTitle.length() >0 || e_writingContent.length()>0){
+            managerDB.insertDocument(e_writingTitle.getText().toString(),e_writingContent.getText().toString());
+        }
+    }
+    public void TempSavePopUp(View view){
+        if(view==temp ){
+            if(managerDB.DocumentCountDB() > 0 || managerDB.ImgCountDB() > 0){
+                AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
+                alBuilder.setView(R.layout.temp_save_pop_up);
+                AlertDialog ad = alBuilder.create();
+            findViewById(R.id.saveCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ad.dismiss();
+                }
+            });
+            findViewById(R.id.tempSave).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        tempSave();
+                        finish();
+                    }
+                });
+            alBuilder.show();
+            }
+            else
+                tempSave();
+        }
+    }
+    public void LoadingWriting(View view){
+        checkSave();
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
+        alBuilder.setMessage("임시저장?");
+        alBuilder.setView(R.layout.writing_back_pop_up);
+        AlertDialog ad = alBuilder.create();
+
+        // "예" 버튼을 누르면 실행되는 리스너
+        findViewById(R.id.saveCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             ad.dismiss();
+            }
+        });
+
+        alBuilder.show(); // AlertDialog.Bulider로 만든 AlertDialog를 보여준다.
     }
 
 }
