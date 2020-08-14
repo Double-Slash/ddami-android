@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.adapter.LikeAdapter;
+import com.doubleslash.ddamiapp.adapter.MainAdapter;
+import com.doubleslash.ddamiapp.adapter.OnLikeItemClickListener;
 import com.doubleslash.ddamiapp.model.LikeItem;
 import com.doubleslash.ddamiapp.model.MyLikeListItemDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickListener {
+public class LikeFragment extends Fragment implements OnLikeItemClickListener {
 
     ImageButton likeBack;
 
@@ -78,35 +82,47 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
 
                             for (int i = 0; i < it.getLikes().size(); i++) {
                                 MyLikeListItemDAO like = it.getLikes().get(i);
-                                list.add(new LikeItem(like.getFileUrl().get(0),
+                                list.add(new LikeItem(
+                                        like.getId(),
+                                        like.getFileUrl().get(0),
                                         like.getTitle(),
-                                 //       like.getAuthor().getUserProfile(),
+                                        //       like.getAuthor().getUserProfile(),
                                         like.getAuthor().getUserId()));
                             }
-                            mLikeAdapter = new LikeAdapter(list);
-                            mLikeAdapter.setOnItemClickListener(this);
+//                            mLikeAdapter = new LikeAdapter(list);
+//                            mLikeAdapter.onLikeListItemClicked(this);
+//
+//                            recyclerView.setAdapter(new LikeAdapter(list, this::onLikeListItemClicked));
 
-                            like_recyclerview.setAdapter(mLikeAdapter);
+                            like_recyclerview.setAdapter(new LikeAdapter(list, this::onLikeListItemClicked));
 
                             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
                             like_recyclerview.setLayoutManager(mLayoutManager);
 
 
                             //comments
-                            Log.e("tttest",it.toString());
-                        },it -> {
-                            Log.e("failed",it.toString());
+                            Log.e("tttest", it.toString());
+                        }, it -> {
+                            Log.e("failed", it.toString());
                         });
 
         return view;
     }
 
     @Override
-    public void onItemClick(View view, LikeItem likeVO) {
-        //작품 상세보시로 이동, id값 같이
-        Log.e("RecyclerVIew :: ", likeVO.toString());
-    }
+    public void onLikeListItemClicked(LikeItem item) {
 
+        //작품 상세보시로 이동, id값 같이
+        Log.e("RecyclerVIew :: ", item.toString());
+
+        Toast.makeText(getContext(), item.getNicname(), Toast.LENGTH_SHORT).show();
+
+        Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
+        detailIntent.putExtra("token", token);
+        detailIntent.putExtra("FileId", item.getPieceId());
+        startActivity(detailIntent);
+
+    }
 }
 
 

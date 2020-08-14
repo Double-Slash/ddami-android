@@ -74,6 +74,7 @@ public class CommentAdapter extends BaseExpandableListAdapter {
 
         viewHolder.commentNic.setText(getGroup(groupPosition));
         viewHolder.commentContext.setText(getGroup(groupPosition));
+        viewHolder.commentProfile.setImageResource(R.drawable.img_detailview_commenter2);
 
         return v;
     }

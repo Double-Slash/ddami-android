@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.WritingActivity;
 import com.doubleslash.ddamiapp.adapter.MyroomAdapter;
@@ -146,7 +147,7 @@ public class MyRoomFragment extends Fragment {
                     Log.e("hhhhere", "현재 터치한 item의 position은 " + currentItem.getId());
 
                     //switch fragment to DetailActivity onItemClicked
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
                     intent.putExtra("FileId", currentItem.getId());
                     startActivity(intent);
                     return true;

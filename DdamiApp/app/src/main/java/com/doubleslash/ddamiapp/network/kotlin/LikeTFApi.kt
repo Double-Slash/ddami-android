@@ -1,7 +1,9 @@
 package com.doubleslash.ddamiapp.network.kotlin
 
 import com.doubleslash.ddamiapp.model.DetailPieceDAO
+import com.doubleslash.ddamiapp.model.LikeTFDAO
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path

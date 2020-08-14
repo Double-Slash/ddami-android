@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,11 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.adapter.CommentAdapter;
 import com.doubleslash.ddamiapp.adapter.DetailImgAdapter;
-import com.doubleslash.ddamiapp.model.CommentItem;
 import com.doubleslash.ddamiapp.model.DetailImgItem;
-import com.doubleslash.ddamiapp.model.DetailPieceCommentDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -47,6 +43,8 @@ public class DetailActivity extends AppCompatActivity {
 
     ExpandableListView commentView;
     RecyclerView recyclerView;
+
+    String token;
 
 
     @SuppressLint("CheckResult")
@@ -69,24 +67,86 @@ public class DetailActivity extends AppCompatActivity {
         addComment=(ImageButton)findViewById(R.id.add_comment);
         commentWrite=(EditText)findViewById(R.id.comment_write);
 
-
+        viewCnt.bringToFront();
+        heartCnt.bringToFront();
+        ImageView heartImag = (ImageView)findViewById(R.id.detail_heart);
+        ImageView viewImag = (ImageView)findViewById(R.id.detail_view);
+        heartImag.bringToFront();
+        viewImag.bringToFront();
 
         detailText = (TextView) findViewById(R.id.detail_text);
         detail_img_recyclerview = (RecyclerView)findViewById(R.id.detail_img_recyclerview);
-
-
-        JsonObject inputJson = new JsonObject();
 
 
         Intent intent = getIntent();
         String fileId = intent.getStringExtra("FileId");
 
         Log.d("진희: fileId 확인 ",fileId );
+
+        token = getIntent().getStringExtra("token");
+        Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
+
+        Log.d("진희: token 확인 ",token );
+
+
+        ApiService.INSTANCE.getLikeList().getLikeList(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        it -> {
+                            Log.e("tttestlist",it.toString());
+
+                            for(int i=0; i<it.getLikes().size();i++){
+                                if(it.getLikes().get(i).getId().equals(fileId)){   //좋아요 목록에 존재
+                                    heart.setSelected(true);
+                                    break;
+                                }
+                                else {                                      //좋아요 목록에 없음
+                                    heart.setSelected(false);
+                                }
+                            }
+                            heart.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    String strCount = heartCnt.getText().toString();
+                                    int count = Integer.parseInt(strCount);
+
+                                    if(heart.isSelected()){
+                                        int result = count-1;
+                                        heart.setSelected(false);
+                                        heartCnt.setText(Integer.toString(result));
+                                    }
+                                    else if(!heart.isSelected()){
+                                        int result = count+1;
+                                        heart.setSelected(true);
+                                        heartCnt.setText(Integer.toString(result));
+                                    }
+
+                                    ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(
+                                                    it -> {
+                                                        Log.e("tttest",it.toString());
+                                                    },it -> {
+                                                        Log.e("ffffailed",it.toString());
+                                                    });
+
+                                }
+                            });
+
+
+                            Log.e("tttestlist",it.toString());
+                        },it -> {
+                            Log.e("ffffailedlist",it.toString());
+                        });
+
         ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
+
 
                             ArrayList<String> hasField = new ArrayList<>();
                             for(int i =0; i<it.getPiece().getHasField().size(); i++){
@@ -135,39 +195,35 @@ public class DetailActivity extends AppCompatActivity {
                             Log.e("ffffailed",it.toString());
                         });
 
-
-
-
-
-
-        //Intent intent2 = getIntent();
-
-        String token = getIntent().getStringExtra("token");
-        Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
-
-        Log.d("진희: token 확인 ",token );
-
-        heart.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if(heart.isSelected()){
-                    heart.setSelected(false);
-                }
-                else if(!heart.isSelected()){
-                    heart.setSelected(true);
-                }
-                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                it -> {
-                                    Log.e("tttest",it.toString());
-                                },it -> {
-                                    Log.e("ffffailed",it.toString());
-                                });
-            }
-        });
+//        heart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String strCount = heartCnt.getText().toString();
+//                int count = Integer.parseInt(strCount);
+//
+//                if(heart.isSelected()){
+//                    int result = count-1;
+//                    heart.setSelected(false);
+//                    heartCnt.setText(Integer.toString(result));
+//                }
+//                else if(!heart.isSelected()){
+//                    int result = count+1;
+//                    heart.setSelected(true);
+//                    heartCnt.setText(Integer.toString(result));
+//                }
+//
+//                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(
+//                                it -> {
+//                                    Log.e("tttest",it.toString());
+//                                },it -> {
+//                                    Log.e("ffffailed",it.toString());
+//                                });
+//
+//            }
+//        });
 
 
         detailBack.setOnClickListener(new View.OnClickListener() {
