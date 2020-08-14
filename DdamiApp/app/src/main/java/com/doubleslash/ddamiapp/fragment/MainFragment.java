@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import com.doubleslash.ddamiapp.activity.DetailActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doubleslash.ddamiapp.R;
-import com.doubleslash.ddamiapp.activity.DetailActivity;
+//import com.doubleslash.ddamiapp.activity.DetailActivity;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.activity.login.CustomBaseView;
 import com.doubleslash.ddamiapp.adapter.MainAdapter;
@@ -59,7 +62,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
 
     private BehaviorSubject<String> mSortType;
     private BehaviorSubject<String> mFilterType;
-
+    Bundle bundle = new Bundle();
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -188,7 +191,8 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
                                 piece.getAuthor().getUserId(),
                                 piece.getAuthor().getImageUrl(),
                                 piece.getViews(),
-                                piece.getLikeCount()));
+                                piece.getLikeCount(),
+                                piece.getId()));
                     }
                     recyclerView.setAdapter(new MainAdapter(items, this::onHomeViewItemClicked, this::onHomeProfileItemClicked));
                 }, it -> {
@@ -234,12 +238,16 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
         detailIntent.putExtra("token", token);
         detailIntent.putExtra("FileId", item.getPieceId());
         startActivity(detailIntent);
-
     }
 
     @Override
     public void onHomeProfileItemClicked(MainItem item) {
-        Toast.makeText(getContext(), item.getNickname(), Toast.LENGTH_SHORT).show();
+        bundle.putString("AuthId", item.getAuthId());
+        MyRoomFragment myroom = new MyRoomFragment();
+        myroom.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, myroom).commit();
     }
 
     private void initRx() {

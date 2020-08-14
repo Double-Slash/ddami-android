@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,7 +29,11 @@ import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.MainActivity;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,7 +55,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     File tempFile = null;
     String pictureFilePath;
     EditText et_school, et_program, et_studentId;
-    List<String> likeFields = new ArrayList<String>();
+    JSONArray likeFields = new JSONArray();
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.fragment_verification);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        token=getIntent().getStringExtra("token");
         btn_modern = (Button) findViewById(R.id.btn_modern_art);
         btn_graphic = (Button) findViewById(R.id.btn_graphic_design);
         btn_craft = (Button) findViewById(R.id.btn_craft_art);
@@ -144,7 +151,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
 
     public void addIfSelected(Button b) {
         if(b.isSelected()) {
-            likeFields.add(b.getText().toString());
+            likeFields.put(b.getText().toString());
         }
     }
 
@@ -272,7 +279,6 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void verify(JsonObject inputJson) {
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
         inputJson.addProperty("token", token);
         ApiService.INSTANCE.getVerifyUser().verify(inputJson)
                 .subscribeOn(Schedulers.io())

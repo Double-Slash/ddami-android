@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -53,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Button btn_verification;
     TextView nav_main, nav_myroom, nav_like, nav_shop, nav_purchase, nav_shop_like, nav_activities, nav_interested_activities, nav_settings;
-    TextView nav_header_program;
+    TextView nav_header_program, nav_tv_name;
     ImageView nav_profile_img;
     Fragment fragment;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         String id = getIntent().getStringExtra("id");
-        String token = getIntent().getStringExtra("token");
+        token = getIntent().getStringExtra("token");
 
         Toast.makeText(this, "id = " + id + "token = " + token, Toast.LENGTH_LONG).show();
 
@@ -80,12 +82,11 @@ public class MainActivity extends AppCompatActivity {
         nav_settings = (TextView) findViewById(R.id.nav_settings);
         nav_header_program = (TextView) findViewById(R.id.nav_header_program);
         nav_profile_img = (ImageView) findViewById(R.id.nav_profile_img);
-
+        nav_tv_name = (TextView) findViewById(R.id.textView_name);
         Bundle bundle = new Bundle();
 
         JsonObject input = new JsonObject();
-        String token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
-        input.addProperty("token", token2);
+        input.addProperty("token", token);
         ApiService.INSTANCE.getMyroomUser().myroom(input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         it -> {
                             Log.e("sss@@@!!!", it.toString());
                             bundle.putBoolean("Myroom", true);
-                            bundle.putString("Id", it.getMyInfo().getUserId());
+                            bundle.putString("UserId", it.getMyInfo().getUserId());
                             for (int i = 0; i < it.getMyInfo().getLikeField().size(); i++) {
                                 bundle.putString("LikeField" + String.valueOf(i), it.getMyInfo().getLikeField().get(i).toString());
                             }
@@ -109,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
                             bundle.putString("ProfileImg", it.getMyInfo().getImageUrl());
                             bundle.putString("Program", it.getMyInfo().getStudent().getDepartment());
 
-                            //set profile img
+                            //set profile nav_profile
                             Picasso.get().load(it.getMyInfo().getImageUrl()).into(nav_profile_img);
+                            nav_tv_name.setText(it.getMyInfo().getUserName());
+
                         },
                         it -> {
                             Log.e("fff@@@!!!", it.toString());
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 );
 
         JsonObject input_v = new JsonObject();
-        input_v.addProperty("token", token2);
+        input_v.addProperty("token", token);
         ApiService.INSTANCE.getMyInfo().myinfo(input_v)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MyRoomFragment myroom = new MyRoomFragment();
                 drawerLayout.closeDrawers();
+                bundle.putString("token", token);
                 myroom.setArguments(bundle);
                 replaceFragment(myroom);
             }
@@ -251,9 +255,8 @@ public class MainActivity extends AppCompatActivity {
 
     //화면 전환
     public void replaceFragment(Fragment fr) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        if(fragment != null)
-            getSupportFragmentManager().beginTransaction().remove(fragment).add(R.id.nav_host_fragment,fr).commit();
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, fr).addToBackStack("a").commit();
     }
 
     private void initViews() {
@@ -319,6 +322,8 @@ public class MainActivity extends AppCompatActivity {
 
     //open verifiedActivity
     private void openNewActivity() {
-        startActivity(new Intent(getApplicationContext(), VerificationActivity.class));
+        Intent intent = new Intent(getApplicationContext(), VerificationActivity.class);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 }
