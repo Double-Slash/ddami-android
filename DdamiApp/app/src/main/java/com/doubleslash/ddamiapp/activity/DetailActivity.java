@@ -148,8 +148,15 @@ public class DetailActivity extends AppCompatActivity {
         Log.d("진희: token 확인 ",token );
 
         heart.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                if(heart.isSelected()){
+                    heart.setSelected(false);
+                }
+                else if(!heart.isSelected()){
+                    heart.setSelected(true);
+                }
                 ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
