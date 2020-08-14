@@ -57,5 +57,27 @@ object ApiService {
     val followService : FollowApi by lazy {
         retrofit.create(FollowApi::class.java)
     }
+    val ShopWorkService : ShopWorkApi by lazy {
+        retrofit.create(ShopWorkApi::class.java)
+    }
 
+    val ShopMaterialService : ShopMaterialApi by lazy {
+        retrofit.create(ShopMaterialApi::class.java)
+    }
+
+    val ShopFeedService : ShopFeedApi by lazy {
+        retrofit.create(ShopFeedApi::class.java)
+    }
+
+    val ShopMaterialUploadService : ShopMaterialUploadApi by lazy {
+        retrofit.create(ShopMaterialUploadApi::class.java)
+    }
+
+    val ShopWorkDetailService : ShopWorkDetailApi by lazy {
+        retrofit.create(ShopWorkDetailApi::class.java)
+    }
+
+    val shopUser : ShopUserApi by lazy {
+        retrofit.create(ShopUserApi::class.java)
+    }
 }

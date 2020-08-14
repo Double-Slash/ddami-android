@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Shop.ShopWritingActivity2_1"
+    tools:context=".activity.shop.ShopWritingActivity2_1"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -49,7 +49,8 @@
                 android:background="@drawable/shop_custom_radius_lightgray"
                 android:text="@string/shop_writing_btn"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:onClick="onClickMaterialUpload"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -80,7 +81,7 @@
 
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/et_title_material"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -106,7 +107,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName2"
+                        android:id="@+id/et_price_material"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -150,7 +151,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName3"
+                    android:id="@+id/et_location_material"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -168,7 +169,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName4"
+                    android:id="@+id/et_description_material"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
