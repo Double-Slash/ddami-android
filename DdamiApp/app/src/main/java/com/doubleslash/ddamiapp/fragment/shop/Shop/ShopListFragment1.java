@@ -78,7 +78,7 @@ public class ShopListFragment1 extends Fragment {
                         it -> {
                             //Toast.makeText(getContext(), "서버 연결 성공"+it.getMypieces().get(0).get_id(), Toast.LENGTH_SHORT).show();
                             //Log.e("서버 연결 확인_피드",it.getMypieces().get(0).getFileUrl().toString());
-                            Log.e("이미지", it.getMypieces().get(0).getFileUrl().toString());
+                            //Log.e("이미지", it.getMypieces().get(0).getFileUrl().toString());
                             for(int i = 0; i<it.getMypieces().size(); i++){
                                 MypieceX mypieceX = it.getMypieces().get(i);
                                 mData.add(new ShopFeedItem(mypieceX.getFileUrl(), mypieceX.getState()));
