@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doubleslash.ddamiapp.R;
@@ -33,10 +34,14 @@ import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.rxkotlin.Observables;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class ShopFirstFragment extends Fragment implements OnShopItemClickListener {
 
@@ -46,8 +51,17 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
     RecyclerView recyclerView=null;
 
     Context context;
-    static ShopWorkItem shopWorkItem;
+    //static ShopWorkItem shopWorkItem;
 
+    TextView sort_popularity;
+    TextView sort_recent;
+
+    TextView filter;
+
+    private CompositeDisposable mAllDisposable;
+
+    private BehaviorSubject<String> mSortType;
+    private BehaviorSubject<String> mFilterType;
 
     @SuppressLint("CheckResult")
     @Override
@@ -57,20 +71,118 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
         recyclerView = view.findViewById(R.id.shop_first_recyclerview);
         mData = new ArrayList<ShopWorkItem>();
 
-        //ShopWorkItem work1 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
-        //ShopWorkItem work2 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
-        //ShopWorkItem work3 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
-        //ShopWorkItem work4 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
-        //ShopWorkItem work5 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
-        //ShopWorkItem work6 = new ShopWorkItem("https://mblogthumb-phinf.pstatic.net/20160929_86/uidesignmage_1475139514655cRcSa_JPEG/%B5%F0%C0%DA%C0%CE%B8%DE%C0%CC%C1%F6_1.JPG?type=w800", "작품 이름 (한 줄만 표시해주세요)", "대학교 이름", "가격");
+        initViews(view);
+        //initRx();
 
-        //mData.add(work1);
-        //mData.add(work2);
-        //mData.add(work3);
-        //mData.add(work4);
-        //mData.add(work5);
-        //mData.add(work6);
+        final List<String> filters = new ArrayList<>();
+        filters.add("공예 디자인");
+        filters.add("필터2");
+        filters.add("필터3");
+        //addFilters(filters);
+    }
 
+
+    private void initViews(View view) {
+
+        sort_popularity = view.findViewById(R.id.tv_shop_order_popularity);
+        sort_recent = view.findViewById(R.id.tv_shop_order_recent);
+
+        filter = view.findViewById(R.id.tv_shop_filter);
+
+        mSortType = BehaviorSubject.createDefault("L");
+        mFilterType = BehaviorSubject.createDefault("");
+
+        mAllDisposable = new CompositeDisposable();
+
+        sort_popularity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("정렬 확인", "인기순");
+                mSortType.onNext("L");
+            }
+        });
+
+        sort_recent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("정렬 확인", "최신순");
+                mSortType.onNext("V");
+            }
+        });
+
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFilterType.onNext("sample19");
+            }
+        });
+
+    }
+
+
+    /*
+    @SuppressLint("CheckResult")
+    private void pieceSearch(String sortType) {
+
+        ArrayList<ShopWorkItem> items = new ArrayList<>();
+
+        JsonObject inputJson = new JsonObject();
+
+        inputJson.addProperty("list", 0);
+        inputJson.addProperty("sortingBy", sortType);
+
+        ApiService.INSTANCE.getShopWorkService().shopWork(inputJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(it -> {
+                    Toast.makeText(context, "정렬 확인해보자: "+it.getProducts().get(0).getHasField()+"",Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < it.getProducts().size(); i++) {
+                        Product product = it.getProducts().get(i);
+                        items.add(new ShopWorkItem(product.getPieces().get(0).getFileUrl(),
+                                product.getHasField(),
+                                product.getTitle(),
+                                product.getLocationName(),
+                                product.getPrice(),
+                                product.getViews(),
+                                product.getLikeCount(),
+                                product.get_id()));
+                    }
+                    recyclerView.setAdapter(new ShopWorkAdapter(items, this::onShopWorkClicked));
+                }, it -> {
+                    Log.e("Failed", it.toString());
+                });
+    }
+
+
+
+
+    private void initRx() {
+        mAllDisposable.add(Observables.INSTANCE.combineLatest(mSortType, mFilterType)
+                .doOnNext(it -> {
+                    if (it.getFirst() == null || it.getSecond() == null) {
+                        mSortType.onNext("L");
+                        mFilterType.onNext("");
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .distinctUntilChanged()
+                .doOnNext(
+                        it -> {
+                            pieceSearch(it.getFirst());
+                        }
+
+                )
+                .subscribe()
+        );
+    }
+*/
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // 따미샵 - 작품샵 - 서버연결
         JsonObject input = new JsonObject();
@@ -98,11 +210,6 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
 
 
                         });
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
 
