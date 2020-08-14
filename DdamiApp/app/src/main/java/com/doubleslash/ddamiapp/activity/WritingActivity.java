@@ -2,15 +2,17 @@ package com.doubleslash.ddamiapp.activity;
 
 import android.Manifest;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,22 +35,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.db.ManagerDB;
-import com.doubleslash.ddamiapp.fragment.FilterFragment;
 import com.doubleslash.ddamiapp.model.UploadPieceDAO;
 import com.doubleslash.ddamiapp.network.kotlin.ApiService;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 
 import okhttp3.MediaType;
@@ -58,6 +53,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.doubleslash.ddamiapp.activity.SavePopUP.tempCount;
 import static com.doubleslash.ddamiapp.db.ManagerDB.managerDB;
 
 public class WritingActivity extends AppCompatActivity {
@@ -76,14 +73,17 @@ public class WritingActivity extends AppCompatActivity {
     Uri takePhotoUri;
     Fragment filterFragment;
     FragmentManager manager;
+    ArrayList<Bitmap> bitmapArrayList;
     private FragmentTransaction transaction;
     ImageView iv;
     Button temp;
+    ArrayList<String> tempFileUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing);
         tedPermission();
+
 //        filterFragment = new FilterFragment();
 //        manager = getSupportFragmentManager();
 //        transaction = manager.beginTransaction();
@@ -97,7 +97,7 @@ public class WritingActivity extends AppCompatActivity {
             }
         });
 //        filterFragment = getSupportFragmentManager().findFragmentById(R.id.filter_fragment);
-        temp = findViewById(R.id.tempSave);
+
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +116,7 @@ public class WritingActivity extends AppCompatActivity {
         findViewById(R.id.btnReg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                managerDB.deleteEveryData();
                 ImgUpload();
             }
         });
@@ -165,6 +166,7 @@ public class WritingActivity extends AppCompatActivity {
 
                 tempFile = new File(cursor.getString(column_index));
                 fileUri.add(cursor.getString(column_index));
+                managerDB.addFileUri(cursor.getString(column_index));
 
             } finally {
                 if (cursor != null) {
@@ -191,8 +193,26 @@ public class WritingActivity extends AppCompatActivity {
         originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         iv.setImageBitmap(originalBm);
         iv.setId(writingImgId);
+        getRoundedCornerBitmap(originalBm,6);
         LinearLayout imgLayout = (LinearLayout)findViewById(R.id.writingImgLayout);
         imgLayout.addView(iv,300,200);
+        bitmapArrayList  = new ArrayList<>();
+        bitmapArrayList.add(originalBm);
+    }
+    public Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels){
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint();
+        Rect rect = new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
+        RectF rectF = new RectF(rect);
+        float roundPx = pixels;
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0,0,0,0);
+        canvas.drawRoundRect(rectF,roundPx,roundPx,paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect,rect,paint);
+        return output;
+
     }
     private void takePhoto(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -208,6 +228,8 @@ public class WritingActivity extends AppCompatActivity {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this,"{package_name}.fileprovider",tempFile));
             startActivityForResult(intent, PICK_CAMERA);
         }
+
+
     }
     private File createImageFile() throws IOException {
 
@@ -227,6 +249,11 @@ public class WritingActivity extends AppCompatActivity {
         e_writingContent = findViewById(R.id.writingContent);
         e_writingTitle = findViewById(R.id.writingTitle);
         ArrayList<MultipartBody.Part> imgList = new ArrayList<>();
+        if(managerDB.FileUriCountDB()>0){
+            for(int i = 0; i < managerDB.FileUriCountDB(); i++){
+                fileUri.add(managerDB.getFileUri());
+            }
+        }
         for(int i = 0; i < fileUri.size(); i++){
             File file = new File(fileUri.get(i));
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
@@ -242,7 +269,8 @@ public class WritingActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"비어져 있는 칸이 있습니다. ", Toast.LENGTH_LONG).show();
         }
         else {
-            ApiService.INSTANCE.getUploadPieceService().UploadPiece(token,
+            ApiService.INSTANCE.getUploadPieceService().UploadPiece(
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMyNWZlYjA0Mjk1OTJjYzAwZTcxYTMiLCJ1c2VySWQiOiJ0ZXN0NSIsImlhdCI6MTU5NzQwMDMxMywiZXhwIjoxNTk4MDA1MTEzLCJpc3MiOiJkZGFtaS5jb20iLCJzdWIiOiJ1c2VySW5mbyJ9.HQSTgs72EF9g9udo9U0rb09o81MD4uIk8fy81KuqZpk",
                     title, content, imgList).enqueue(new Callback<UploadPieceDAO.UploadPieceResponse>() {
                 @Override
                 public void onResponse(Call<UploadPieceDAO.UploadPieceResponse> call, Response<UploadPieceDAO.UploadPieceResponse> response) {
@@ -296,7 +324,7 @@ public class WritingActivity extends AppCompatActivity {
                         iv = new ImageView(this);
                         iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         iv.setImageBitmap(managerDB.imgDB());
-                        linearLayout.addView(iv,300,300);
+                        linearLayout.addView(iv,300,200);
                     }
                     imgLayout.addView(linearLayout);
 
@@ -312,52 +340,35 @@ public class WritingActivity extends AppCompatActivity {
         e_writingTitle = findViewById(R.id.writingTitle);
         if(e_writingTitle.length() >0 || e_writingContent.length()>0){
             managerDB.insertDocument(e_writingTitle.getText().toString(),e_writingContent.getText().toString());
-        }
-    }
-    public void TempSavePopUp(View view){
-        if(view==temp ){
-            if(managerDB.DocumentCountDB() > 0 || managerDB.ImgCountDB() > 0){
-                AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
-                alBuilder.setView(R.layout.temp_save_pop_up);
-                AlertDialog ad = alBuilder.create();
-            findViewById(R.id.saveCancel).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ad.dismiss();
-                }
-            });
-            findViewById(R.id.tempSave).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tempSave();
-                        finish();
-                    }
-                });
-            alBuilder.show();
+                 }
+        if(fileUri.size() >0) {
+            for (int i = 0; i < fileUri.size(); i++) {
+                managerDB.addFileUri(fileUri.get(i));
             }
-            else
-                tempSave();
+        }
+        for(int i = 0; i < bitmapArrayList.size(); i++){
+            managerDB.addEntry(managerDB.getBytes( bitmapArrayList.get(i)));
         }
     }
+
     public void LoadingWriting(View view){
         checkSave();
     }
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
-        alBuilder.setMessage("임시저장?");
-        alBuilder.setView(R.layout.writing_back_pop_up);
-        AlertDialog ad = alBuilder.create();
-
-        // "예" 버튼을 누르면 실행되는 리스너
-        findViewById(R.id.saveCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             ad.dismiss();
-            }
-        });
-
-        alBuilder.show(); // AlertDialog.Bulider로 만든 AlertDialog를 보여준다.
+        BackPopUP backPopUP = new BackPopUP(this);
+        backPopUP.show();
     }
+    public void TempSave(View view){
 
+        if(managerDB.DocumentCountDB() >0){
+            SavePopUP savePopUP = new SavePopUP(this);
+            savePopUP.show();
+            if(tempCount >0)
+                managerDB.deleteEveryData();
+                tempSave();
+        }
+        else
+            tempSave();
+    }
 }

@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:id="@+id/writingLayout"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:context=".WritingActivity">
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
+            </LinearLayout>
 
             <TextView
                 android:layout_width="55dp"
@@ -120,7 +120,7 @@
                     android:id="@+id/add_filter"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:layout_marginLeft="270dp"
+                    android:layout_marginLeft="340dp"
                     android:background="@drawable/ic_btn_add"
                     android:onClick="FilterAdd" />
 
@@ -158,7 +158,6 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/ic_attach_file" />
             </LinearLayout>
-        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

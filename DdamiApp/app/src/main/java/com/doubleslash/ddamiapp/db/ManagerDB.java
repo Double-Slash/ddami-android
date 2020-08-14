@@ -24,6 +24,7 @@ public class ManagerDB extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private final String CREATE_DOCUMENT_TABLE = "CREATE TABLE IF NOT EXISTS Document(title TEXT, content TEXT)";
     private final String CREATE_IMG_TABLE = "CREATE TABLE IF NOT EXISTS Img(id integer primary key autoincrement,img BLOB)";
+    private final String CREATE_FILE_URI = "CREATE TABLE IF NOT EXISTS FileUri(id integer primary key autoincrement, pileUri TEXT)";
     public static Context con;
 
 
@@ -41,12 +42,15 @@ public class ManagerDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_DOCUMENT_TABLE);//글 임시저장
         db.execSQL(CREATE_IMG_TABLE);//사진 임시저장
+        db.execSQL(CREATE_FILE_URI);//사진 임시저장
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Document");
         db.execSQL("DROP TABLE IF EXISTS Img");
+        db.execSQL("DROP TABLE IF EXISTS FileUri");
         onCreate(db);
     }
     public void deleteEveryData() { //모든 테이블의 전체 튜플 삭제
@@ -54,6 +58,16 @@ public class ManagerDB extends SQLiteOpenHelper {
         try {
             db.execSQL("DELETE FROM Document");
             db.execSQL("DELETE FROM Img");
+            db.execSQL("DELETE FROM FileUri");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteImgAndUri() { //모든 테이블의 전체 튜플 삭제
+        db = getWritableDatabase();
+        try {
+            db.execSQL("DELETE FROM Img");
+            db.execSQL("DELETE FROM FileUri");
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +103,24 @@ public class ManagerDB extends SQLiteOpenHelper {
         cv.put("img", image);
         database.insert( "Img" , null, cv );
     }
+    public void addFileUri( String fileUri) throws SQLiteException {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("fileUri", fileUri);
+        database.insert( "FileUri" , null, cv );
+    }
+    public void addEntryCopy( byte[] image) throws SQLiteException {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("img", image);
+        database.insert( "Img" , null, cv );
+    }
+    public void addFileUriCopy( String fileUri) throws SQLiteException {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("fileUri", fileUri);
+        database.insert( "FileUri" , null, cv );
+    }
     public int DocumentCountDB(){
         int documentCount = 0;
         db = getWritableDatabase();
@@ -98,6 +130,16 @@ public class ManagerDB extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return documentCount;
+    }
+    public int FileUriCountDB(){
+        int fileUriCount = 0;
+        db = getWritableDatabase();
+        try{
+            fileUriCount = db.rawQuery("SELECT*FROM Document",null).getCount();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return fileUriCount;
     }
     public int ImgCountDB(){
         int imgCount = 0;
@@ -137,6 +179,7 @@ public class ManagerDB extends SQLiteOpenHelper {
         }
         return content;
     }
+
     public Bitmap imgDB(){
         Bitmap bitmap = null;
         byte[] bytes = null;
@@ -152,6 +195,22 @@ public class ManagerDB extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return bitmap;
+    }
+
+
+    public String getFileUri(){
+        String file = "";
+        db = getWritableDatabase();
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM FileUri",null);
+            while(cursor.moveToNext()) {
+                file = cursor.getString(cursor.getColumnIndex("fileUri"));
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 //    public ArrayList<Bitmap> getAllBitmap(){
 //        Bitmap bitmap = null;
