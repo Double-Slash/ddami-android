@@ -9,8 +9,7 @@
         android:id="@+id/comment_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_brightness_1_puple_24dp"
-        android:backgroundTint="#B3B3B3"
+        android:background="@drawable/img_shop_detailview_writer"
         android:layout_margin="20dp"
         />
     <RelativeLayout

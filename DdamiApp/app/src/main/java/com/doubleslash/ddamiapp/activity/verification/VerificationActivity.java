@@ -244,8 +244,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
 
     //open verifiedActivity
     private void openNewActivity() {
-        Intent intent = new Intent(this, VerifiedActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, VerifiedActivity.class);
+//        startActivity(intent);
     }
 
     private boolean isEmpty(String s) {

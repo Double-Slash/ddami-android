@@ -31,6 +31,13 @@ object ApiService {
         retrofit.create(DetailPieceApi::class.java)
     }
 
+    val likeTrueFalse : LikeTFApi by lazy {
+        retrofit.create(LikeTFApi::class.java)
+    }
+    val likeList : MyLikeListApi by lazy {
+        retrofit.create(MyLikeListApi::class.java)
+    }
+
     val userDetailService : UserApi by lazy {
         retrofit.create(UserApi::class.java)
     }

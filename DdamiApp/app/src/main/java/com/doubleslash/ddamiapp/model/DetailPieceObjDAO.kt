@@ -1,19 +1,35 @@
 package com.doubleslash.ddamiapp.model
 
-data class DetailPieceObjDAO(
-        val __v: Int,
-        val _id: String,
-        val author: DetailPieceAuthorDAO,
-        val comments: List<Any>,
-        val created: String,
-        val description: String,
-        val fileUrl: List<String>,
-        val hasField: List<String>,
-        val like: List<String>,
-        val likeByUser: Boolean,
-        val likeCount: Int,
-        val state: Int,
-        val title: String,
-        val views: Int
 
+import com.google.gson.annotations.SerializedName
+
+data class DetailPieceObjDAO(
+        @SerializedName("author")
+    val author: DetailPieceAuthorDAO,
+        @SerializedName("comments")
+    val comments: List<DetailPieceCommentDAO>,
+        @SerializedName("created")
+    val created: String,
+        @SerializedName("description")
+    val description: String,
+        @SerializedName("fileUrl")
+    val fileUrl: List<String>,
+        @SerializedName("hasField")
+    val hasField: List<String>,
+        @SerializedName("_id")
+    val FileId: String,
+        @SerializedName("like")
+    val like: List<String>,
+        @SerializedName("likeByUser")
+    val likeByUser: Boolean,
+        @SerializedName("likeCount")
+    val likeCount: Int,
+        @SerializedName("state")
+    val state: Int,
+        @SerializedName("title")
+    val title: String,
+        @SerializedName("__v")
+    val v: Int,
+        @SerializedName("views")
+    val views: Int
 )

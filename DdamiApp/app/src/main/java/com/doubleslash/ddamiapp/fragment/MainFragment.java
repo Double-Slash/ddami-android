@@ -74,19 +74,41 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
         token = getActivity().getIntent().getStringExtra("token");
 
         getUserInfo(token);
+//
+//        getParentFragmentManager()setFragmentResultListener("key", this, new FragmentResultListener() {
+//            @Override
+//            public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
+//                // We use a String here, but any type that can be put in a Bundle is supported
+//                String result = bundle.getString("bundleKey");
+//                // Do something with the result...
+//            }
+//        });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+
+//
+//        String strFilter = getActivity().getIntent().getStringExtra("filter");
+//      //  Toast.makeText(getActivity(),"filter = " + strFilter, Toast.LENGTH_LONG).show();
+//        Log.d("진희: filter :: ", strFilter);
+
+
+        return view;
     }
 
     @SuppressLint("CheckResult")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+//
+//
+//        Bundle bundle = this.getArguments();
+//        String str = bundle.getString("filter");
 
         FragmentActivity activity = getActivity();
         if (activity != null) {
@@ -94,6 +116,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
         }
 
         initViews(view);
+       // pieceSearch();
         initRx();
 
         final List<String> filters = new ArrayList<>();
@@ -172,7 +195,6 @@ public class MainFragment extends Fragment implements OnItemClickListener, OnIte
                 }, it -> {
                     Log.e("Failed", it.toString());
                 });
-
     }
 
     @SuppressLint("CheckResult")
