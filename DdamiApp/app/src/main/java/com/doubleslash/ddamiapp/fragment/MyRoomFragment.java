@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,15 @@ public class MyRoomFragment extends Fragment {
     RecyclerView recyclerView;
     Button btn_modify, btn_follow;
     FloatingActionButton btn_fab;
+
+    String token;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        token = getActivity().getIntent().getStringExtra("token");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,6 +159,7 @@ public class MyRoomFragment extends Fragment {
                     //switch fragment to DetailActivity onItemClicked
                     Intent intent = new Intent(getActivity(), DetailActivity.class);
                     intent.putExtra("FileId", currentItem.getId());
+                    intent.putExtra("token", token);
                     startActivity(intent);
                     return true;
                 }
@@ -165,7 +176,7 @@ public class MyRoomFragment extends Fragment {
         };
 
         recyclerView.addOnItemTouchListener(onItemTouchListener);
-        
+
         //FloatingActionButton onClick event
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -97,13 +97,6 @@ public class ShopFirstFragment extends Fragment {
             }
         });
 
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity)getActivity()).replaceFragment(FilterFragment.newInstance());
-//            }
-//        });
-
         return v;
     }
 

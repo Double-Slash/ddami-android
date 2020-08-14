@@ -81,12 +81,12 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String fileId = intent.getStringExtra("FileId");
 
-        Log.d("진희: fileId 확인 ",fileId );
+        Log.d("진희: fileId 확인 ",fileId);
 
         token = getIntent().getStringExtra("token");
         Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
 
-        Log.d("진희: token 확인 ",token );
+        Log.d("진희: token 확인 ",token);
 
 
         ApiService.INSTANCE.getLikeList().getLikeList(token)
@@ -155,10 +155,6 @@ public class DetailActivity extends AppCompatActivity {
                             }
                             Log.e("진희: hasField list ", hasField.toString());
                             detailCatagoly.setText(hasField.toString());
-//                            String replace = detailCatagoly.getText().toString();
-//                            replace = replace.replace("[","");
-//                            replace = replace.replace("]","");
-//                            replace = replace.replace(","," / ");
 
                             detailTitle.setText(it.getPiece().getTitle());
 
@@ -195,35 +191,6 @@ public class DetailActivity extends AppCompatActivity {
                             Log.e("ffffailed",it.toString());
                         });
 
-//        heart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String strCount = heartCnt.getText().toString();
-//                int count = Integer.parseInt(strCount);
-//
-//                if(heart.isSelected()){
-//                    int result = count-1;
-//                    heart.setSelected(false);
-//                    heartCnt.setText(Integer.toString(result));
-//                }
-//                else if(!heart.isSelected()){
-//                    int result = count+1;
-//                    heart.setSelected(true);
-//                    heartCnt.setText(Integer.toString(result));
-//                }
-//
-//                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(
-//                                it -> {
-//                                    Log.e("tttest",it.toString());
-//                                },it -> {
-//                                    Log.e("ffffailed",it.toString());
-//                                });
-//
-//            }
-//        });
 
 
         detailBack.setOnClickListener(new View.OnClickListener() {

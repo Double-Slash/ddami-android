@@ -89,10 +89,6 @@ public class LikeFragment extends Fragment implements OnLikeItemClickListener {
                                         //       like.getAuthor().getUserProfile(),
                                         like.getAuthor().getUserId()));
                             }
-//                            mLikeAdapter = new LikeAdapter(list);
-//                            mLikeAdapter.onLikeListItemClicked(this);
-//
-//                            recyclerView.setAdapter(new LikeAdapter(list, this::onLikeListItemClicked));
 
                             like_recyclerview.setAdapter(new LikeAdapter(list, this::onLikeListItemClicked));
 
@@ -124,6 +120,5 @@ public class LikeFragment extends Fragment implements OnLikeItemClickListener {
 
     }
 }
-
 
 
