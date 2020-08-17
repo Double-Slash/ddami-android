@@ -99,6 +99,6 @@ public class ShopListFragment1 extends Fragment {
     }
 
     private void onShopFeedClicked(ShopFeedItem shopFeedItem) {
-        Toast.makeText(getContext(), shopFeedItem.getmImageArr().get(0), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), shopFeedItem.getmImageArr().get(0), Toast.LENGTH_LONG).show();
     }
 }

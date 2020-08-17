@@ -191,7 +191,6 @@ public class ShopFirstFragment extends Fragment implements OnShopItemClickListen
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         it -> {
-                            Toast.makeText(context, "서버 연결 성공"+it.getProducts().get(0).get_id(), Toast.LENGTH_SHORT).show();
                             Log.e("서버 연결 확인",it.getProducts().get(0).getPieces().get(0).getFileUrl().toString());
 
                             for(int i = 0; i<it.getProducts().size(); i++){

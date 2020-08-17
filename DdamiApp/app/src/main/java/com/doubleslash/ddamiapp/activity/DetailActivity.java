@@ -79,10 +79,10 @@ public class DetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String fileId = intent.getStringExtra("FileId");
+//        String fileId = intent.getStringExtra("FileId");
 
-        Log.d("진희: fileId 확인 ",fileId );
-        ApiService.INSTANCE.getDetailPieceService().getDeatil(fileId)
+//        Log.d("진희: fileId 확인 ",fileId );
+        ApiService.INSTANCE.getDetailPieceService().getDeatil("5f323e36085ba51d50ff5b3c")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -143,7 +143,6 @@ public class DetailActivity extends AppCompatActivity {
         //Intent intent2 = getIntent();
 
         String token = getIntent().getStringExtra("token");
-        Toast.makeText(this,"token = " + token, Toast.LENGTH_LONG).show();
 
         Log.d("진희: token 확인 ",token );
 
@@ -157,7 +156,7 @@ public class DetailActivity extends AppCompatActivity {
                 else if(!heart.isSelected()){
                     heart.setSelected(true);
                 }
-                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, fileId)
+                ApiService.INSTANCE.getLikeTrueFalse().getBoolean(token, "5f323e36085ba51d50ff5b3c")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(

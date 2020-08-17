@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.doubleslash.ddamiapp.R;
 import com.doubleslash.ddamiapp.activity.MainActivity;
+import com.doubleslash.ddamiapp.activity.login.LoginActivity;
 
 public class VerifiedActivity extends AppCompatActivity {
     Button btn_goto_main;
@@ -29,7 +30,7 @@ public class VerifiedActivity extends AppCompatActivity {
     }
 
     public void goToMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

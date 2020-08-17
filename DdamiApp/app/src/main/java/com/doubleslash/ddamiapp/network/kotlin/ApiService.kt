@@ -80,4 +80,8 @@ object ApiService {
     val shopUser : ShopUserApi by lazy {
         retrofit.create(ShopUserApi::class.java)
     }
+
+    val userRoomService : UserRoomApi by lazy {
+        retrofit.create(UserRoomApi::class.java)
+    }
 }

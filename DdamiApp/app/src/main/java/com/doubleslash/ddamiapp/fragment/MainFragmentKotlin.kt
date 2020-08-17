@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentResultListener
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.doubleslash.ddamiapp.R
@@ -40,6 +42,8 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
     private var mFilterType: BehaviorSubject<String>? = null
     private var token: String? = null
 
+    private val handler = Handler()
+    var bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +79,7 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
         // We use a String here, but any type that can be put in a Bundle is supported
 
 
-        setUpEnterNumberButtonClickListener()
+//        setUpEnterNumberButtonClickListener()
 //        Bundle bundle = this.getArguments();
 //        String str = bundle.getString("filter");
         val activity = activity
@@ -86,9 +90,9 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
         // pieceSearch();
         initRx()
         val filters: MutableList<String> = ArrayList()
-        filters.add("공예 디자인")
-        filters.add("필터2")
-        filters.add("필터3")
+        filters.add("생활 공간")
+        filters.add("현대미술")
+        filters.add("사진")
         addFilters(filters)
     }
 
@@ -102,9 +106,12 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
         mFilterType = BehaviorSubject.createDefault("")
         mAllDisposable = CompositeDisposable()
 
-        filter_popularity?.setOnClickListener(View.OnClickListener { mSortType!!.onNext("L") })
-        filter_recent?.setOnClickListener(View.OnClickListener { mSortType!!.onNext("V") })
-        filter?.setOnClickListener(View.OnClickListener { (activity as MainActivity?)!!.replaceFragment(FilterFragmentKotlin.newInstance()) })
+        filter_popularity?.setOnClickListener(View.OnClickListener {
+            Toast.makeText(context,"인기순 정렬",Toast.LENGTH_SHORT).show()
+            mSortType!!.onNext("L") })
+        filter_recent?.setOnClickListener(View.OnClickListener { mSortType!!.onNext("V")
+            Toast.makeText(context,"최신순 정렬",Toast.LENGTH_SHORT).show()})
+        tv_filter?.setOnClickListener(View.OnClickListener { (activity as MainActivity?)!!.replaceFragment(FilterFragmentKotlin.newInstance()) })
     }
 
     @SuppressLint("CheckResult")
@@ -125,9 +132,11 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
                                 author.userId,
                                 author.imageUrl,
                                 views,
-                                likeCount))
+                                likeCount, id))
                     }
-                    main_recyclerview!!.adapter = MainAdapter(items, OnItemClickListener { item: MainItem -> onHomeViewItemClicked(item) }, OnItemClickListener { item: MainItem -> onHomeProfileItemClicked(item) })
+                    main_recyclerview!!.adapter = MainAdapter(items,
+                            OnItemClickListener { item: MainItem -> onHomeViewItemClicked(item) },
+                            OnItemClickListener { item: MainItem -> onHomeProfileItemClicked(item) })
                 }) { it: Throwable -> Log.e("Failed", it.toString()) }
     }
 
@@ -146,24 +155,44 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
     }
 
     private fun addFilters(filters: List<String>) {
-        chip_container!!.removeAllViews()
-        for (filter in filters) {
-            val filterView = CustomBaseView(requireContext())
-            filterView.setChipName(filter)
-            chip_container!!.addView(filterView)
-        }
+
+        handler.postDelayed({
+            chip_container!!.removeAllViews()
+            for (filter in filters) {
+                val filterView = CustomBaseView(requireContext())
+                filterView.setChipName(filter)
+                chip_container!!.addView(filterView)
+            }
+        },10000)
     }
 
     override fun onHomeViewItemClicked(item: MainItem) {
-        Toast.makeText(context, item.nickname, Toast.LENGTH_SHORT).show()
         val detailIntent = Intent(activity, DetailActivity::class.java)
         detailIntent.putExtra("token", token)
         detailIntent.putExtra("FileId", item.pieceId)
         startActivity(detailIntent)
     }
 
-    override fun onHomeProfileItemClicked(item: MainItem) {
-        Toast.makeText(context, item.nickname, Toast.LENGTH_SHORT).show()
+//    override fun onHomeProfileItemClicked(item: MainItem) {
+//        bundle.putString("AuthId", item.getAuthId())
+//        val myroom = MyRoomFragment()
+//        myroom.arguments = bundle
+//        val fragmentManager = requireActivity().supportFragmentManager
+//        fragmentManager.popBackStack()
+//        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, myroom).commit()
+//
+//
+//    }
+
+    override fun onHomeProfileItemClicked(item: MainItem?) {
+        bundle.putString("AuthId", "5f3139a8cb0e0f42d0a02b9a")
+        bundle.putBoolean("Myroom", false)
+        bundle.putString("token", token)
+        val myroom = MyRoomFragment()
+        myroom.arguments = bundle
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.popBackStack()
+        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, myroom).commit()
     }
 
     private fun initRx() {
@@ -187,7 +216,7 @@ class MainFragmentKotlin : Fragment(R.layout.fragment_main), OnItemClickListener
         Preconditions.checkState(REQUEST_KEY == requestKey)
 
         val number = result.getInt(KEY_NUMBER)
-        Log.e("서어어어어어고오오옹",number.toString())
+        Log.e("서어어어어어고오오옹", number.toString())
     }
 
     private fun setUpEnterNumberButtonClickListener() {
