@@ -173,7 +173,7 @@ public class ShopSecondFragment extends Fragment implements OnShopMaterialItemCl
 
     @Override
     public void onShopMaterialClicked(ShopMaterialItem shopMaterialItem) {
-        Toast.makeText(getContext(), shopMaterialItem.getmMaterial(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), shopMaterialItem.getmMaterial(), Toast.LENGTH_LONG).show();
 
     }
 }

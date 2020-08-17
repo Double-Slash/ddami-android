@@ -34,7 +34,7 @@ public class LikeFragment extends Fragment implements LikeAdapter.OnItemClickLis
     private RecyclerView like_recyclerview;
     private LikeAdapter mLikeAdapter;
     private ArrayList<LikeItem> list = new ArrayList<>(); //서버에서 불러오기
-    String token;
+    String token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMxMzlhOGNiMGUwZjQyZDBhMDJiOWEiLCJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNTk3MjU0MjgzLCJleHAiOjE1OTc4NTkwODMsImlzcyI6ImRkYW1pLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.vXZr-6P0IQXNYaknHIgqBhXUlOnknobDU9uY2ojPVGk";
 
     // 각각의 Fragment마다 Instance를 반환해 줄 메소드를 생성
     public static LikeFragment newInstance() {

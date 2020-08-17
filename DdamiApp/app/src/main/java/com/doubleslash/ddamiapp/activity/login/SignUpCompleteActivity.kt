@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.doubleslash.ddamiapp.R
 import com.doubleslash.ddamiapp.activity.MainActivity
+import com.doubleslash.ddamiapp.activity.verification.VerificationActivity
+import com.doubleslash.ddamiapp.activity.verification.VerifiedActivity
 import kotlinx.android.synthetic.main.activity_complete.*
 
 class SignUpCompleteActivity : AppCompatActivity() {
@@ -17,9 +19,16 @@ class SignUpCompleteActivity : AppCompatActivity() {
 
     private fun initViews() {
         btn_main.setOnClickListener{
-            val mainIntent = Intent(this,MainActivity::class.java)
+            val mainIntent = Intent(this,LoginActivity::class.java)
             startActivity(mainIntent)
             finish()
         }
+
+        btn_cert.setOnClickListener{
+            var verifyIntent = Intent(this,VerificationActivity::class.java)
+            startActivity(verifyIntent)
+            finish()
+        }
     }
+
 }

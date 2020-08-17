@@ -105,7 +105,7 @@ class SignUpSecondActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.e("shin_success", it.message)
-                    if (it.result == 0) {
+                    if (it.result == 1) {
                         startActivity(Intent(this, SignUpCompleteActivity::class.java))
                         finish()
                     } else {

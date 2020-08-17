@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".activity.login.SignUpCompleteActivity">
+        </activity>
         <activity android:name=".activity.shop.ShopMaterialDetailActivity"></activity>
         <activity
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
@@ -61,12 +65,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.verification.VerifiedActivity">
+        <activity
+            android:name=".activity.verification.VerifiedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
-        <activity android:name=".activity.verification.VerificationActivity">
+        <activity
+            android:name=".activity.verification.VerificationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
